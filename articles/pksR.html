@@ -35,6 +35,11 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/harmonization.html">Harmonization: methods, assumptions and sensitivity</a></li>
     <li><a class="dropdown-item" href="../articles/provenance.html">Data provenance and validation</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Deutsch</h6></li>
+    <li><a class="dropdown-item" href="../articles/pksR-de.html">Erste Schritte mit pksR</a></li>
+    <li><a class="dropdown-item" href="../articles/harmonization-de.html">Harmonisierung: Methoden, Annahmen und Sensitivität</a></li>
+    <li><a class="dropdown-item" href="../articles/provenance-de.html">Herkunft und Prüfung der Daten</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -83,7 +88,10 @@ latest data release, checks every file against its SHA-256 checksum and
 keeps it in a local cache:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Total offences, harmonized to the latest boundary (the default)</span></span>
-<span><span class="va">total</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence_keys <span class="op">=</span> <span class="st">"------"</span><span class="op">)</span></span>
+<span><span class="va">total</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="st">"total"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Offences by key, short name or label, in English or German</span></span>
+<span><span class="va">burglary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"burglary"</span>, <span class="st">"einbruch"</span><span class="op">)</span>, lang <span class="op">=</span> <span class="st">"en"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Two years as published by the BKA, all offence keys</span></span>
 <span><span class="va">published</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2024</span><span class="op">:</span><span class="fl">2025</span>, harmonize_to <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
@@ -120,6 +128,27 @@ session (forward only)</td>
 </table>
 <p>See <code><a href="../articles/harmonization.html">vignette("harmonization")</a></code> for the methods and their
 assumptions.</p>
+</div>
+<div class="section level2">
+<h2 id="choosing-offences">Choosing offences<a class="anchor" aria-label="anchor" href="#choosing-offences"></a>
+</h2>
+<p><code>offence</code> takes, for each element, an offence key
+(<code>"435*00"</code>), a short name (<code>"burglary"</code>, or the
+German <code>"wohnungseinbruch"</code>), a full label in either
+language, or a part of a label (<code>"einbruch"</code> selects both
+burglary keys and says so). Capitals, spaces and umlauts do not matter,
+and an exact key, name or label wins over a part.
+<code><a href="../reference/pks_offences.html">pks_offences()</a></code> lists all keys with their names; the names
+are drafts until the maintainer has reviewed them.</p>
+</div>
+<div class="section level2">
+<h2 id="languages">Languages<a class="anchor" aria-label="anchor" href="#languages"></a>
+</h2>
+<p>Messages and offence labels come in English or German:
+<code>options(pksR.lang = "de")</code>, or <code>lang = "de"</code> in
+<code><a href="../reference/pks_get.html">pks_get()</a></code> and <code><a href="../reference/pks_offences.html">pks_offences()</a></code>. Without either,
+the language of the R session decides. A German version of this vignette
+is <code><a href="../articles/pksR-de.html">vignette("pksR-de")</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="the-example-panel">The example panel<a class="anchor" aria-label="anchor" href="#the-example-panel"></a>
@@ -278,22 +307,17 @@ the national totals.</p>
 <h2 id="offence-keys-and-breaks">Offence keys and breaks<a class="anchor" aria-label="anchor" href="#offence-keys-and-breaks"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/pks_offences.html">pks_offences</a></span><span class="op">(</span><span class="st">"Diebstahl"</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"offence_key"</span>, <span class="st">"label"</span>, <span class="st">"valid_from"</span>, <span class="st">"valid_to"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 4</span></span></span>
-<span><span class="co">#&gt;    offence_key label                                         valid_from valid_to</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ****00      Diebstahl insgesamt                                 <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> ***100      Diebstahl insgesamt von Kraftwagen einschl. …       <span style="text-decoration: underline;">2</span>013     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ***200      Diebstahl insgesamt von Mopeds und Krafträde…       <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ***300      Diebstahl insgesamt von Fahrrädern einschl. …       <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> *26*00      Ladendiebstahl insgesamt                            <span style="text-decoration: underline;">2</span>023     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> *50*00      Diebstahl insgesamt an/aus Kraftfahrzeugen          <span style="text-decoration: underline;">2</span>003     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> *90*00      Taschendiebstahl insgesamt                          <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 3***00      Diebstahl ohne erschwerende Umstände §§ 242,…       <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 326*00      Einfacher Ladendiebstahl                            <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 4***00      Diebstahl unter erschwerenden Umständen §§ 2…       <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 435*00      Wohnungseinbruchdiebstahl §§ 244 Abs. 1 Nr. …       <span style="text-decoration: underline;">2</span>003     <span style="text-decoration: underline;">2</span>025</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 436*00      Tageswohnungseinbruchdiebstahl §§ 244 Abs. 1…       <span style="text-decoration: underline;">2</span>013     <span style="text-decoration: underline;">2</span>025</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pks_offences.html">pks_offences</a></span><span class="op">(</span><span class="st">"theft"</span>, lang <span class="op">=</span> <span class="st">"en"</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"offence_key"</span>, <span class="st">"name"</span>, <span class="st">"label"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 3</span></span></span>
+<span><span class="co">#&gt;   offence_key name                label                                         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ****00      theft               Theft, total                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ***100      car_theft           Theft of motor cars, total, incl. unauthorize…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ***200      motorcycle_theft    Theft of mopeds and motorcycles, total, incl.…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ***300      bicycle_theft       Theft of bicycles, total, incl. unauthorized …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> *50*00      theft_from_vehicles Theft of parts from and items out of motor ve…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 3***00      simple_theft        Theft without aggravating circumstances       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 4***00      aggravated_theft    Theft under aggravating circumstances</span></span></code></pre></div>
 <p>The district tables contain only a selected set of offence keys, and
 keys change over time. Before reading a time series, check the known
 methodological breaks:</p>

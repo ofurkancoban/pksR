@@ -15,6 +15,12 @@ pks_versions()
 A tibble with one row per data release, newest first: `version`, `tag`,
 `published_at`, `files` and `url`.
 
+## Deutsch
+
+Listet die veröffentlichten Datenversionen, die neueste zuerst. Eine
+Veröffentlichung ändert sich nie; Korrekturen erscheinen als neue
+Version.
+
 ## See also
 
 Other releases:

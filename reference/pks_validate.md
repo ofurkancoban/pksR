@@ -45,6 +45,14 @@ Checks:
 - `population`: the median district population per year lies between
   50,000 and 400,000 (a warning otherwise).
 
+## Deutsch
+
+Prüft ein Panel auf Schema, Eindeutigkeit (eine Zeile je Jahr, Kreis und
+Schlüssel), Vorhandensein von Berlin und Hamburg in jedem Jahr, gleichen
+Kreisbestand in harmonisierten Daten, keine negativen Zahlen, nicht mehr
+Versuche als Fälle und plausible Einwohnerzahlen. Ergebnis: ein Tibble
+mit einer Zeile je Prüfung und dem Status `pass`, `warn` oder `fail`.
+
 ## See also
 
 Other analysis:

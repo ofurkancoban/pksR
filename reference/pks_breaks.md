@@ -23,6 +23,13 @@ A tibble with `break_id`, `first_year`, `offence_key` (keys separated by
 The table is a snapshot of `known_breaks.csv` of pksR-data that ships
 with the package; each data release contains its own copy.
 
+## Deutsch
+
+Bekannte methodische Brüche der PKS: neue Definitionen, geänderte
+Schlüssel, geänderte Bezugsbevölkerung, Gebietsreformen und andere.
+`comparable` gibt an, ob Werte vor und nach dem Jahr vergleichbar sind
+(`yes`, `likely`, `unknown`, `no`). Vor jeder Zeitreihe prüfen.
+
 ## See also
 
 Other metadata:

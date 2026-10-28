@@ -42,6 +42,14 @@ Cases come from `cases`, or from `cases_derived` in the PDF years, where
 the BKA printed only rates. The clearance rate is 0 where cases are 0,
 as in the BKA tables.
 
+## Deutsch
+
+Berechnet Häufigkeitszahl (Fälle je 100.000 Einwohner) und
+Aufklärungsquote neu aus den Fallzahlen, etwa nach einer Harmonisierung,
+bei der veröffentlichte Quoten nicht übertragen werden können.
+`population` kann eine eigene Einwohnerzahl je Jahr und Kreis liefern;
+`per` setzt den Nenner der neuen Spalte `rate`.
+
 ## See also
 
 Other analysis:

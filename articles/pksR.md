@@ -22,7 +22,10 @@ every file against its SHA-256 checksum and keeps it in a local cache:
 ``` r
 
 # Total offences, harmonized to the latest boundary (the default)
-total <- pks_get(offence_keys = "------")
+total <- pks_get(offence = "total")
+
+# Offences by key, short name or label, in English or German
+burglary <- pks_get(offence = c("burglary", "einbruch"), lang = "en")
 
 # Two years as published by the BKA, all offence keys
 published <- pks_get(years = 2024:2025, harmonize_to = NULL)
@@ -42,6 +45,28 @@ The three choices of `harmonize_to`:
 See
 [`vignette("harmonization")`](https://ofurkancoban.github.io/pksR/articles/harmonization.md)
 for the methods and their assumptions.
+
+## Choosing offences
+
+`offence` takes, for each element, an offence key (`"435*00"`), a short
+name (`"burglary"`, or the German `"wohnungseinbruch"`), a full label in
+either language, or a part of a label (`"einbruch"` selects both
+burglary keys and says so). Capitals, spaces and umlauts do not matter,
+and an exact key, name or label wins over a part.
+[`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md)
+lists all keys with their names; the names are drafts until the
+maintainer has reviewed them.
+
+## Languages
+
+Messages and offence labels come in English or German:
+`options(pksR.lang = "de")`, or `lang = "de"` in
+[`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md)
+and
+[`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md).
+Without either, the language of the R session decides. A German version
+of this vignette is
+[`vignette("pksR-de")`](https://ofurkancoban.github.io/pksR/articles/pksR-de.md).
 
 ## The example panel
 
@@ -118,22 +143,17 @@ national totals.
 
 ``` r
 
-pks_offences("Diebstahl")[, c("offence_key", "label", "valid_from", "valid_to")]
-#> # A tibble: 12 × 4
-#>    offence_key label                                         valid_from valid_to
-#>    <chr>       <chr>                                              <int>    <int>
-#>  1 ****00      Diebstahl insgesamt                                 2014     2025
-#>  2 ***100      Diebstahl insgesamt von Kraftwagen einschl. …       2013     2025
-#>  3 ***200      Diebstahl insgesamt von Mopeds und Krafträde…       2014     2025
-#>  4 ***300      Diebstahl insgesamt von Fahrrädern einschl. …       2014     2025
-#>  5 *26*00      Ladendiebstahl insgesamt                            2023     2025
-#>  6 *50*00      Diebstahl insgesamt an/aus Kraftfahrzeugen          2003     2025
-#>  7 *90*00      Taschendiebstahl insgesamt                          2014     2025
-#>  8 3***00      Diebstahl ohne erschwerende Umstände §§ 242,…       2014     2025
-#>  9 326*00      Einfacher Ladendiebstahl                            2014     2025
-#> 10 4***00      Diebstahl unter erschwerenden Umständen §§ 2…       2014     2025
-#> 11 435*00      Wohnungseinbruchdiebstahl §§ 244 Abs. 1 Nr. …       2003     2025
-#> 12 436*00      Tageswohnungseinbruchdiebstahl §§ 244 Abs. 1…       2013     2025
+pks_offences("theft", lang = "en")[, c("offence_key", "name", "label")]
+#> # A tibble: 7 × 3
+#>   offence_key name                label                                         
+#>   <chr>       <chr>               <chr>                                         
+#> 1 ****00      theft               Theft, total                                  
+#> 2 ***100      car_theft           Theft of motor cars, total, incl. unauthorize…
+#> 3 ***200      motorcycle_theft    Theft of mopeds and motorcycles, total, incl.…
+#> 4 ***300      bicycle_theft       Theft of bicycles, total, incl. unauthorized …
+#> 5 *50*00      theft_from_vehicles Theft of parts from and items out of motor ve…
+#> 6 3***00      simple_theft        Theft without aggravating circumstances       
+#> 7 4***00      aggravated_theft    Theft under aggravating circumstances
 ```
 
 The district tables contain only a selected set of offence keys, and

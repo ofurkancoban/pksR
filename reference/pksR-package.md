@@ -15,6 +15,8 @@ Useful links:
 
 - <https://github.com/ofurkancoban/pksR>
 
+- <https://ofurkancoban.github.io/pksR/>
+
 - <https://github.com/ofurkancoban/pksR-data>
 
 - Report bugs at <https://github.com/ofurkancoban/pksR/issues>

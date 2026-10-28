@@ -1,5 +1,7 @@
 # pksR: District-Level German Police Crime Statistics
 
+[Deutsch](https://ofurkancoban.github.io/pksR/README.de.md)
+
 `pksR` gives R users the district (Kreis) tables of the German Police
 Crime Statistics (*Polizeiliche Kriminalstatistik*, PKS) published by
 the Bundeskriminalamt, from 2003 onwards: as published, or harmonized to
@@ -30,7 +32,10 @@ remotes::install_github("ofurkancoban/pksR")
 library(pksR)
 
 # Total offences in every district, harmonized to the latest boundary
-total <- pks_get(offence_keys = "------")
+total <- pks_get(offence = "total")
+
+# Offences by key, short name or label, in English or German
+burglary <- pks_get(offence = c("burglary", "435*00", "Wohnungseinbruchdiebstahl"))
 
 # As published by the BKA, two years
 published <- pks_get(years = 2024:2025, harmonize_to = NULL)
@@ -41,12 +46,23 @@ d <- pks_get(years = 2010:2015, harmonize_to = 2016, weights = "area")
 # Rates recomputed after harmonization, with your own population if you like
 rates <- pks_rates(d)
 
-pks_offences("Diebstahl")   # harmonized offence keys
+pks_offences("theft")       # offence keys, short names and labels
 pks_breaks()                # known methodological breaks
 pks_validate(d)             # consistency checks
 pks_versions()              # available data releases
 pks_cite()                  # how to cite package, data release and sources
 ```
+
+## Languages
+
+Messages, errors and offence labels are available in English and German.
+`options(pksR.lang = "de")` switches to German; otherwise the language
+of the R session is used.
+[`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md)
+and
+[`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md)
+also take `lang = "de"` or `lang = "en"`. The vignettes and this README
+exist in both languages.
 
 ## Data releases
 

@@ -3,7 +3,8 @@
 Every number that `pksR` returns can be traced to a file published by
 the Bundeskriminalamt, and every data release is validated before it is
 published. This vignette describes the path from the BKA files to a data
-release, and how to check where your data came from.
+release, and how to check where your data came from. A German version is
+[`vignette("provenance-de")`](https://ofurkancoban.github.io/pksR/articles/provenance-de.md).
 
 ``` r
 

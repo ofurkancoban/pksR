@@ -37,6 +37,11 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/harmonization.html">Harmonization: methods, assumptions and sensitivity</a></li>
     <li><a class="dropdown-item" href="articles/provenance.html">Data provenance and validation</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Deutsch</h6></li>
+    <li><a class="dropdown-item" href="articles/pksR-de.html">Erste Schritte mit pksR</a></li>
+    <li><a class="dropdown-item" href="articles/harmonization-de.html">Harmonisierung: Methoden, Annahmen und Sensitivität</a></li>
+    <li><a class="dropdown-item" href="articles/provenance-de.html">Herkunft und Prüfung der Daten</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -56,6 +61,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="pksr-district-level-german-police-crime-statistics">pksR: District-Level German Police Crime Statistics<a class="anchor" aria-label="anchor" href="#pksr-district-level-german-police-crime-statistics"></a>
 </h1></div>
+<p><a href="README.de.html">Deutsch</a></p>
 <p><code>pksR</code> gives R users the district (Kreis) tables of the German Police Crime Statistics (<em>Polizeiliche Kriminalstatistik</em>, PKS) published by the Bundeskriminalamt, from 2003 onwards: as published, or harmonized to one territorial boundary and offence classification.</p>
 <p>The data come from versioned, validated releases of <a href="https://github.com/ofurkancoban/pksR-data" class="external-link">pksR-data</a>, the pipeline that downloads the original BKA files, extracts and harmonizes them and checks every release. <code>pksR</code> downloads only the years you ask for, keeps them in a local cache and checks every file against the SHA-256 checksums of the release.</p>
 <p>Not to be confused with the CRAN package <code>pks</code> (probabilistic knowledge structures).</p>
@@ -73,7 +79,10 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ofurkancoban/pksR" class="external-link">pksR</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Total offences in every district, harmonized to the latest boundary</span></span>
-<span><span class="va">total</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence_keys <span class="op">=</span> <span class="st">"------"</span><span class="op">)</span></span>
+<span><span class="va">total</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="st">"total"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Offences by key, short name or label, in English or German</span></span>
+<span><span class="va">burglary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"burglary"</span>, <span class="st">"435*00"</span>, <span class="st">"Wohnungseinbruchdiebstahl"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># As published by the BKA, two years</span></span>
 <span><span class="va">published</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2024</span><span class="op">:</span><span class="fl">2025</span>, harmonize_to <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
@@ -84,11 +93,16 @@
 <span><span class="co"># Rates recomputed after harmonization, with your own population if you like</span></span>
 <span><span class="va">rates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_rates.html">pks_rates</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/pks_offences.html">pks_offences</a></span><span class="op">(</span><span class="st">"Diebstahl"</span><span class="op">)</span>   <span class="co"># harmonized offence keys</span></span>
+<span><span class="fu"><a href="reference/pks_offences.html">pks_offences</a></span><span class="op">(</span><span class="st">"theft"</span><span class="op">)</span>       <span class="co"># offence keys, short names and labels</span></span>
 <span><span class="fu"><a href="reference/pks_breaks.html">pks_breaks</a></span><span class="op">(</span><span class="op">)</span>                <span class="co"># known methodological breaks</span></span>
 <span><span class="fu"><a href="reference/pks_validate.html">pks_validate</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>             <span class="co"># consistency checks</span></span>
 <span><span class="fu"><a href="reference/pks_versions.html">pks_versions</a></span><span class="op">(</span><span class="op">)</span>              <span class="co"># available data releases</span></span>
 <span><span class="fu"><a href="reference/pks_cite.html">pks_cite</a></span><span class="op">(</span><span class="op">)</span>                  <span class="co"># how to cite package, data release and sources</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="languages">Languages<a class="anchor" aria-label="anchor" href="#languages"></a>
+</h2>
+<p>Messages, errors and offence labels are available in English and German. <code>options(pksR.lang = "de")</code> switches to German; otherwise the language of the R session is used. <code><a href="reference/pks_get.html">pks_get()</a></code> and <code><a href="reference/pks_offences.html">pks_offences()</a></code> also take <code>lang = "de"</code> or <code>lang = "en"</code>. The vignettes and this README exist in both languages.</p>
 </div>
 <div class="section level2">
 <h2 id="data-releases">Data releases<a class="anchor" aria-label="anchor" href="#data-releases"></a>

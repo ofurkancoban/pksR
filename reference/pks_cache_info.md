@@ -18,6 +18,11 @@ pks_cache_info()
 A tibble with one row per cached file: `version`, `file`, `bytes` and
 `modified`. The cache directory is attached as attribute `path`.
 
+## Deutsch
+
+Listet die im Cache (`tools::R_user_dir("pksR", "cache")`) gespeicherten
+Dateien, je Datenversion.
+
 ## See also
 
 Other cache:

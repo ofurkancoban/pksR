@@ -6,7 +6,9 @@ Mecklenburg-Vorpommern (2011). A district code in 2005 may not exist in
 2025, and a district of 2025 may combine parts of several earlier ones.
 Comparing districts over time therefore needs the data of every year on
 one boundary (Gebietsstand). This vignette describes how `pksR` and its
-data pipeline do that, and which assumptions the results rest on.
+data pipeline do that, and which assumptions the results rest on. A
+German version is
+[`vignette("harmonization-de")`](https://ofurkancoban.github.io/pksR/articles/harmonization-de.md).
 
 ``` r
 
@@ -95,8 +97,8 @@ see how much a result depends on the choice, compare both:
 
 ``` r
 
-pop <- pks_get(years = 2005:2010, offence_keys = "------")
-area <- pks_get(years = 2005:2010, offence_keys = "------", weights = "area")
+pop <- pks_get(years = 2005:2010, offence = "total")
+area <- pks_get(years = 2005:2010, offence = "total", weights = "area")
 both <- merge(pop[, c("year", "ags", "cases")], area[, c("year", "ags", "cases")],
               by = c("year", "ags"), suffixes = c("_population", "_area"))
 both$difference <- both$cases_area - both$cases_population

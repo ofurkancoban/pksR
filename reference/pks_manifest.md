@@ -25,6 +25,14 @@ A tibble with one row per release file (`name`, `sha256`, `bytes`,
 `notes`, `license`, `attribution`, ...) are attached as attribute
 `manifest`.
 
+## Deutsch
+
+Liest das Manifest einer Datenveröffentlichung: wann und mit welchem
+Stand der Pipeline sie erstellt wurde, welche Jahre und welchen
+Gebietsstand sie abdeckt, das Ergebnis der Prüfung und jede Datei mit
+Prüfsumme, Größe und Zeilenzahl. Ergebnis: ein Tibble der Dateien, die
+übrigen Angaben im Attribut `manifest`.
+
 ## See also
 
 Other releases:

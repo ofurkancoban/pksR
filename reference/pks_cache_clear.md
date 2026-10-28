@@ -27,6 +27,11 @@ The removed files as a tibble like
 [`pks_cache_info()`](https://ofurkancoban.github.io/pksR/reference/pks_cache_info.md),
 invisibly.
 
+## Deutsch
+
+Löscht Dateien aus dem Cache, für alle oder für die angegebenen
+Datenversionen. In interaktiven Sitzungen wird vorher nachgefragt.
+
 ## See also
 
 Other cache:

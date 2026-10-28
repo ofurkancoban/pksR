@@ -29,6 +29,16 @@ with one entry each for the package, the data release, the PKS, the BBSR
 crosswalk and the Destatis municipality directory. Print it, or convert
 it with `format(x, "bibtex")`.
 
+## Deutsch
+
+Zitierangaben für das Paket, die verwendete Datenveröffentlichung und
+die Quellen: die PKS des Bundeskriminalamts und der Umsteigeschlüssel
+des BBSR (beide Datenlizenz Deutschland, Namensnennung, Version 2.0, die
+die Nennung der Quelle und einen Hinweis auf Veränderungen verlangt)
+sowie das Gemeindeverzeichnis von Destatis. Ergebnis: ein
+[`utils::bibentry()`](https://rdrr.io/r/utils/bibentry.html)-Objekt;
+`format(x, "bibtex")` liefert BibTeX.
+
 ## See also
 
 Other releases:
