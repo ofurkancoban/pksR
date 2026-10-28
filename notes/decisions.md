@@ -20,3 +20,7 @@
 4. Language: argument `lang` of `pks_get()` and `pks_offences()`, otherwise `options(pksR.lang)`, otherwise the session language (`LANGUAGE`, then `LC_MESSAGES`); anything not German is English.
 5. Own translation table (`inst/i18n/de.po`, read by `tr()`) instead of R's gettext: gettext ignores `LANGUAGE` in the C locale (as on CRAN check machines) and cannot switch language within a session for one call. The file keeps the `.po` format, so it can later move to `po/` if that is preferred. `test-lang.R` checks that every `tr()` text has a translation with the same placeholders.
 6. Harmonized data get `offence_label` in the chosen language from the offence map. Data as published keep the published German label for `lang = "de"` and get the English label of the mapped harmonized key for `lang = "en"` (`NA` where the published key has no mapping).
+
+## 2026-10-28: No httptest2
+
+1. The brief (Section 10.3) asks for offline tests with `httptest2` fixtures. The tests are offline, but use `httr2::local_mocked_responses()` with a fake GitHub release in `tests/testthat/helper-release.R` and the files in `tests/testthat/fixtures`. `httptest2` was never used and is removed from `Suggests` (decided by the maintainer): one dependency less, and the fixed responses with checksums are easier to read than recorded request trees. `httr2` is already in `Imports`.
