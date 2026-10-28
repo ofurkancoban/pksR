@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-German districts were merged and split several times since 2003, most of them in the reforms of Sachsen-Anhalt (2007), Sachsen (2008) and Mecklenburg-Vorpommern (2011). A district code in 2005 may not exist in 2025, and a district of 2025 may combine parts of several earlier ones. Comparing districts over time therefore needs the data of every year on one boundary (Gebietsstand). This vignette describes how `pksR` and its data pipeline do that, and which assumptions the results rest on.
+German districts were merged and split several times since 2003, most of them in the reforms of Sachsen-Anhalt (2007), Sachsen (2008) and Mecklenburg-Vorpommern (2011). A district code in 2005 may not exist in 2025, and a district of 2025 may combine parts of several earlier ones. Comparing districts over time therefore needs the data of every year on one boundary (Gebietsstand). This vignette describes how `pksR` and its data pipeline do that, and which assumptions the results rest on. A German version is `vignette("harmonization-de")`.
 
 ```{r}
 library(pksR)
@@ -66,8 +66,8 @@ The latest boundary is read as released and is fastest. Other target years are c
 Population and area weights differ only where districts were split. To see how much a result depends on the choice, compare both:
 
 ```{r, eval = FALSE}
-pop <- pks_get(years = 2005:2010, offence_keys = "------")
-area <- pks_get(years = 2005:2010, offence_keys = "------", weights = "area")
+pop <- pks_get(years = 2005:2010, offence = "total")
+area <- pks_get(years = 2005:2010, offence = "total", weights = "area")
 both <- merge(pop[, c("year", "ags", "cases")], area[, c("year", "ags", "cases")],
               by = c("year", "ags"), suffixes = c("_population", "_area"))
 both$difference <- both$cases_area - both$cases_population

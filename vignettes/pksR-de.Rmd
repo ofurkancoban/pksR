@@ -1,0 +1,140 @@
+---
+title: "Erste Schritte mit pksR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Erste Schritte mit pksR (Deutsch)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+old <- options(pksR.lang = "de")
+```
+
+`pksR` liest die Kreistabellen der Polizeilichen Kriminalstatistik (PKS) des Bundeskriminalamts (BKA) aus versionierten Datenveröffentlichungen. Diese Vignette zeigt die wichtigsten Funktionen und beschreibt die Spalten. Beispiele, die das Internet brauchen, werden gezeigt, aber hier nicht ausgeführt; die übrigen verwenden `pks_example()`, ein kleines Panel, das mit dem Paket ausgeliefert wird. Die englische Fassung ist `vignette("pksR")`.
+
+```{r}
+library(pksR)
+options(pksR.lang = "de")
+```
+
+## Daten abrufen
+
+`pks_get()` lädt die gewünschten Jahre aus der neuesten Datenveröffentlichung, prüft jede Datei gegen ihre SHA-256-Prüfsumme und speichert sie in einem lokalen Cache:
+
+```{r, eval = FALSE}
+# Straftaten insgesamt, auf den neuesten Gebietsstand harmonisiert (Voreinstellung)
+insgesamt <- pks_get(offence = "insgesamt")
+
+# Straftaten per Schlüssel, Kurzname oder Bezeichnung
+einbruch <- pks_get(offence = c("wohnungseinbruch", "einbruch"))
+
+# Zwei Jahre wie vom BKA veröffentlicht, alle Straftatenschlüssel
+veroeffentlicht <- pks_get(years = 2024:2025, harmonize_to = NULL)
+
+# Eine feste Datenversion, für reproduzierbare Arbeiten
+d <- pks_get(years = 2015:2025, version = "2026.1")
+```
+
+Die drei Möglichkeiten für `harmonize_to`:
+
+| `harmonize_to` | Ergebnis |
+|---|---|
+| `"latest"` (Voreinstellung) | Harmonisiert auf den Gebietsstand der Veröffentlichung, so gelesen, wie veröffentlicht |
+| ein Jahr, etwa `2016` | Die Daten wie veröffentlicht, in Ihrer Sitzung auf den Gebietsstand dieses Jahres harmonisiert (nur vorwärts) |
+| `NULL` | Wie veröffentlicht: jedes Jahr mit den Kreisen seines eigenen Gebietsstands |
+
+Methoden und Annahmen beschreibt `vignette("harmonization-de")`.
+
+## Straftaten auswählen
+
+`offence` nimmt für jedes Element einen Straftatenschlüssel (`"435*00"`), einen Kurznamen (`"wohnungseinbruch"` oder englisch `"burglary"`), eine vollständige Bezeichnung in einer der beiden Sprachen oder einen Teil einer Bezeichnung (`"einbruch"` wählt beide Schlüssel zum Wohnungseinbruch und meldet das). Groß- und Kleinschreibung, Leerzeichen und Umlaute spielen keine Rolle, und ein genauer Schlüssel, Name oder eine genaue Bezeichnung hat Vorrang vor einem Teil. `pks_offences()` listet alle Schlüssel mit ihren Namen; die Namen sind Entwürfe, bis der Maintainer sie geprüft hat.
+
+## Sprachen
+
+Meldungen und Bezeichnungen der Straftaten kommen auf Deutsch oder Englisch: `options(pksR.lang = "de")` oder `lang = "de"` in `pks_get()` und `pks_offences()`. Ohne beides entscheidet die Sprache der R-Sitzung.
+
+## Das Beispielpanel
+
+```{r}
+d <- pks_example()
+d[, c("year", "ags", "region_name", "offence_key", "cases", "hz", "harmonized")]
+```
+
+Jedes Ergebnis trägt seine Herkunft als Attribute:
+
+```{r}
+attributes(d)[c("data_version", "boundary_year", "weights")]
+```
+
+Bei Daten aus `pks_get()` ist `data_version` die Datenversion, `retrieved_at` der Zeitpunkt des Downloads und `source_urls` die Dateien der Veröffentlichung, aus denen die Daten stammen.
+
+## Spalten
+
+| Spalte | Inhalt |
+|---|---|
+| `year` | Berichtsjahr |
+| `ags` | Kreisschlüssel, fünfstellig mit führender Null, etwa `"02000"` für Hamburg |
+| `region_name` | Name des Kreises wie veröffentlicht, bei veränderten Kreisen der Name im Ziel-Gebietsstand |
+| `offence_key` | Straftatenschlüssel; in harmonisierten Daten der harmonisierte Schlüssel, siehe `pks_offences()` |
+| `offence_key_published` | Nur harmonisierte Daten: der veröffentlichte Schlüssel oder `"SCHLÜSSEL minus SCHLÜSSEL"` bei berechneten Schlüsseln |
+| `offence_label` | Bezeichnung in der gewählten Sprache |
+| `cases` | Erfasste Fälle (veröffentlicht; `NA` in den PDF-Jahren 2003 bis 2012) |
+| `attempts` | Versuche |
+| `hz` | Häufigkeitszahl: Fälle je 100.000 Einwohner |
+| `cleared` | Aufgeklärte Fälle |
+| `clearance_rate` | Aufklärungsquote in Prozent (0, wo die Fallzahl 0 ist, wie in den BKA-Tabellen) |
+| `suspects` | Tatverdächtige (Personen; über Schlüssel nicht addierbar) |
+| `cases_derived`, `cleared_derived` | Nur PDF-Jahre: `hz * population / 1e5`, weil diese Tabellen Quoten und Einwohnerzahlen, aber keine Fallzahlen enthalten |
+| `population` | Veröffentlichte Einwohnerzahl (PDF-Jahre und 2020) |
+| `derived_population` | `cases / hz * 1e5`, aus der veröffentlichten Quote abgeleitet; ein Wert je Kreis und Jahr |
+| `source_format`, `source_file` | Format und Datei der BKA-Quelle |
+| `boundary_year` | Gebietsstand der Zeile |
+| `harmonized` | `TRUE`, wenn der Kreis durch die Harmonisierung verändert wurde |
+| `weight_type` | `none`, `population` oder `area` |
+| `estimated` | `TRUE` für Anteile geteilter Kreise und für abgeleitete Fallzahlen (PDF-Jahre) |
+
+Fallzahlen in harmonisierten Daten sind Dezimalzahlen: Ein geteilter Kreis gibt Bruchteile seiner Fälle an seine Nachfolger ab, und Runden würde die Bundessummen verändern.
+
+## Straftatenschlüssel und Brüche
+
+```{r}
+pks_offences("Diebstahl")[, c("offence_key", "name", "label")]
+```
+
+Die Kreistabellen enthalten nur eine Auswahl von Straftatenschlüsseln, und Schlüssel ändern sich über die Zeit. Vor jeder Zeitreihe die bekannten methodischen Brüche prüfen:
+
+```{r}
+b <- pks_breaks()
+b[b$comparable == "no", c("first_year", "offence_key", "type")]
+```
+
+## Quoten, Prüfungen und Zitieren
+
+Nach dem Filtern oder Harmonisieren die Quoten aus den Fallzahlen neu berechnen und die Prüfungen laufen lassen:
+
+```{r}
+r <- pks_rates(d, per = 1000)
+head(r[, c("year", "ags", "offence_key", "cases", "rate")])
+pks_validate(d)
+```
+
+Arbeiten mit diesen Daten sollten das Paket, die Datenversion und die Quellen zitieren. `pks_cite()` liefert alle fünf Einträge, einschließlich der Lizenz der BKA-Daten (Datenlizenz Deutschland, Namensnennung, Version 2.0):
+
+```{r, eval = FALSE}
+pks_cite()
+```
+
+## Cache
+
+Downloads liegen unter `tools::R_user_dir("pksR", "cache")`, ein Ordner je Datenversion. Eine Veröffentlichung ändert sich nie; eine Datei im Cache wird verwendet, bis ihre Prüfsumme nicht mehr stimmt.
+
+```{r, eval = FALSE}
+pks_cache_info()
+pks_cache_clear(version = "2026.1")
+```
+
+```{r, include = FALSE}
+options(old)
+```

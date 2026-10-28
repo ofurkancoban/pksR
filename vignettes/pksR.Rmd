@@ -23,7 +23,10 @@ library(pksR)
 
 ```{r, eval = FALSE}
 # Total offences, harmonized to the latest boundary (the default)
-total <- pks_get(offence_keys = "------")
+total <- pks_get(offence = "total")
+
+# Offences by key, short name or label, in English or German
+burglary <- pks_get(offence = c("burglary", "einbruch"), lang = "en")
 
 # Two years as published by the BKA, all offence keys
 published <- pks_get(years = 2024:2025, harmonize_to = NULL)
@@ -41,6 +44,14 @@ The three choices of `harmonize_to`:
 | `NULL` | As published: each year with the districts of its own boundary |
 
 See `vignette("harmonization")` for the methods and their assumptions.
+
+## Choosing offences
+
+`offence` takes, for each element, an offence key (`"435*00"`), a short name (`"burglary"`, or the German `"wohnungseinbruch"`), a full label in either language, or a part of a label (`"einbruch"` selects both burglary keys and says so). Capitals, spaces and umlauts do not matter, and an exact key, name or label wins over a part. `pks_offences()` lists all keys with their names; the names are drafts until the maintainer has reviewed them.
+
+## Languages
+
+Messages and offence labels come in English or German: `options(pksR.lang = "de")`, or `lang = "de"` in `pks_get()` and `pks_offences()`. Without either, the language of the R session decides. A German version of this vignette is `vignette("pksR-de")`.
 
 ## The example panel
 
@@ -87,7 +98,7 @@ Counts in harmonized data are doubles: a split district passes fractions of its 
 ## Offence keys and breaks
 
 ```{r}
-pks_offences("Diebstahl")[, c("offence_key", "label", "valid_from", "valid_to")]
+pks_offences("theft", lang = "en")[, c("offence_key", "name", "label")]
 ```
 
 The district tables contain only a selected set of offence keys, and keys change over time. Before reading a time series, check the known methodological breaks:
