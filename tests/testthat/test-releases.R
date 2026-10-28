@@ -24,12 +24,12 @@ test_that("an unknown version is an error that lists the available ones", {
 
 test_that("without internet the newest cached version is used, and nothing else is possible", {
   local_fake_release()
-  pks_get(years = 2021, offence_keys = "------")
+  pks_get(years = 2021, offence = "------")
   # Same cache, network gone
   cache <- Sys.getenv("R_USER_CACHE_DIR")
   log <- local_fake_release(offline = TRUE)
   withr::local_envvar(R_USER_CACHE_DIR = cache)
-  expect_warning(d <- pks_get(years = 2021, offence_keys = "------"), "newest cached version")
+  expect_warning(d <- pks_get(years = 2021, offence = "------"), "newest cached version")
   expect_identical(attr(d, "data_version"), "2026.1")
   # Five districts in the fixture, four at the 2025 boundary (Eisenach merged)
   expect_equal(nrow(d), 4)

@@ -19,7 +19,7 @@ user_agent <- function() {
 log_rows_removed <- function(n_before, n_after, reason) {
   removed <- n_before - n_after
   if (removed > 0) {
-    cli::cli_inform("Removed {removed} row{?s}: {reason}")
+    cli::cli_inform(tr("Removed {removed} row{?s}: {reason}"))
   }
   invisible(removed)
 }
@@ -33,7 +33,7 @@ join_checked <- function(x, y, by, what) {
   matched <- dplyr::semi_join(x, y, by = by)
   if (nrow(matched) != nrow(x)) {
     lost <- dplyr::anti_join(x, y, by = by)
-    cli::cli_abort("Join of {what} loses {nrow(lost)} row{?s}; unmatched {.val {unique(do.call(paste, lost[key_x]))}}")
+    cli::cli_abort(tr("Join of {what} loses {nrow(lost)} row{?s}; unmatched {.val {unique(do.call(paste, lost[key_x]))}}"))
   }
   out
 }
@@ -48,7 +48,7 @@ parse_years <- function(x) {
   unlist(lapply(parts, function(p) {
     b <- as.integer(strsplit(p, "-", fixed = TRUE)[[1]])
     if (anyNA(b) || !length(b) %in% 1:2) {
-      cli::cli_abort("Invalid year range {.val {p}}.")
+      cli::cli_abort(tr("Invalid year range {.val {p}}."))
     }
     seq(b[1], b[length(b)])
   }))

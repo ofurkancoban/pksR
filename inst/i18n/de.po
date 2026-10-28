@@ -1,0 +1,266 @@
+# German texts of pksR (read by R/lang.R). Updated by data-raw/translations.R;
+# keep placeholders in braces exactly as in the msgid.
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "{.arg lang} must be {.val de} or {.val en}."
+msgstr "{.arg lang} muss {.val de} oder {.val en} sein."
+
+msgid "clearance_rate is 0 where cases are 0. This follows the BKA tables and is not a real rate: some of these rows have cleared > 0 (cases recorded in earlier years). The 2022 table leaves these cells empty; they are set to 0 for consistency."
+msgstr "clearance_rate ist 0, wo cases 0 ist. Das folgt den BKA-Tabellen und ist keine echte Quote: In einigen dieser Zeilen ist cleared > 0 (in Vorjahren erfasste Fälle). Die Tabelle 2022 lässt diese Zellen leer; sie werden einheitlich auf 0 gesetzt."
+
+msgid "As published: clearance_rate is 0 where cases are 0, except in 2022, where the BKA table leaves these cells empty (NA). It is not a real rate."
+msgstr "Wie veröffentlicht: clearance_rate ist 0, wo cases 0 ist, außer 2022, wo die BKA-Tabelle diese Zellen leer lässt (NA). Es ist keine echte Quote."
+
+msgid "{.arg offence} must be a character vector, such as {.code \"burglary\"} or {.code \"435*00\"}."
+msgstr "{.arg offence} muss ein Zeichenvektor sein, etwa {.code \"burglary\"} oder {.code \"435*00\"}."
+
+msgid "No offence matches {.val {x}}."
+msgstr "Keine Straftat passt zu {.val {x}}."
+
+msgid "See {.fn pks_offences} for keys, names and labels."
+msgstr "Schlüssel, Kurznamen und Bezeichnungen zeigt {.fn pks_offences}."
+
+msgid "{.val {x}} matches {length(found)} offence{?s}: {shown}."
+msgstr "{.val {x}} passt zu {length(found)} Straftat{?en}: {shown}."
+
+msgid "Not published as such, only computed when harmonizing: {.val {unique(paste0(computed$offence_key_harmonized, ' (', computed$year, ')'))}}."
+msgstr "Nicht als solche veröffentlicht, nur bei der Harmonisierung berechnet: {.val {unique(paste0(computed$offence_key_harmonized, ' (', computed$year, ')'))}}."
+
+msgid "Cache: {.path {root}}"
+msgstr "Cache: {.path {root}}"
+
+msgid "{nrow(out)} file{?s}, {format_bytes(sum(out$bytes))} in {length(unique(out$version))} data version{?s}."
+msgstr "{nrow(out)} Datei{?en}, {format_bytes(sum(out$bytes))} in {length(unique(out$version))} Datenversion{?en}."
+
+msgid "Nothing to remove from the cache."
+msgstr "Im Cache ist nichts zu löschen."
+
+msgid "Delete %d cached file(s), %s?"
+msgstr "%d Datei(en) im Cache löschen, %s?"
+
+msgid "Cache left unchanged."
+msgstr "Cache unverändert."
+
+msgid "Removed {nrow(info)} file{?s} from the cache."
+msgstr "{nrow(info)} Datei{?en} aus dem Cache gelöscht."
+
+msgid "Cannot read the manifest of data version {.val {version}}; the data release is not cited."
+msgstr "Das Manifest der Datenversion {.val {version}} ist nicht lesbar; die Datenveröffentlichung wird nicht zitiert."
+
+msgid "{.code source = \"bka\"} is not available yet."
+msgstr "{.code source = \"bka\"} ist noch nicht verfügbar."
+
+msgid "Use {.code source = \"release\"}; the releases are built from the BKA files by pksR-data."
+msgstr "Verwenden Sie {.code source = \"release\"}; pksR-data erstellt die Veröffentlichungen aus den BKA-Dateien."
+
+msgid "{.arg cache} must be {.val TRUE} or {.val FALSE}."
+msgstr "{.arg cache} muss {.val TRUE} oder {.val FALSE} sein."
+
+msgid "Data release {.val {version}} has no year{?s} {.val {setdiff(years, available)}}."
+msgstr "Die Datenveröffentlichung {.val {version}} enthält {?das/die} Jahr{?e} {.val {setdiff(years, available)}} nicht."
+
+msgid "Available: {min(available)} to {max(available)}."
+msgstr "Verfügbar: {min(available)} bis {max(available)}."
+
+msgid "Harmonizing {length(years)} year{?s} to the boundary of {target} with {weights} weights."
+msgstr "Harmonisiere {length(years)} Jahr{?e} auf den Gebietsstand {target} mit Gewichtung {weights}."
+
+msgid "{.arg years} must be whole numbers, such as {.code 2015:2025}."
+msgstr "{.arg years} muss aus ganzen Zahlen bestehen, etwa {.code 2015:2025}."
+
+msgid "{.arg harmonize_to} must be a year, {.val latest} or {.code NULL}."
+msgstr "{.arg harmonize_to} muss ein Jahr, {.val latest} oder {.code NULL} sein."
+
+msgid "PKS data release {.val {version}}."
+msgstr "PKS-Datenveröffentlichung {.val {version}}."
+
+msgid "Source: PKS Bundeskriminalamt; licence {licence}. Cite with {.fn pks_cite}."
+msgstr "Quelle: PKS Bundeskriminalamt; Lizenz {licence}. Zitieren mit {.fn pks_cite}."
+
+msgid "{.file {basename(path)}} lacks columns {.val {setdiff(boundary_map_columns, names(m))}}."
+msgstr "{.file {basename(path)}} fehlen die Spalten {.val {setdiff(boundary_map_columns, names(m))}}."
+
+msgid "{added$id[i]}: the giving district has no own row to take the transfer from."
+msgstr "{added$id[i]}: Der abgebende Kreis hat keine eigene Zeile, von der die Übertragung abgezogen werden kann."
+
+msgid "{w} does not sum to 1 for {sum(abs(sums$x - 1) > tolerance)} source district{?s} of the crosswalk."
+msgstr "{w} summiert sich für {sum(abs(sums$x - 1) > tolerance)} Ausgangskreis{?e} des Umsteigeschlüssels nicht zu 1."
+
+msgid "The crosswalk periods have gaps."
+msgstr "Die Perioden des Umsteigeschlüssels haben Lücken."
+
+msgid "Crosswalk periods {p} and {p + 1} do not chain."
+msgstr "Die Perioden {p} und {p + 1} des Umsteigeschlüssels schließen nicht aneinander an."
+
+msgid "The crosswalk does not cover the boundary of {year}."
+msgstr "Der Umsteigeschlüssel deckt den Gebietsstand {year} nicht ab."
+
+msgid "Boundary {year}: codes with several names: {.val {unique(rows$ags[duplicated(rows$ags)])}}"
+msgstr "Gebietsstand {year}: Schlüssel mit mehreren Namen: {.val {unique(rows$ags[duplicated(rows$ags)])}}"
+
+msgid "Only forward harmonization is supported ({from_year} to {to_year})."
+msgstr "Nur die Harmonisierung vorwärts ist möglich ({from_year} auf {to_year})."
+
+msgid "The crosswalk has no period {p}-{p + 1}."
+msgstr "Der Umsteigeschlüssel hat keine Periode {p}-{p + 1}."
+
+msgid "District {d$ags[1]}: published population differs between offence keys."
+msgstr "Kreis {d$ags[1]}: Die veröffentlichte Einwohnerzahl unterscheidet sich zwischen Straftatenschlüsseln."
+
+msgid "Data to harmonize must have one boundary year."
+msgstr "Zu harmonisierende Daten müssen einen einzigen Gebietsstand haben."
+
+msgid "{unique(data$year)}: {length(unmatched)} AGS code{?s} not in the crosswalk at {from_year}: {.val {unmatched}}"
+msgstr "{unique(data$year)}: {length(unmatched)} Kreisschlüssel {?ist/sind} nicht im Umsteigeschlüssel von {from_year}: {.val {unmatched}}"
+
+msgid "{unique(before$year)}: offence keys differ before and after harmonization."
+msgstr "{unique(before$year)}: Die Straftatenschlüssel unterscheiden sich vor und nach der Harmonisierung."
+
+msgid "{unique(before$year)}: harmonization changed national totals for {.val {unique(a$offence_key[bad[, 1]])}}."
+msgstr "{unique(before$year)}: Die Harmonisierung hat die Bundessummen für {.val {unique(a$offence_key[bad[, 1]])}} verändert."
+
+msgid "{.file {basename(path)}} lacks columns {.val {setdiff(offence_map_columns, names(m))}}."
+msgstr "{.file {basename(path)}} fehlen die Spalten {.val {setdiff(offence_map_columns, names(m))}}."
+
+msgid "Offence map entry {.val {e}} lacks @YEARS."
+msgstr "Dem Eintrag {.val {e}} der Straftatenzuordnung fehlt @JAHRE."
+
+msgid "Offence map entry {.val {e}} is not KEY or KEY minus KEY."
+msgstr "Der Eintrag {.val {e}} der Straftatenzuordnung ist weder SCHLÜSSEL noch SCHLÜSSEL minus SCHLÜSSEL."
+
+msgid "{year}: offence key{?s} {.val {unknown}} not in the offence map of this data release."
+msgstr "{year}: Straftatenschlüssel {.val {unknown}} {?fehlt/fehlen} in der Straftatenzuordnung dieser Datenveröffentlichung."
+
+msgid "{year}: the offence map expects key{?s} {.val {absent}}, which the data lack."
+msgstr "{year}: Die Straftatenzuordnung erwartet {?den Schlüssel/die Schlüssel} {.val {absent}}, die in den Daten fehlen."
+
+msgid "{spec_row$year}: key {spec_row$minus_key} is missing for some districts."
+msgstr "{spec_row$year}: Der Schlüssel {spec_row$minus_key} fehlt für einige Kreise."
+
+msgid "This data release can harmonize to boundary years {min(boundary_years(map))} to {max(boundary_years(map))}, not {target}."
+msgstr "Diese Datenveröffentlichung kann auf die Gebietsstände {min(boundary_years(map))} bis {max(boundary_years(map))} harmonisieren, nicht auf {target}."
+
+msgid "Use {.code harmonize_to = NULL} for the data as published."
+msgstr "Für die Daten wie veröffentlicht: {.code harmonize_to = NULL}."
+
+msgid "Only forward harmonization is supported: years with boundary {.val {sort(later)}} cannot be moved back to {target}."
+msgstr "Nur die Harmonisierung vorwärts ist möglich: Jahre mit Gebietsstand {.val {sort(later)}} können nicht auf {target} zurückgeführt werden."
+
+msgid "Request years up to {target}, or a later {.arg harmonize_to}."
+msgstr "Wählen Sie Jahre bis {target} oder ein späteres {.arg harmonize_to}."
+
+msgid "{.arg version} must be one string, such as {.val latest} or {.val 2026.1}."
+msgstr "{.arg version} muss eine einzelne Zeichenkette sein, etwa {.val latest} oder {.val 2026.1}."
+
+msgid "Cannot list the data releases; using the newest cached version {.val {cached[1]}}."
+msgstr "Die Datenveröffentlichungen sind nicht abrufbar; verwendet wird die neueste Version im Cache, {.val {cached[1]}}."
+
+msgid "Cannot reach GitHub to list the data releases, and version {.val {version}} is not cached."
+msgstr "GitHub ist nicht erreichbar, und die Version {.val {version}} ist nicht im Cache."
+
+msgid "{.val {data_repo()}} has no published data release yet."
+msgstr "{.val {data_repo()}} hat noch keine veröffentlichte Datenversion."
+
+msgid "Data version {.val {version}} does not exist."
+msgstr "Die Datenversion {.val {version}} gibt es nicht."
+
+msgid "Available: {.val {index$version}}"
+msgstr "Verfügbar: {.val {index$version}}"
+
+msgid "The manifest of {.val {version}} names version {.val {m$data_version}}."
+msgstr "Das Manifest von {.val {version}} nennt die Version {.val {m$data_version}}."
+
+msgid "Data release {.val {version}} has no file {.file {name}}."
+msgstr "Die Datenveröffentlichung {.val {version}} hat keine Datei {.file {name}}."
+
+msgid "{.file {name}} of data release {.val {version}} fails its checksum."
+msgstr "{.file {name}} der Datenveröffentlichung {.val {version}} besteht die Prüfsumme nicht."
+
+msgid "Manifest: {expected}"
+msgstr "Manifest: {expected}"
+
+msgid "Download: {actual}"
+msgstr "Download: {actual}"
+
+msgid "Download of {.url {url}} failed."
+msgstr "Der Download von {.url {url}} ist fehlgeschlagen."
+
+msgid "{.arg pattern} must be one string."
+msgstr "{.arg pattern} muss eine einzelne Zeichenkette sein."
+
+msgid "{.arg per} must be one positive number."
+msgstr "{.arg per} muss eine einzelne positive Zahl sein."
+
+msgid "{.arg population} must be a data frame with columns {.field year}, {.field ags} and {.field population}."
+msgstr "{.arg population} muss ein Data Frame mit den Spalten {.field year}, {.field ags} und {.field population} sein."
+
+msgid "{.arg population} has several values for one year and district."
+msgstr "{.arg population} hat mehrere Werte für ein Jahr und einen Kreis."
+
+msgid "No population for {length(missing)} year and district pair{?s}: {.val {utils::head(missing, 10)}}"
+msgstr "Keine Einwohnerzahl für {length(missing)} Kombination{?en} aus Jahr und Kreis: {.val {utils::head(missing, 10)}}"
+
+msgid "{.arg {arg}} must be a tibble from {.fn pks_get}; missing column{?s} {.field {setdiff(needed, names(data))}}."
+msgstr "{.arg {arg}} muss ein Tibble aus {.fn pks_get} sein; es fehl{?t/en} {?die Spalte/die Spalten} {.field {setdiff(needed, names(data))}}."
+
+msgid "{.arg data} must be a data frame."
+msgstr "{.arg data} muss ein Data Frame sein."
+
+msgid "Validation: {n[['pass']]} passed, {n[['warn']]} warning{?s}, {n[['fail']]} failed."
+msgstr "Prüfung: {n[['pass']]} bestanden, {n[['warn']]} Warnung{?en}, {n[['fail']]} nicht bestanden."
+
+msgid "{out$check[i]}: {out$details[i]}"
+msgstr "{out$check[i]}: {out$details[i]}"
+
+msgid "missing: %s; wrong type: %s"
+msgstr "fehlend: %s; falscher Typ: %s"
+
+msgid "year, ags or offence_key missing"
+msgstr "year, ags oder offence_key fehlt"
+
+msgid "%d duplicate year, ags, offence_key rows"
+msgstr "%d doppelte Zeilen zu year, ags, offence_key"
+
+msgid "year or ags missing"
+msgstr "year oder ags fehlt"
+
+msgid "%s: %s missing"
+msgstr "%s: %s fehlt"
+
+msgid "district set differs in %s"
+msgstr "Kreisbestand weicht ab in %s"
+
+msgid "%d rows with negative counts, %d with attempts above cases"
+msgstr "%d Zeilen mit negativen Zahlen, %d mit mehr Versuchen als Fällen"
+
+msgid "population columns missing"
+msgstr "Spalten zur Einwohnerzahl fehlen"
+
+msgid "median district population outside 50,000 to 400,000 in %s"
+msgstr "Median der Kreiseinwohnerzahl außerhalb von 50.000 bis 400.000 in %s"
+
+msgid "{.file {basename(path)}} does not have the expected columns."
+msgstr "{.file {basename(path)}} hat nicht die erwarteten Spalten."
+
+msgid "Missing: {.val {setdiff(names(spec), header)}}; unexpected: {.val {setdiff(header, names(spec))}}"
+msgstr "Fehlend: {.val {setdiff(names(spec), header)}}; unerwartet: {.val {setdiff(header, names(spec))}}"
+
+msgid "A newer pksR version may be needed for this data release."
+msgstr "Für diese Datenveröffentlichung ist möglicherweise eine neuere pksR-Version nötig."
+
+msgid "Columns differ from the {what} schema."
+msgstr "Die Spalten weichen vom Schema {what} ab."
+
+msgid "Wrong column types in the {what} schema: {.val {bad}}"
+msgstr "Falsche Spaltentypen im Schema {what}: {.val {bad}}"
+
+msgid "Removed {removed} row{?s}: {reason}"
+msgstr "{removed} Zeile{?n} entfernt: {reason}"
+
+msgid "Join of {what} loses {nrow(lost)} row{?s}; unmatched {.val {unique(do.call(paste, lost[key_x]))}}"
+msgstr "Die Verknüpfung {what} verliert {nrow(lost)} Zeile{?n}; ohne Partner: {.val {unique(do.call(paste, lost[key_x]))}}"
+
+msgid "Invalid year range {.val {p}}."
+msgstr "Ungültiger Jahresbereich {.val {p}}."
+

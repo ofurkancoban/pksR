@@ -28,24 +28,24 @@
 pks_rates <- function(data, population = NULL, per = 1e5) {
   check_panel(data)
   if (!is.numeric(per) || length(per) != 1 || is.na(per) || per <= 0) {
-    cli::cli_abort("{.arg per} must be one positive number.")
+    cli::cli_abort(tr("{.arg per} must be one positive number."))
   }
   if (is.null(population)) {
     pop <- dplyr::coalesce(data$population, data$derived_population)
   } else {
     if (!is.data.frame(population) || !all(c("year", "ags", "population") %in% names(population))) {
-      cli::cli_abort("{.arg population} must be a data frame with columns {.field year}, {.field ags} and {.field population}.")
+      cli::cli_abort(tr("{.arg population} must be a data frame with columns {.field year}, {.field ags} and {.field population}."))
     }
     population <- unique(tibble::tibble(
       year = as.integer(population$year), ags = as.character(population$ags), population = as.numeric(population$population)
     ))
     if (anyDuplicated(population[c("year", "ags")])) {
-      cli::cli_abort("{.arg population} has several values for one year and district.")
+      cli::cli_abort(tr("{.arg population} has several values for one year and district."))
     }
     i <- match(paste(data$year, data$ags), paste(population$year, population$ags))
     if (anyNA(i)) {
       missing <- unique(paste(data$year[is.na(i)], data$ags[is.na(i)]))
-      cli::cli_abort("No population for {length(missing)} year and district pair{?s}: {.val {utils::head(missing, 10)}}")
+      cli::cli_abort(tr("No population for {length(missing)} year and district pair{?s}: {.val {utils::head(missing, 10)}}"))
     }
     pop <- population$population[i]
   }
@@ -62,7 +62,7 @@ pks_rates <- function(data, population = NULL, per = 1e5) {
 check_panel <- function(data, arg = "data") {
   needed <- c("year", "ags", "offence_key", "cases", "cleared", "population", "derived_population", "cases_derived", "cleared_derived")
   if (!is.data.frame(data) || !all(needed %in% names(data))) {
-    cli::cli_abort("{.arg {arg}} must be a tibble from {.fn pks_get}; missing column{?s} {.field {setdiff(needed, names(data))}}.")
+    cli::cli_abort(tr("{.arg {arg}} must be a tibble from {.fn pks_get}; missing column{?s} {.field {setdiff(needed, names(data))}}."))
   }
   invisible(data)
 }

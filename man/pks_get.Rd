@@ -6,22 +6,27 @@
 \usage{
 pks_get(
   years = NULL,
-  offence_keys = NULL,
+  offence = NULL,
   harmonize_to = "latest",
   weights = c("population", "area"),
   version = "latest",
   source = c("release", "bka"),
-  cache = TRUE
+  cache = TRUE,
+  lang = NULL
 )
 }
 \arguments{
 \item{years}{Integer vector of reporting years, or \code{NULL} (default) for all
 years of the release.}
 
-\item{offence_keys}{Character vector of offence keys (Straftatenschluessel),
-or \code{NULL} (default) for all. For harmonized data these are the harmonized
-keys listed by \code{\link[=pks_offences]{pks_offences()}}; for the data as published, the keys as
-printed in the BKA tables.}
+\item{offence}{Offences to return, or \code{NULL} (default) for all. Each
+element can be an offence key (\code{"435*00"}), a short name in English or
+German (\code{"burglary"}, \code{"wohnungseinbruch"}), a full label
+(\code{"Wohnungseinbruchdiebstahl"}) or a part of a label (\code{"einbruch"}, which
+selects both burglary keys). An exact key, name or label wins over a part.
+Capitals, spaces and umlauts do not matter. See
+\code{\link[=pks_offences]{pks_offences()}} for all keys and names. For the data as published, the
+published keys that feed the selected keys are returned.}
 
 \item{harmonize_to}{Target boundary year (Gebietsstand). \code{"latest"}
 (default) is the boundary of the release, read as released; another year
@@ -41,6 +46,13 @@ available yet.}
 \item{cache}{Keep downloaded files in the cache (default \code{TRUE}). With
 \code{FALSE}, files go to a temporary directory and are removed with the R
 session.}
+
+\item{lang}{Language of the offence labels in column \code{offence_label} and
+of the messages: \code{"de"} or \code{"en"}. \code{NULL} (default) uses
+\code{options(pksR.lang)}, otherwise the language of the R session. Harmonized
+data get the label of the harmonized key; data as published keep the
+published German label, or get the English label of the matching
+harmonized key.}
 }
 \value{
 A tibble with one row per year, district (\code{ags}) and offence key.
@@ -58,7 +70,10 @@ checksums of the release manifest.
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Total offences, harmonized to the latest boundary
-total <- pks_get(offence_keys = "------")
+total <- pks_get(offence = "total")
+
+# Theft in total and both burglary keys, German labels
+theft <- pks_get(offence = c("diebstahl", "einbruch"), lang = "de")
 
 # As published by the BKA, two years
 published <- pks_get(years = 2024:2025, harmonize_to = NULL)

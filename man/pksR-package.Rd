@@ -12,6 +12,7 @@ Access to the district (Kreis) tables of the German Police Crime Statistics ('Po
 Useful links:
 \itemize{
   \item \url{https://github.com/ofurkancoban/pksR}
+  \item \url{https://ofurkancoban.github.io/pksR/}
   \item \url{https://github.com/ofurkancoban/pksR-data}
   \item Report bugs at \url{https://github.com/ofurkancoban/pksR/issues}
 }

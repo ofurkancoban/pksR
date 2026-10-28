@@ -68,26 +68,26 @@ pks_versions <- function() {
 # back to the newest version in the cache.
 resolve_version <- function(version = "latest") {
   if (!is.character(version) || length(version) != 1 || is.na(version)) {
-    cli::cli_abort("{.arg version} must be one string, such as {.val latest} or {.val 2026.1}.")
+    cli::cli_abort(tr("{.arg version} must be one string, such as {.val latest} or {.val 2026.1}."))
   }
   version <- sub("^v", "", version)
   index <- tryCatch(release_index(), error = function(e) e)
   if (inherits(index, "error")) {
     cached <- cached_versions()
     if (version == "latest" && length(cached)) {
-      cli::cli_warn(c("Cannot list the data releases; using the newest cached version {.val {cached[1]}}.", "i" = conditionMessage(index)))
+      cli::cli_warn(c(tr("Cannot list the data releases; using the newest cached version {.val {cached[1]}}."), "i" = conditionMessage(index)))
       return(cached[1])
     }
     if (version %in% cached) return(version)
     cli::cli_abort(c(
-      "Cannot reach GitHub to list the data releases, and version {.val {version}} is not cached.",
+      tr("Cannot reach GitHub to list the data releases, and version {.val {version}} is not cached."),
       "i" = conditionMessage(index)
     ), parent = index)
   }
-  if (nrow(index) == 0) cli::cli_abort("{.val {data_repo()}} has no published data release yet.")
+  if (nrow(index) == 0) cli::cli_abort(tr("{.val {data_repo()}} has no published data release yet."))
   if (version == "latest") return(index$version[1])
   if (!version %in% index$version) {
-    cli::cli_abort(c("Data version {.val {version}} does not exist.", "i" = "Available: {.val {index$version}}"))
+    cli::cli_abort(c(tr("Data version {.val {version}} does not exist."), "i" = tr("Available: {.val {index$version}}")))
   }
   version
 }
@@ -115,7 +115,7 @@ read_manifest <- function(version, cache = TRUE) {
   m <- jsonlite::read_json(path)
   if (!identical(m$data_version, version)) {
     unlink(path)
-    cli::cli_abort("The manifest of {.val {version}} names version {.val {m$data_version}}.")
+    cli::cli_abort(tr("The manifest of {.val {version}} names version {.val {m$data_version}}."))
   }
   m
 }
@@ -157,7 +157,7 @@ pks_manifest <- function(version = "latest") {
 release_file <- function(version, name, manifest, cache = TRUE) {
   entry <- Filter(function(f) identical(f$name, name), manifest$files)
   if (length(entry) != 1) {
-    cli::cli_abort("Data release {.val {version}} has no file {.file {name}}.")
+    cli::cli_abort(tr("Data release {.val {version}} has no file {.file {name}}."))
   }
   expected <- entry[[1]]$sha256
   path <- file.path(if (cache) cache_dir(version) else tempdir(), name)
@@ -167,9 +167,9 @@ release_file <- function(version, name, manifest, cache = TRUE) {
   if (!identical(actual, expected)) {
     unlink(path)
     cli::cli_abort(c(
-      "{.file {name}} of data release {.val {version}} fails its checksum.",
-      "i" = "Manifest: {expected}",
-      "i" = "Download: {actual}"
+      tr("{.file {name}} of data release {.val {version}} fails its checksum."),
+      "i" = tr("Manifest: {expected}"),
+      "i" = tr("Download: {actual}")
     ))
   }
   path
@@ -183,7 +183,7 @@ download <- function(url, path) {
   resp <- tryCatch(
     httr2::req_perform(github_request(url), path = tmp),
     error = function(e) {
-      cli::cli_abort(c("Download of {.url {url}} failed.", "i" = conditionMessage(e)), parent = e, call = NULL)
+      cli::cli_abort(c(tr("Download of {.url {url}} failed."), "i" = conditionMessage(e)), parent = e, call = NULL)
     }
   )
   # A mocked response (tests) keeps its body in memory instead of `tmp`

@@ -27,7 +27,7 @@
 #' @examples
 #' pks_validate(pks_example())
 pks_validate <- function(data) {
-  if (!is.data.frame(data)) cli::cli_abort("{.arg data} must be a data frame.")
+  if (!is.data.frame(data)) cli::cli_abort(tr("{.arg data} must be a data frame."))
   spec <- if ("offence_key_published" %in% names(data)) harmonized_spec else canonical_spec
   checks <- list(
     check_schema(data, spec),
@@ -39,9 +39,9 @@ pks_validate <- function(data) {
   )
   out <- dplyr::bind_rows(checks)
   n <- table(factor(out$status, c("pass", "warn", "fail")))
-  cli::cli_inform("Validation: {n[['pass']]} passed, {n[['warn']]} warning{?s}, {n[['fail']]} failed.")
+  cli::cli_inform(tr("Validation: {n[['pass']]} passed, {n[['warn']]} warning{?s}, {n[['fail']]} failed."))
   for (i in which(out$status != "pass")) {
-    cli::cli_inform(c("!" = "{out$check[i]}: {out$details[i]}"))
+    cli::cli_inform(c("!" = tr("{out$check[i]}: {out$details[i]}")))
   }
   out
 }
@@ -57,22 +57,22 @@ check_schema <- function(data, spec) {
   types <- vapply(data[present], typeof, "")
   wrong <- present[types != spec[present]]
   check_result("schema", length(missing) + length(wrong),
-               paste0("missing: ", paste(missing, collapse = ", "), "; wrong type: ", paste(wrong, collapse = ", ")))
+               sprintf(tr("missing: %s; wrong type: %s"), paste(missing, collapse = ", "), paste(wrong, collapse = ", ")))
 }
 
 check_unique <- function(data) {
-  if (!all(c("year", "ags", "offence_key") %in% names(data))) return(check_result("uniqueness", 1, "year, ags or offence_key missing"))
+  if (!all(c("year", "ags", "offence_key") %in% names(data))) return(check_result("uniqueness", 1, tr("year, ags or offence_key missing")))
   dup <- duplicated(data[c("year", "ags", "offence_key")])
-  check_result("uniqueness", sum(dup), paste(sum(dup), "duplicate year, ags, offence_key rows"))
+  check_result("uniqueness", sum(dup), sprintf(tr("%d duplicate year, ags, offence_key rows"), sum(dup)))
 }
 
 check_city_states <- function(data) {
-  if (!all(c("year", "ags") %in% names(data))) return(check_result("city_states", 1, "year or ags missing"))
+  if (!all(c("year", "ags") %in% names(data))) return(check_result("city_states", 1, tr("year or ags missing")))
   missing <- vapply(split(data$ags, data$year), function(a) {
-    paste(setdiff(c("11000", "02000"), a), collapse = " and ")
+    paste(setdiff(c("11000", "02000"), a), collapse = ", ")
   }, "")
   bad <- missing[nzchar(missing)]
-  check_result("city_states", length(bad), paste0(names(bad), ": ", bad, " missing", collapse = "; "))
+  check_result("city_states", length(bad), paste(sprintf(tr("%s: %s missing"), names(bad), bad), collapse = "; "))
 }
 
 check_coverage <- function(data) {
@@ -82,7 +82,7 @@ check_coverage <- function(data) {
   sets <- lapply(split(data$ags, data$year), function(a) sort(unique(a)))
   ref <- sets[[which.max(lengths(sets))]]
   differ <- names(sets)[!vapply(sets, identical, TRUE, ref)]
-  check_result("coverage", length(differ), paste("district set differs in", paste(differ, collapse = ", ")))
+  check_result("coverage", length(differ), sprintf(tr("district set differs in %s"), paste(differ, collapse = ", ")))
 }
 
 check_counts <- function(data) {
@@ -94,17 +94,17 @@ check_counts <- function(data) {
     FALSE
   }
   check_result("counts", sum(negative | over),
-               sprintf("%d rows with negative counts, %d with attempts above cases", sum(negative), sum(over)))
+               sprintf(tr("%d rows with negative counts, %d with attempts above cases"), sum(negative), sum(over)))
 }
 
 check_population <- function(data) {
   if (!all(c("year", "ags", "population", "derived_population") %in% names(data))) {
-    return(check_result("population", 1, "population columns missing", warn_only = TRUE))
+    return(check_result("population", 1, tr("population columns missing"), warn_only = TRUE))
   }
   pop <- unique(data.frame(year = data$year, ags = data$ags, p = dplyr::coalesce(data$population, data$derived_population)))
   med <- vapply(split(pop$p, pop$year), stats::median, 1, na.rm = TRUE)
   bad <- names(med)[is.na(med) | med < 5e4 | med > 4e5]
   check_result("population", length(bad),
-               paste("median district population outside 50,000 to 400,000 in", paste(bad, collapse = ", ")),
+               sprintf(tr("median district population outside 50,000 to 400,000 in %s"), paste(bad, collapse = ", ")),
                warn_only = TRUE)
 }

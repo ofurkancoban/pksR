@@ -53,9 +53,9 @@ read_release_csv <- function(path, spec) {
   header <- names(readr::read_csv(path, n_max = 0, col_types = readr::cols(.default = "c"), progress = FALSE))
   if (!identical(sort(header), sort(names(spec)))) {
     cli::cli_abort(c(
-      "{.file {basename(path)}} does not have the expected columns.",
-      "i" = "Missing: {.val {setdiff(names(spec), header)}}; unexpected: {.val {setdiff(header, names(spec))}}",
-      "i" = "A newer pksR version may be needed for this data release."
+      tr("{.file {basename(path)}} does not have the expected columns."),
+      "i" = tr("Missing: {.val {setdiff(names(spec), header)}}; unexpected: {.val {setdiff(header, names(spec))}}"),
+      "i" = tr("A newer pksR version may be needed for this data release.")
     ))
   }
   # The pipeline writes NA as an empty field (readr::write_csv(na = ""))
@@ -65,12 +65,12 @@ read_release_csv <- function(path, spec) {
 
 assert_schema <- function(data, spec, what) {
   if (!identical(names(data), names(spec))) {
-    cli::cli_abort("Columns differ from the {what} schema.")
+    cli::cli_abort(tr("Columns differ from the {what} schema."))
   }
   types <- vapply(data, typeof, character(1))
   bad <- names(types)[types != spec[names(types)]]
   if (length(bad) > 0) {
-    cli::cli_abort("Wrong column types in the {what} schema: {.val {bad}}")
+    cli::cli_abort(tr("Wrong column types in the {what} schema: {.val {bad}}"))
   }
   invisible(data)
 }

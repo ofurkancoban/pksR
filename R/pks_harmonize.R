@@ -13,7 +13,7 @@ boundary_map_columns <- c(
 read_boundary_map <- function(path) {
   m <- readr::read_csv(path, col_types = readr::cols(.default = "c"), na = "", progress = FALSE)
   if (!all(boundary_map_columns %in% names(m))) {
-    cli::cli_abort("{.file {basename(path)}} lacks columns {.val {setdiff(boundary_map_columns, names(m))}}.")
+    cli::cli_abort(tr("{.file {basename(path)}} lacks columns {.val {setdiff(boundary_map_columns, names(m))}}."))
   }
   m$period <- as.integer(m$period)
   m$weight_population <- as.numeric(m$weight_population)
@@ -31,7 +31,7 @@ effective_boundary_map <- function(map) {
   for (i in seq_len(nrow(added))) {
     own <- which(out$period == added$period[i] & out$from_ags == added$from_ags[i] & out$to_ags == added$from_ags[i])
     if (length(own) != 1) {
-      cli::cli_abort("{added$id[i]}: the giving district has no own row to take the transfer from.")
+      cli::cli_abort(tr("{added$id[i]}: the giving district has no own row to take the transfer from."))
     }
     out$weight_population[own] <- out$weight_population[own] - added$weight_population[i]
     out$weight_area[own] <- out$weight_area[own] - added$weight_area[i]
@@ -47,16 +47,16 @@ assert_boundary_map <- function(map, tolerance = 1e-6) {
   for (w in c("weight_population", "weight_area")) {
     sums <- stats::aggregate(map[[w]], map[c("period", "from_ags")], sum)
     if (any(abs(sums$x - 1) > tolerance)) {
-      cli::cli_abort("{w} does not sum to 1 for {sum(abs(sums$x - 1) > tolerance)} source district{?s} of the crosswalk.")
+      cli::cli_abort(tr("{w} does not sum to 1 for {sum(abs(sums$x - 1) > tolerance)} source district{?s} of the crosswalk."))
     }
   }
   periods <- sort(unique(map$period))
   if (!identical(periods, seq(min(periods), max(periods)))) {
-    cli::cli_abort("The crosswalk periods have gaps.")
+    cli::cli_abort(tr("The crosswalk periods have gaps."))
   }
   for (p in periods[-length(periods)]) {
     if (!identical(sort(unique(map$to_ags[map$period == p])), sort(unique(map$from_ags[map$period == p + 1])))) {
-      cli::cli_abort("Crosswalk periods {p} and {p + 1} do not chain.")
+      cli::cli_abort(tr("Crosswalk periods {p} and {p + 1} do not chain."))
     }
   }
   invisible(map)
@@ -70,7 +70,7 @@ boundary_codes <- function(map, year) {
   if ((year - 1) %in% map$period) {
     return(sort(unique(map$to_ags[map$period == year - 1])))
   }
-  cli::cli_abort("The crosswalk does not cover the boundary of {year}.")
+  cli::cli_abort(tr("The crosswalk does not cover the boundary of {year}."))
 }
 
 boundary_names <- function(map, year) {
@@ -82,7 +82,7 @@ boundary_names <- function(map, year) {
   names(rows) <- c("ags", "name")
   rows <- unique(rows)
   if (anyDuplicated(rows$ags)) {
-    cli::cli_abort("Boundary {year}: codes with several names: {.val {unique(rows$ags[duplicated(rows$ags)])}}")
+    cli::cli_abort(tr("Boundary {year}: codes with several names: {.val {unique(rows$ags[duplicated(rows$ags)])}}"))
   }
   rows
 }
@@ -97,7 +97,7 @@ boundary_years <- function(map) {
 compose_crosswalk <- function(map, from_year, to_year, weights = c("population", "area")) {
   weights <- match.arg(weights)
   if (to_year < from_year) {
-    cli::cli_abort("Only forward harmonization is supported ({from_year} to {to_year}).")
+    cli::cli_abort(tr("Only forward harmonization is supported ({from_year} to {to_year})."))
   }
   w_col <- paste0("weight_", weights)
   codes <- boundary_codes(map, from_year)
@@ -105,7 +105,7 @@ compose_crosswalk <- function(map, from_year, to_year, weights = c("population",
   for (p in seq_len(to_year - from_year) + from_year - 1L) {
     step <- map[map$period == p, c("from_ags", "to_ags", w_col)]
     if (nrow(step) == 0) {
-      cli::cli_abort("The crosswalk has no period {p}-{p + 1}.")
+      cli::cli_abort(tr("The crosswalk has no period {p}-{p + 1}."))
     }
     names(step) <- c("mid_ags", "next_ags", "w")
     names(cw)[2] <- "mid_ags"
@@ -125,7 +125,7 @@ district_population <- function(data) {
   rows <- lapply(split(data, data$ags), function(d) {
     pop <- unique(d$population)
     if (length(pop) != 1) {
-      cli::cli_abort("District {d$ags[1]}: published population differs between offence keys.")
+      cli::cli_abort(tr("District {d$ags[1]}: published population differs between offence keys."))
     }
     total <- d$derived_population[d$offence_key %in% c("------", "----")]
     derived <- if (length(total) == 1 && !is.na(total)) total else stats::median(d$derived_population, na.rm = TRUE)
@@ -146,13 +146,13 @@ harmonize_space <- function(data, map, target, weights = c("population", "area")
   weights <- match.arg(weights)
   from_year <- unique(data$boundary_year)
   if (length(from_year) != 1) {
-    cli::cli_abort("Data to harmonize must have one boundary year.")
+    cli::cli_abort(tr("Data to harmonize must have one boundary year."))
   }
   cw <- compose_crosswalk(map, from_year, target, weights)
 
   unmatched <- setdiff(unique(data$ags), cw$from_ags)
   if (length(unmatched) > 0) {
-    cli::cli_warn("{unique(data$year)}: {length(unmatched)} AGS code{?s} not in the crosswalk at {from_year}: {.val {unmatched}}")
+    cli::cli_warn(tr("{unique(data$year)}: {length(unmatched)} AGS code{?s} not in the crosswalk at {from_year}: {.val {unmatched}}"))
     n <- nrow(data)
     data <- data[!data$ags %in% unmatched, ]
     log_rows_removed(n, nrow(data), "AGS codes without crosswalk row")
@@ -224,7 +224,7 @@ check_conservation <- function(before, after, tolerance = 1e-9) {
   a <- totals(before)
   b <- totals(after[, c("offence_key", harmonized_counts)])
   if (!identical(a$offence_key, b$offence_key)) {
-    cli::cli_abort("{unique(before$year)}: offence keys differ before and after harmonization.")
+    cli::cli_abort(tr("{unique(before$year)}: offence keys differ before and after harmonization."))
   }
   rel <- abs(as.matrix(b[-1]) - as.matrix(a[-1])) / pmax(abs(as.matrix(a[-1])), 1)
   district_total <- function(p) sum(dplyr::coalesce(p$population, p$derived_population))
@@ -232,7 +232,7 @@ check_conservation <- function(before, after, tolerance = 1e-9) {
   pop_after <- district_total(unique(after[c("ags", "population", "derived_population")]))
   bad <- which(rel > tolerance | xor(is.na(as.matrix(a[-1])), is.na(as.matrix(b[-1]))), arr.ind = TRUE)
   if (nrow(bad) > 0 || is.na(pop_after) != is.na(pop_before) || isTRUE(abs(pop_after - pop_before) / pop_before > tolerance)) {
-    cli::cli_abort("{unique(before$year)}: harmonization changed national totals for {.val {unique(a$offence_key[bad[, 1]])}}.")
+    cli::cli_abort(tr("{unique(before$year)}: harmonization changed national totals for {.val {unique(a$offence_key[bad[, 1]])}}."))
   }
   invisible(TRUE)
 }
@@ -248,11 +248,12 @@ offence_map_columns <- c(
 read_offence_map <- function(path) {
   m <- readr::read_csv(path, col_types = readr::cols(.default = "c"), na = "", progress = FALSE)
   if (!all(offence_map_columns %in% names(m))) {
-    cli::cli_abort("{.file {basename(path)}} lacks columns {.val {setdiff(offence_map_columns, names(m))}}.")
+    cli::cli_abort(tr("{.file {basename(path)}} lacks columns {.val {setdiff(offence_map_columns, names(m))}}."))
   }
   m$valid_from <- as.integer(m$valid_from)
   m$valid_to <- as.integer(m$valid_to)
-  m[offence_map_columns]
+  # Releases before the alias columns lack them (with_aliases() fills them)
+  m[intersect(c(offence_map_columns, "alias_en", "alias_de"), names(m))]
 }
 
 offence_spec <- function(map) {
@@ -260,9 +261,9 @@ offence_spec <- function(map) {
     entries <- trimws(strsplit(map$source_keys[i], ";", fixed = TRUE)[[1]])
     dplyr::bind_rows(lapply(entries, function(e) {
       at <- regexpr("@[^@]*$", e)
-      if (at < 0) cli::cli_abort("Offence map entry {.val {e}} lacks @YEARS.")
+      if (at < 0) cli::cli_abort(tr("Offence map entry {.val {e}} lacks @YEARS."))
       expr <- strsplit(substr(e, 1, at - 1), " minus ", fixed = TRUE)[[1]]
-      if (!length(expr) %in% 1:2) cli::cli_abort("Offence map entry {.val {e}} is not KEY or KEY minus KEY.")
+      if (!length(expr) %in% 1:2) cli::cli_abort(tr("Offence map entry {.val {e}} is not KEY or KEY minus KEY."))
       tibble::tibble(
         offence_key_harmonized = map$offence_key_harmonized[i],
         year = parse_years(substr(e, at + 1, nchar(e))),
@@ -283,11 +284,11 @@ harmonize_offences <- function(data, map) {
   published <- unique(data$offence_key)
   unknown <- setdiff(published, spec$plus_key[is.na(spec$minus_key)])
   if (length(unknown) > 0) {
-    cli::cli_abort("{year}: offence key{?s} {.val {unknown}} not in the offence map of this data release.")
+    cli::cli_abort(tr("{year}: offence key{?s} {.val {unknown}} not in the offence map of this data release."))
   }
   absent <- setdiff(stats::na.omit(c(spec$plus_key, spec$minus_key)), published)
   if (length(absent) > 0) {
-    cli::cli_abort("{year}: the offence map expects key{?s} {.val {absent}}, which the data lack.")
+    cli::cli_abort(tr("{year}: the offence map expects key{?s} {.val {absent}}, which the data lack."))
   }
   direct <- spec[is.na(spec$minus_key), ]
   out <- data[data$offence_key %in% direct$plus_key, ]
@@ -305,7 +306,7 @@ difference_rows <- function(data, spec_row, map) {
   minus <- data[data$offence_key == spec_row$minus_key, ]
   minus <- minus[match(plus$ags, minus$ags), ]
   if (anyNA(minus$ags)) {
-    cli::cli_abort("{spec_row$year}: key {spec_row$minus_key} is missing for some districts.")
+    cli::cli_abort(tr("{spec_row$year}: key {spec_row$minus_key} is missing for some districts."))
   }
   out <- plus
   for (col in setdiff(harmonized_counts, "suspects")) {
@@ -328,15 +329,15 @@ harmonize_published <- function(published, boundary_map, offence_map, target, we
   map <- effective_boundary_map(boundary_map)
   if (!target %in% boundary_years(map)) {
     cli::cli_abort(c(
-      "This data release can harmonize to boundary years {min(boundary_years(map))} to {max(boundary_years(map))}, not {target}.",
-      "i" = "Use {.code harmonize_to = NULL} for the data as published."
+      tr("This data release can harmonize to boundary years {min(boundary_years(map))} to {max(boundary_years(map))}, not {target}."),
+      "i" = tr("Use {.code harmonize_to = NULL} for the data as published.")
     ))
   }
   later <- unique(published$boundary_year[published$boundary_year > target])
   if (length(later) > 0) {
     cli::cli_abort(c(
-      "Only forward harmonization is supported: years with boundary {.val {sort(later)}} cannot be moved back to {target}.",
-      "i" = "Request years up to {target}, or a later {.arg harmonize_to}."
+      tr("Only forward harmonization is supported: years with boundary {.val {sort(later)}} cannot be moved back to {target}."),
+      "i" = tr("Request years up to {target}, or a later {.arg harmonize_to}.")
     ))
   }
   years <- split(published, published$year)

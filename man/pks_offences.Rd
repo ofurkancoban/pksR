@@ -4,24 +4,28 @@
 \alias{pks_offences}
 \title{List the harmonized offence keys}
 \usage{
-pks_offences(pattern = NULL, lang = c("de", "en"))
+pks_offences(pattern = NULL, lang = NULL)
 }
 \arguments{
-\item{pattern}{Optional text to search for: an offence key (matched
-literally, so \code{"435*00"} works) or a regular expression matched against
-the labels, ignoring case.}
+\item{pattern}{Optional text to search for in the keys, short names and
+labels of both languages. Capitals, spaces and umlauts do not matter, so
+\code{"Diebstahl"}, \code{"theft"} and \code{"435*00"} all work.}
 
-\item{lang}{Language of the \code{label} column: \code{"de"} (default) or \code{"en"}.}
+\item{lang}{Language of the \code{name} and \code{label} columns: \code{"de"} or \code{"en"}.
+\code{NULL} (default) uses \code{options(pksR.lang)}, otherwise the language of the
+R session.}
 }
 \value{
-A tibble with \code{offence_key}, \code{label}, \code{parent_key}, \code{valid_from},
-\code{valid_to}, \code{status} and \code{notes}.
+A tibble with \code{offence_key}, \code{name} (the short name accepted by
+\code{pks_get(offence = )}), \code{label}, \code{parent_key}, \code{valid_from}, \code{valid_to},
+\code{status} and \code{notes}.
 }
 \description{
 The district tables contain a selected subset of offence keys
 (Straftatenschluessel). The harmonized keys used by \code{\link[=pks_get]{pks_get()}} are listed
-here with their German and English labels, their parent key and the years
-they cover. Mappings marked \code{status = "draft"} have not been reviewed yet.
+here with a short name and a label in German or English, their parent key
+and the years they cover. Mappings and names marked \code{status = "draft"}
+have not been reviewed yet.
 }
 \details{
 The table is a snapshot of the offence map of pksR-data that ships with the
@@ -29,7 +33,7 @@ package, so it works offline. Each data release also contains its own
 \code{offence_map.csv}, which \code{\link[=pks_get]{pks_get()}} uses.
 }
 \examples{
-pks_offences("Diebstahl")
+pks_offences("Diebstahl", lang = "de")
 pks_offences("theft", lang = "en")
 }
 \seealso{

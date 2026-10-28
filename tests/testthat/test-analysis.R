@@ -57,9 +57,9 @@ test_that("validation passes on the example and catches broken panels", {
 
 test_that("offences can be searched by key and label in both languages", {
   expect_identical(pks_offences("435*00")$offence_key, "435*00")
-  expect_true(all(grepl("diebstahl", pks_offences("Diebstahl")$label, ignore.case = TRUE)))
+  expect_true(all(grepl("diebstahl", pks_offences("Diebstahl", lang = "de")$label, ignore.case = TRUE)))
   en <- pks_offences(lang = "en")
-  expect_equal(nrow(en), nrow(pks_offences()))
+  expect_equal(nrow(en), nrow(pks_offences(lang = "de")))
   expect_true("Total offences" %in% en$label)
   expect_error(pks_offences(c("a", "b")), "one string")
 })

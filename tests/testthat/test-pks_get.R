@@ -7,8 +7,9 @@ test_that("harmonized data come with the attributes of the request", {
   expect_identical(attr(d, "boundary_year"), 2025L)
   expect_identical(attr(d, "weights"), "population")
   expect_s3_class(attr(d, "retrieved_at"), "POSIXct")
-  expect_identical(attr(d, "source_urls"), sprintf(
-    "https://github.com/test/pksR-data/releases/download/v2026.1/pks_kreis_%d_population.csv.gz", 2019:2021
+  expect_identical(attr(d, "source_urls"), paste0(
+    "https://github.com/test/pksR-data/releases/download/v2026.1/",
+    c(sprintf("pks_kreis_%d_population.csv.gz", 2019:2021), "offence_map.csv")
   ))
   expect_true(all(d$boundary_year == 2025L))
   # Eisenach (16056) is part of the Wartburgkreis at the 2025 boundary
@@ -27,16 +28,16 @@ test_that("the data as published keep the published codes and keys", {
   # Eisenach and the Wartburgkreis together are the merged district of the
   # 2021 boundary (merger on 1 July 2021, weight 1); at later boundaries a
   # 2024 transfer to 16064 takes a share off
-  h <- suppressMessages(pks_get(years = 2019, offence_keys = "------", harmonize_to = 2021))
+  h <- suppressMessages(pks_get(years = 2019, offence = "total", harmonize_to = 2021))
   merged <- sum(d$cases[d$ags %in% c("16056", "16063") & d$offence_key == "------"])
   expect_equal(h$cases[h$ags == "16063"], merged)
 })
 
 test_that("area weights read the area panel", {
   local_fake_release()
-  d <- pks_get(years = 2020, weights = "area", offence_keys = "------")
+  d <- pks_get(years = 2020, weights = "area", offence = "------")
   expect_identical(attr(d, "weights"), "area")
-  expect_match(attr(d, "source_urls"), "_area\\.csv\\.gz$")
+  expect_match(attr(d, "source_urls")[1], "_area\\.csv\\.gz$")
 })
 
 test_that("harmonizing to an earlier boundary uses the crosswalk of the release", {
@@ -51,6 +52,7 @@ test_that("harmonizing to an earlier boundary uses the crosswalk of the release"
                  sum(p$cases[p$year == y & p$offence_key == "------"]))
   }
   expect_true(any(grepl("boundary_map.csv", attr(d, "source_urls"))))
+  expect_true(any(grepl("offence_map.csv", attr(d, "source_urls"))))
 })
 
 test_that("harmonizing to the release boundary on the client gives the released panel", {
@@ -78,9 +80,8 @@ test_that("years and offence keys are checked", {
   local_fake_release()
   expect_error(pks_get(years = 2018), "has no year")
   expect_error(pks_get(years = 2019.5), "whole numbers")
-  expect_error(pks_get(offence_keys = 890000), "character vector")
-  expect_warning(d <- pks_get(years = 2021, offence_keys = c("------", "nonsense")), "nonsense")
-  expect_identical(unique(d$offence_key), "------")
+  expect_error(pks_get(offence = 890000), "character vector")
+  expect_error(pks_get(years = 2021, offence = c("------", "nonsense")), "No offence matches")
   expect_error(pks_get(source = "bka"), "not available yet")
 })
 

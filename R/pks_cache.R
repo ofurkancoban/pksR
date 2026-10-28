@@ -36,8 +36,8 @@ pks_cache_info <- function() {
   )
   out <- out[order(out$version, out$file), ]
   cli::cli_inform(c(
-    "i" = "Cache: {.path {root}}",
-    "i" = "{nrow(out)} file{?s}, {format_bytes(sum(out$bytes))} in {length(unique(out$version))} data version{?s}."
+    "i" = tr("Cache: {.path {root}}"),
+    "i" = tr("{nrow(out)} file{?s}, {format_bytes(sum(out$bytes))} in {length(unique(out$version))} data version{?s}.")
   ))
   attr(out, "path") <- root
   out
@@ -63,20 +63,20 @@ pks_cache_clear <- function(version = NULL, ask = interactive()) {
   info <- suppressMessages(pks_cache_info())
   if (!is.null(version)) info <- info[info$version %in% version, ]
   if (nrow(info) == 0) {
-    cli::cli_inform("Nothing to remove from the cache.")
+    cli::cli_inform(tr("Nothing to remove from the cache."))
     return(invisible(info))
   }
   if (ask) {
-    answer <- ask_yes_no(sprintf("Delete %d cached file(s), %s?", nrow(info), format_bytes(sum(info$bytes))))
+    answer <- ask_yes_no(sprintf(tr("Delete %d cached file(s), %s?"), nrow(info), format_bytes(sum(info$bytes))))
     if (!isTRUE(answer)) {
-      cli::cli_inform("Cache left unchanged.")
+      cli::cli_inform(tr("Cache left unchanged."))
       return(invisible(info[0, ]))
     }
   }
   dirs <- file.path(cache_root(), unique(info$version))
   unlink(file.path(cache_root(), info$version, info$file))
   for (d in dirs) if (length(list.files(d)) == 0) unlink(d, recursive = TRUE)
-  cli::cli_inform("Removed {nrow(info)} file{?s} from the cache.")
+  cli::cli_inform(tr("Removed {nrow(info)} file{?s} from the cache."))
   invisible(info)
 }
 

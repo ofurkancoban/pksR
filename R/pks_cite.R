@@ -33,7 +33,7 @@ pks_cite <- function(version = "latest") {
   ))
 
   m <- tryCatch(attr(pks_manifest(version), "manifest"), error = function(e) {
-    cli::cli_warn(c("Cannot read the manifest of data version {.val {version}}; the data release is not cited.", "i" = conditionMessage(e)))
+    cli::cli_warn(c(tr("Cannot read the manifest of data version {.val {version}}; the data release is not cited."), "i" = conditionMessage(e)))
     NULL
   })
   years <- "2003 to the latest reporting year"
