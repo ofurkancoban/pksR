@@ -25,7 +25,7 @@ every file against its SHA-256 checksum and keeps it in a local cache:
 total <- pks_get(offence = "total")
 
 # Offences by key, short name or label, in English or German
-burglary <- pks_get(offence = c("burglary", "einbruch"), lang = "en")
+burglary <- pks_get(offence = c("residential_burglary", "einbruch"), lang = "en")
 
 # Two years as published by the BKA, all offence keys
 published <- pks_get(years = 2024:2025, harmonize_to = NULL)
@@ -49,10 +49,10 @@ for the methods and their assumptions.
 ## Choosing offences
 
 `offence` takes, for each element, an offence key (`"435*00"`), a short
-name (`"burglary"`, or the German `"wohnungseinbruch"`), a full label in
-either language, or a part of a label (`"einbruch"` selects both
-burglary keys and says so). Capitals, spaces and umlauts do not matter,
-and an exact key, name or label wins over a part.
+name (`"residential_burglary"`, or the German `"wohnungseinbruch"`), a
+full label in either language, or a part of a label (`"einbruch"`
+selects both burglary keys and says so). Capitals, spaces and umlauts do
+not matter, and an exact key, name or label wins over a part.
 [`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md)
 lists all keys with their names; the names are drafts until the
 maintainer has reviewed them.

@@ -32,7 +32,7 @@ pks_get(
 
   Offences to return, or `NULL` (default) for all. Each element can be
   an offence key (`"435*00"`), a short name in English or German
-  (`"burglary"`, `"wohnungseinbruch"`), a full label
+  (`"residential_burglary"`, `"wohnungseinbruch"`), a full label
   (`"Wohnungseinbruchdiebstahl"`) or a part of a label (`"einbruch"`,
   which selects both burglary keys). An exact key, name or label wins
   over a part. Capitals, spaces and umlauts do not matter. See
@@ -96,10 +96,10 @@ geprüft und im Cache abgelegt.
 - `years`: Berichtsjahre, `NULL` für alle.
 
 - `offence`: Straftaten als Schlüssel (`"435*00"`), Kurzname auf Deutsch
-  oder Englisch (`"wohnungseinbruch"`, `"burglary"`), vollständige
-  Bezeichnung oder Teil einer Bezeichnung (`"einbruch"`). Groß- und
-  Kleinschreibung, Leerzeichen und Umlaute spielen keine Rolle; eine
-  genaue Übereinstimmung hat Vorrang. Übersicht:
+  oder Englisch (`"wohnungseinbruch"`, `"residential_burglary"`),
+  vollständige Bezeichnung oder Teil einer Bezeichnung (`"einbruch"`).
+  Groß- und Kleinschreibung, Leerzeichen und Umlaute spielen keine
+  Rolle; eine genaue Übereinstimmung hat Vorrang. Übersicht:
   [`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md).
 
 - `harmonize_to`: `"latest"` (Gebietsstand der Veröffentlichung), ein

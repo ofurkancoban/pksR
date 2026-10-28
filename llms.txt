@@ -35,7 +35,7 @@ library(pksR)
 total <- pks_get(offence = "total")
 
 # Offences by key, short name or label, in English or German
-burglary <- pks_get(offence = c("burglary", "435*00", "Wohnungseinbruchdiebstahl"))
+burglary <- pks_get(offence = c("residential_burglary", "435*00", "Wohnungseinbruchdiebstahl"))
 
 # As published by the BKA, two years
 published <- pks_get(years = 2024:2025, harmonize_to = NULL)

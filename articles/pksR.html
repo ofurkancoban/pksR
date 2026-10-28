@@ -91,7 +91,7 @@ keeps it in a local cache:</p>
 <span><span class="va">total</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="st">"total"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Offences by key, short name or label, in English or German</span></span>
-<span><span class="va">burglary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"burglary"</span>, <span class="st">"einbruch"</span><span class="op">)</span>, lang <span class="op">=</span> <span class="st">"en"</span><span class="op">)</span></span>
+<span><span class="va">burglary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residential_burglary"</span>, <span class="st">"einbruch"</span><span class="op">)</span>, lang <span class="op">=</span> <span class="st">"en"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Two years as published by the BKA, all offence keys</span></span>
 <span><span class="va">published</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2024</span><span class="op">:</span><span class="fl">2025</span>, harmonize_to <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
@@ -133,13 +133,14 @@ assumptions.</p>
 <h2 id="choosing-offences">Choosing offences<a class="anchor" aria-label="anchor" href="#choosing-offences"></a>
 </h2>
 <p><code>offence</code> takes, for each element, an offence key
-(<code>"435*00"</code>), a short name (<code>"burglary"</code>, or the
-German <code>"wohnungseinbruch"</code>), a full label in either
-language, or a part of a label (<code>"einbruch"</code> selects both
-burglary keys and says so). Capitals, spaces and umlauts do not matter,
-and an exact key, name or label wins over a part.
-<code><a href="../reference/pks_offences.html">pks_offences()</a></code> lists all keys with their names; the names
-are drafts until the maintainer has reviewed them.</p>
+(<code>"435*00"</code>), a short name
+(<code>"residential_burglary"</code>, or the German
+<code>"wohnungseinbruch"</code>), a full label in either language, or a
+part of a label (<code>"einbruch"</code> selects both burglary keys and
+says so). Capitals, spaces and umlauts do not matter, and an exact key,
+name or label wins over a part. <code><a href="../reference/pks_offences.html">pks_offences()</a></code> lists all
+keys with their names; the names are drafts until the maintainer has
+reviewed them.</p>
 </div>
 <div class="section level2">
 <h2 id="languages">Languages<a class="anchor" aria-label="anchor" href="#languages"></a>

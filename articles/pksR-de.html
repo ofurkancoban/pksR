@@ -138,14 +138,15 @@ Gebietsstands</td>
 </h2>
 <p><code>offence</code> nimmt für jedes Element einen
 Straftatenschlüssel (<code>"435*00"</code>), einen Kurznamen
-(<code>"wohnungseinbruch"</code> oder englisch <code>"burglary"</code>),
-eine vollständige Bezeichnung in einer der beiden Sprachen oder einen
-Teil einer Bezeichnung (<code>"einbruch"</code> wählt beide Schlüssel
-zum Wohnungseinbruch und meldet das). Groß- und Kleinschreibung,
-Leerzeichen und Umlaute spielen keine Rolle, und ein genauer Schlüssel,
-Name oder eine genaue Bezeichnung hat Vorrang vor einem Teil.
-<code><a href="../reference/pks_offences.html">pks_offences()</a></code> listet alle Schlüssel mit ihren Namen; die
-Namen sind Entwürfe, bis der Maintainer sie geprüft hat.</p>
+(<code>"wohnungseinbruch"</code> oder englisch
+<code>"residential_burglary"</code>), eine vollständige Bezeichnung in
+einer der beiden Sprachen oder einen Teil einer Bezeichnung
+(<code>"einbruch"</code> wählt beide Schlüssel zum Wohnungseinbruch und
+meldet das). Groß- und Kleinschreibung, Leerzeichen und Umlaute spielen
+keine Rolle, und ein genauer Schlüssel, Name oder eine genaue
+Bezeichnung hat Vorrang vor einem Teil. <code><a href="../reference/pks_offences.html">pks_offences()</a></code>
+listet alle Schlüssel mit ihren Namen; die Namen sind Entwürfe, bis der
+Maintainer sie geprüft hat.</p>
 </div>
 <div class="section level2">
 <h2 id="sprachen">Sprachen<a class="anchor" aria-label="anchor" href="#sprachen"></a>
@@ -322,11 +323,11 @@ würde die Bundessummen verändern.</p>
 <span><span class="co">#&gt;    offence_key name                     label                                   </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ****00      diebstahl                Diebstahl insgesamt                     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> ***100      kfz_diebstahl            Diebstahl insgesamt von Kraftwagen eins…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> ***100      kraftwagendiebstahl      Diebstahl insgesamt von Kraftwagen eins…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ***200      kraftrad_diebstahl       Diebstahl insgesamt von Mopeds und Kraf…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ***300      fahrraddiebstahl         Diebstahl insgesamt von Fahrrädern eins…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> *26*00      ladendiebstahl           Ladendiebstahl insgesamt                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> *50*00      diebstahl_aus_kfz        Diebstahl insgesamt an/aus Kraftfahrzeu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> *50*00      diebstahl_an_aus_kfz     Diebstahl insgesamt an/aus Kraftfahrzeu…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> *90*00      taschendiebstahl         Taschendiebstahl insgesamt              </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 3***00      einfacher_diebstahl      Diebstahl ohne erschwerende Umstände §§…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 326*00      einfacher_ladendiebstahl Einfacher Ladendiebstahl                </span></span>

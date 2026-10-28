@@ -86,7 +86,7 @@ years of the release.</p></dd>
 <dt id="arg-offence">offence<a class="anchor" aria-label="anchor" href="#arg-offence"></a></dt>
 <dd><p>Offences to return, or <code>NULL</code> (default) for all. Each
 element can be an offence key (<code>"435*00"</code>), a short name in English or
-German (<code>"burglary"</code>, <code>"wohnungseinbruch"</code>), a full label
+German (<code>"residential_burglary"</code>, <code>"wohnungseinbruch"</code>), a full label
 (<code>"Wohnungseinbruchdiebstahl"</code>) or a part of a label (<code>"einbruch"</code>, which
 selects both burglary keys). An exact key, name or label wins over a part.
 Capitals, spaces and umlauts do not matter. See
@@ -149,7 +149,7 @@ oder auf einen Gebietsstand und eine Straftatenzuordnung harmonisiert. Jede
 Datei wird gegen die SHA-256-Prüfsumme des Manifests geprüft und im Cache
 abgelegt.</p><ul><li><p><code>years</code>: Berichtsjahre, <code>NULL</code> für alle.</p></li>
 <li><p><code>offence</code>: Straftaten als Schlüssel (<code>"435*00"</code>), Kurzname auf Deutsch oder
-Englisch (<code>"wohnungseinbruch"</code>, <code>"burglary"</code>), vollständige Bezeichnung oder
+Englisch (<code>"wohnungseinbruch"</code>, <code>"residential_burglary"</code>), vollständige Bezeichnung oder
 Teil einer Bezeichnung (<code>"einbruch"</code>). Groß- und Kleinschreibung,
 Leerzeichen und Umlaute spielen keine Rolle; eine genaue Übereinstimmung hat
 Vorrang. Übersicht: <code><a href="pks_offences.html">pks_offences()</a></code>.</p></li>

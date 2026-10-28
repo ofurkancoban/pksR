@@ -63,11 +63,11 @@ pks_offences("Diebstahl", lang = "de")
 #>    offence_key name            label parent_key valid_from valid_to status notes
 #>    <chr>       <chr>           <chr> <chr>           <int>    <int> <chr>  <chr>
 #>  1 ****00      diebstahl       Dieb… ------           2014     2025 draft  NA   
-#>  2 ***100      kfz_diebstahl   Dieb… ****00           2013     2025 draft  NA   
+#>  2 ***100      kraftwagendieb… Dieb… ****00           2013     2025 draft  NA   
 #>  3 ***200      kraftrad_diebs… Dieb… ****00           2014     2025 draft  NA   
 #>  4 ***300      fahrraddiebsta… Dieb… ****00           2014     2025 draft  NA   
 #>  5 *26*00      ladendiebstahl  Lade… ****00           2023     2025 draft  New …
-#>  6 *50*00      diebstahl_aus_… Dieb… ****00           2003     2025 draft  Defi…
+#>  6 *50*00      diebstahl_an_a… Dieb… ****00           2003     2025 draft  Defi…
 #>  7 *90*00      taschendiebsta… Tasc… ****00           2014     2025 draft  NA   
 #>  8 3***00      einfacher_dieb… Dieb… ****00           2014     2025 draft  NA   
 #>  9 326*00      einfacher_lade… Einf… 3***00           2014     2025 draft  Also…

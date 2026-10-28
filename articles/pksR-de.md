@@ -53,9 +53,9 @@ Methoden und Annahmen beschreibt
 
 `offence` nimmt für jedes Element einen Straftatenschlüssel
 (`"435*00"`), einen Kurznamen (`"wohnungseinbruch"` oder englisch
-`"burglary"`), eine vollständige Bezeichnung in einer der beiden
-Sprachen oder einen Teil einer Bezeichnung (`"einbruch"` wählt beide
-Schlüssel zum Wohnungseinbruch und meldet das). Groß- und
+`"residential_burglary"`), eine vollständige Bezeichnung in einer der
+beiden Sprachen oder einen Teil einer Bezeichnung (`"einbruch"` wählt
+beide Schlüssel zum Wohnungseinbruch und meldet das). Groß- und
 Kleinschreibung, Leerzeichen und Umlaute spielen keine Rolle, und ein
 genauer Schlüssel, Name oder eine genaue Bezeichnung hat Vorrang vor
 einem Teil.
@@ -153,11 +153,11 @@ pks_offences("Diebstahl")[, c("offence_key", "name", "label")]
 #>    offence_key name                     label                                   
 #>    <chr>       <chr>                    <chr>                                   
 #>  1 ****00      diebstahl                Diebstahl insgesamt                     
-#>  2 ***100      kfz_diebstahl            Diebstahl insgesamt von Kraftwagen eins…
+#>  2 ***100      kraftwagendiebstahl      Diebstahl insgesamt von Kraftwagen eins…
 #>  3 ***200      kraftrad_diebstahl       Diebstahl insgesamt von Mopeds und Kraf…
 #>  4 ***300      fahrraddiebstahl         Diebstahl insgesamt von Fahrrädern eins…
 #>  5 *26*00      ladendiebstahl           Ladendiebstahl insgesamt                
-#>  6 *50*00      diebstahl_aus_kfz        Diebstahl insgesamt an/aus Kraftfahrzeu…
+#>  6 *50*00      diebstahl_an_aus_kfz     Diebstahl insgesamt an/aus Kraftfahrzeu…
 #>  7 *90*00      taschendiebstahl         Taschendiebstahl insgesamt              
 #>  8 3***00      einfacher_diebstahl      Diebstahl ohne erschwerende Umstände §§…
 #>  9 326*00      einfacher_ladendiebstahl Einfacher Ladendiebstahl                
