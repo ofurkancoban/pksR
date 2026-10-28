@@ -11,3 +11,12 @@
 7. Added exports beyond the brief's list: `pks_example()`, a 70-row example panel in `inst/extdata` (built by `data-raw/example.R` from pksR-data commit 785ac02, labelled `data_version = "example"`, not a release), for examples, tests and vignettes without internet.
 8. Network examples use `@examplesIf interactive()`: `R CMD check --as-cran` runs `\donttest{}` examples, which would fail offline.
 9. `source = "bka"` is not implemented yet and stops with a clear message; it needs the extraction code of pksR-data and `readxl`.
+
+## 2026-10-28: Choosing offences and two languages
+
+1. `offence` replaces `offence_keys` in `pks_get()` (breaking change, decided by the maintainer: a call like `offence_keys = "------"` is hard to read). Each element may be an offence key, a short name (`alias_en`, `alias_de` in `offence_map.csv` of pksR-data, 46 names with `status = "draft"`), a full label in either language, or a part of a label. Matching ignores case, spaces and umlauts (`normalize_name()`).
+2. Order of matching: an exact key, short name or label wins over a part search, so `"Diebstahl"` gives `****00` only; a part search (`"einbruch"`) selects every matching key and says which, never silently.
+3. Two languages, German and English, chosen by the maintainer for everything user-facing: messages and errors, offence labels in the data, help pages (a `Deutsch` section per page), README (`README.de.md`) and vignettes (`*-de.Rmd`). Code, comments, commit messages and file names stay English (global rule).
+4. Language: argument `lang` of `pks_get()` and `pks_offences()`, otherwise `options(pksR.lang)`, otherwise the session language (`LANGUAGE`, then `LC_MESSAGES`); anything not German is English.
+5. Own translation table (`inst/i18n/de.po`, read by `tr()`) instead of R's gettext: gettext ignores `LANGUAGE` in the C locale (as on CRAN check machines) and cannot switch language within a session for one call. The file keeps the `.po` format, so it can later move to `po/` if that is preferred. `test-lang.R` checks that every `tr()` text has a translation with the same placeholders.
+6. Harmonized data get `offence_label` in the chosen language from the offence map. Data as published keep the published German label for `lang = "de"` and get the English label of the mapped harmonized key for `lang = "en"` (`NA` where the published key has no mapping).
