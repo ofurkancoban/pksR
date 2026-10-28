@@ -32,3 +32,9 @@ articles:
       - pksR
       - harmonization
       - provenance
+  - title: Deutsch
+    navbar: Deutsch
+    contents:
+      - pksR-de
+      - harmonization-de
+      - provenance-de
