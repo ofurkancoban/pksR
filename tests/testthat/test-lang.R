@@ -66,8 +66,8 @@ test_that("the lang argument of pks_get() sets labels and messages", {
 
 test_that("data as published keep the BKA label in German and get the English one", {
   local_fake_release()
-  de <- pks_get(years = 2021, harmonize_to = NULL, offence = "burglary", lang = "de")
-  en <- pks_get(years = 2021, harmonize_to = NULL, offence = "burglary", lang = "en")
+  de <- pks_get(years = 2021, harmonize_to = NULL, offence = "residential_burglary", lang = "de")
+  en <- pks_get(years = 2021, harmonize_to = NULL, offence = "residential_burglary", lang = "en")
   expect_identical(unique(de$offence_key), "435*00")
   expect_match(unique(de$offence_label), "^Wohnungseinbruchdiebstahl")
   expect_identical(unique(en$offence_label), "Residential burglary")

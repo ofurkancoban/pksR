@@ -9,7 +9,7 @@ test_that("names are compared without capitals, spaces and umlauts", {
 test_that("an offence is found by key, alias or full label in both languages", {
   r <- function(x) suppressMessages(pksR:::resolve_offences(x, map))
   expect_identical(r("435*00"), "435*00")
-  expect_identical(r("burglary"), "435*00")
+  expect_identical(r("residential_burglary"), "435*00")
   expect_identical(r("wohnungseinbruch"), "435*00")
   expect_identical(r("Total offences"), "------")
   expect_identical(r("Straftaten insgesamt"), "------")
@@ -28,7 +28,7 @@ test_that("a part of a label selects every matching key and says which", {
 
 test_that("a release without alias columns gets the aliases of the snapshot", {
   old <- map[, setdiff(names(map), c("alias_en", "alias_de"))]
-  expect_identical(suppressMessages(pksR:::resolve_offences("burglary", old)), "435*00")
+  expect_identical(suppressMessages(pksR:::resolve_offences("residential_burglary", old)), "435*00")
 })
 
 test_that("every key has one alias per language, unique and in ASCII", {
@@ -43,7 +43,7 @@ test_that("pks_get() selects by name, and published keys follow the harmonized k
   local_fake_release()
   d <- pks_get(years = 2019:2021, offence = c("total", "wohnungseinbruch"))
   expect_setequal(unique(d$offence_key), c("------", "435*00"))
-  p <- pks_get(years = 2019:2021, offence = "burglary", harmonize_to = NULL)
+  p <- pks_get(years = 2019:2021, offence = "residential_burglary", harmonize_to = NULL)
   expect_identical(unique(p$offence_key), "435*00")
   expect_setequal(unique(p$year), 2019:2021)
 })

@@ -28,7 +28,7 @@ with_aliases <- function(map) {
 # which are reported.
 resolve_offences <- function(offence, map) {
   if (!is.character(offence) || anyNA(offence) || !length(offence)) {
-    cli::cli_abort(tr("{.arg offence} must be a character vector, such as {.code \"burglary\"} or {.code \"435*00\"}."))
+    cli::cli_abort(tr("{.arg offence} must be a character vector, such as {.code \"residential_burglary\"} or {.code \"435*00\"}."))
   }
   map <- with_aliases(map)
   keys <- map$offence_key_harmonized

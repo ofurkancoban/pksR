@@ -21,7 +21,7 @@ years of the release.}
 
 \item{offence}{Offences to return, or \code{NULL} (default) for all. Each
 element can be an offence key (\code{"435*00"}), a short name in English or
-German (\code{"burglary"}, \code{"wohnungseinbruch"}), a full label
+German (\code{"residential_burglary"}, \code{"wohnungseinbruch"}), a full label
 (\code{"Wohnungseinbruchdiebstahl"}) or a part of a label (\code{"einbruch"}, which
 selects both burglary keys). An exact key, name or label wins over a part.
 Capitals, spaces and umlauts do not matter. See
@@ -77,7 +77,7 @@ abgelegt.
 \itemize{
 \item \code{years}: Berichtsjahre, \code{NULL} für alle.
 \item \code{offence}: Straftaten als Schlüssel (\code{"435*00"}), Kurzname auf Deutsch oder
-Englisch (\code{"wohnungseinbruch"}, \code{"burglary"}), vollständige Bezeichnung oder
+Englisch (\code{"wohnungseinbruch"}, \code{"residential_burglary"}), vollständige Bezeichnung oder
 Teil einer Bezeichnung (\code{"einbruch"}). Groß- und Kleinschreibung,
 Leerzeichen und Umlaute spielen keine Rolle; eine genaue Übereinstimmung hat
 Vorrang. Übersicht: \code{\link[=pks_offences]{pks_offences()}}.

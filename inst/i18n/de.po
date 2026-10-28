@@ -12,8 +12,8 @@ msgstr "clearance_rate ist 0, wo cases 0 ist. Das folgt den BKA-Tabellen und ist
 msgid "As published: clearance_rate is 0 where cases are 0, except in 2022, where the BKA table leaves these cells empty (NA). It is not a real rate."
 msgstr "Wie veröffentlicht: clearance_rate ist 0, wo cases 0 ist, außer 2022, wo die BKA-Tabelle diese Zellen leer lässt (NA). Es ist keine echte Quote."
 
-msgid "{.arg offence} must be a character vector, such as {.code \"burglary\"} or {.code \"435*00\"}."
-msgstr "{.arg offence} muss ein Zeichenvektor sein, etwa {.code \"burglary\"} oder {.code \"435*00\"}."
+msgid "{.arg offence} must be a character vector, such as {.code \"residential_burglary\"} or {.code \"435*00\"}."
+msgstr "{.arg offence} muss ein Zeichenvektor sein, etwa {.code \"residential_burglary\"} oder {.code \"435*00\"}."
 
 msgid "No offence matches {.val {x}}."
 msgstr "Keine Straftat passt zu {.val {x}}."

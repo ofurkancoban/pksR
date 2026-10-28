@@ -10,7 +10,7 @@
 #'   years of the release.
 #' @param offence Offences to return, or `NULL` (default) for all. Each
 #'   element can be an offence key (`"435*00"`), a short name in English or
-#'   German (`"burglary"`, `"wohnungseinbruch"`), a full label
+#'   German (`"residential_burglary"`, `"wohnungseinbruch"`), a full label
 #'   (`"Wohnungseinbruchdiebstahl"`) or a part of a label (`"einbruch"`, which
 #'   selects both burglary keys). An exact key, name or label wins over a part.
 #'   Capitals, spaces and umlauts do not matter. See
@@ -50,7 +50,7 @@
 #'
 #' * `years`: Berichtsjahre, `NULL` für alle.
 #' * `offence`: Straftaten als Schlüssel (`"435*00"`), Kurzname auf Deutsch oder
-#'   Englisch (`"wohnungseinbruch"`, `"burglary"`), vollständige Bezeichnung oder
+#'   Englisch (`"wohnungseinbruch"`, `"residential_burglary"`), vollständige Bezeichnung oder
 #'   Teil einer Bezeichnung (`"einbruch"`). Groß- und Kleinschreibung,
 #'   Leerzeichen und Umlaute spielen keine Rolle; eine genaue Übereinstimmung hat
 #'   Vorrang. Übersicht: [pks_offences()].
