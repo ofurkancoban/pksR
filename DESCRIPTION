@@ -1,0 +1,42 @@
+Package: pksR
+Title: District-Level German Police Crime Statistics
+Version: 0.0.0.9000
+Authors@R:
+    person("Ömer Furkan", "Çoban", , "ofurkancoban@gmail.com", role = c("aut", "cre", "cph"))
+Description: Access to the district (Kreis) tables of the German Police Crime
+    Statistics ('Polizeiliche Kriminalstatistik', PKS) published by the
+    Bundeskriminalamt, from 2003 onwards. Data come from versioned, validated
+    releases of the 'pksR-data' pipeline, either as published or harmonized to a
+    common territorial boundary and offence classification. Downloads are
+    cached and checked against SHA-256 checksums; rates can be recomputed after
+    harmonization, panels validated, and data releases cited.
+License: MIT + file LICENSE
+URL: https://github.com/ofurkancoban/pksR, https://github.com/ofurkancoban/pksR-data
+BugReports: https://github.com/ofurkancoban/pksR/issues
+Depends:
+    R (>= 4.1.0)
+Imports:
+    cli,
+    digest,
+    dplyr,
+    httr2,
+    jsonlite,
+    methods,
+    readr,
+    rlang,
+    stats,
+    tibble,
+    tools,
+    utils
+Suggests:
+    httptest2,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    withr
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
