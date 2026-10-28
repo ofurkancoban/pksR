@@ -1,0 +1,123 @@
+---
+title: "Getting started with pksR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with pksR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+`pksR` reads the district (Kreis) tables of the German Police Crime Statistics (*Polizeiliche Kriminalstatistik*, PKS) of the Bundeskriminalamt (BKA) from versioned data releases. This vignette shows the main functions and describes the columns. The examples that need the internet are shown but not run here; the others use `pks_example()`, a small panel that ships with the package.
+
+```{r}
+library(pksR)
+```
+
+## Getting data
+
+`pks_get()` downloads the years you ask for from the latest data release, checks every file against its SHA-256 checksum and keeps it in a local cache:
+
+```{r, eval = FALSE}
+# Total offences, harmonized to the latest boundary (the default)
+total <- pks_get(offence_keys = "------")
+
+# Two years as published by the BKA, all offence keys
+published <- pks_get(years = 2024:2025, harmonize_to = NULL)
+
+# A fixed data release, for reproducible work
+d <- pks_get(years = 2015:2025, version = "2026.1")
+```
+
+The three choices of `harmonize_to`:
+
+| `harmonize_to` | Result |
+|---|---|
+| `"latest"` (default) | Harmonized to the boundary of the release, read as released |
+| a year, e.g. `2016` | The data as published, harmonized to that year's boundary in your session (forward only) |
+| `NULL` | As published: each year with the districts of its own boundary |
+
+See `vignette("harmonization")` for the methods and their assumptions.
+
+## The example panel
+
+```{r}
+d <- pks_example()
+d[, c("year", "ags", "region_name", "offence_key", "cases", "hz", "harmonized")]
+```
+
+Every object carries its provenance as attributes:
+
+```{r}
+attributes(d)[c("data_version", "boundary_year", "weights")]
+```
+
+For data from `pks_get()`, `data_version` is the release version, `retrieved_at` the time of download and `source_urls` the release files the data came from.
+
+## Columns
+
+| Column | Content |
+|---|---|
+| `year` | Reporting year |
+| `ags` | District code (Kreisschlüssel), 5 digits with leading zero, e.g. `"02000"` for Hamburg |
+| `region_name` | District name as published, or the name at the target boundary for changed districts |
+| `offence_key` | Offence key (Straftatenschlüssel); in harmonized data the harmonized key, see `pks_offences()` |
+| `offence_key_published` | Harmonized data only: the key as published, or `"KEY minus KEY"` for computed keys |
+| `offence_label` | German label as published |
+| `cases` | Recorded cases (published; `NA` in the PDF years 2003 to 2012) |
+| `attempts` | Attempted cases |
+| `hz` | Häufigkeitszahl: cases per 100,000 inhabitants |
+| `cleared` | Cleared cases |
+| `clearance_rate` | Aufklärungsquote in percent (0 where cases are 0, as in the BKA tables) |
+| `suspects` | Suspects (persons; not additive over offence keys) |
+| `cases_derived`, `cleared_derived` | PDF years only: `hz * population / 1e5`, because those tables print rates and population but no counts |
+| `population` | Published population (PDF years and 2020) |
+| `derived_population` | `cases / hz * 1e5`, derived from the published rate; one value per district and year |
+| `source_format`, `source_file` | Format and file of the BKA source |
+| `boundary_year` | Territorial boundary (Gebietsstand) of the row |
+| `harmonized` | `TRUE` if the district was changed by harmonization |
+| `weight_type` | `none`, `population` or `area` |
+| `estimated` | `TRUE` for shares of split districts and for derived counts (PDF years) |
+
+Counts in harmonized data are doubles: a split district passes fractions of its cases to its successors, and rounding them would change the national totals.
+
+## Offence keys and breaks
+
+```{r}
+pks_offences("Diebstahl")[, c("offence_key", "label", "valid_from", "valid_to")]
+```
+
+The district tables contain only a selected set of offence keys, and keys change over time. Before reading a time series, check the known methodological breaks:
+
+```{r}
+b <- pks_breaks()
+b[b$comparable == "no", c("first_year", "offence_key", "type")]
+```
+
+## Rates, checks and citation
+
+After filtering or harmonizing, recompute rates from the counts and run the checks:
+
+```{r}
+r <- pks_rates(d, per = 1000)
+head(r[, c("year", "ags", "offence_key", "cases", "rate")])
+pks_validate(d)
+```
+
+Work with these data should cite the package, the data release and the sources. `pks_cite()` returns all five entries, including the licence of the BKA data (Datenlizenz Deutschland, Namensnennung, Version 2.0):
+
+```{r, eval = FALSE}
+pks_cite()
+```
+
+## Cache
+
+Downloads are kept below `tools::R_user_dir("pksR", "cache")`, one folder per data version. A release never changes, so a cached file is used until its checksum fails.
+
+```{r, eval = FALSE}
+pks_cache_info()
+pks_cache_clear(version = "2026.1")
+```
