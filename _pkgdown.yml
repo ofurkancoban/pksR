@@ -1,0 +1,34 @@
+url: https://ofurkancoban.github.io/pksR/
+template:
+  bootstrap: 5
+
+reference:
+  - title: Data
+    contents:
+      - pks_get
+      - pks_example
+  - title: Releases and citation
+    contents:
+      - pks_versions
+      - pks_manifest
+      - pks_cite
+  - title: Metadata
+    contents:
+      - pks_offences
+      - pks_breaks
+  - title: Analysis
+    contents:
+      - pks_rates
+      - pks_validate
+  - title: Cache
+    contents:
+      - pks_cache_info
+      - pks_cache_clear
+
+articles:
+  - title: Articles
+    navbar: ~
+    contents:
+      - pksR
+      - harmonization
+      - provenance

@@ -1,0 +1,18 @@
+# rOpenSci pkgcheck (brief Section 10.1), on demand and for pull requests.
+name: pkgcheck
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  pkgcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ropensci-review-tools/pkgcheck-action@main
+        with:
+          summary-only: true

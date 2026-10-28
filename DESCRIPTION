@@ -11,7 +11,7 @@ Description: Access to the district (Kreis) tables of the German Police Crime
     cached and checked against SHA-256 checksums; rates can be recomputed after
     harmonization, panels validated, and data releases cited.
 License: MIT + file LICENSE
-URL: https://github.com/ofurkancoban/pksR, https://github.com/ofurkancoban/pksR-data
+URL: https://github.com/ofurkancoban/pksR, https://ofurkancoban.github.io/pksR/, https://github.com/ofurkancoban/pksR-data
 BugReports: https://github.com/ofurkancoban/pksR/issues
 Depends:
     R (>= 4.1.0)
