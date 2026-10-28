@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use pksR, please cite the package, the data release (see pksR::pks_cite()) and the original sources."
+type: software
+title: "pksR: District-Level German Police Crime Statistics"
+version: 0.0.0.9000
+license: MIT
+repository-code: "https://github.com/ofurkancoban/pksR"
+authors:
+  - family-names: "Çoban"
+    given-names: "Ömer Furkan"
+    email: "ofurkancoban@gmail.com"
+references:
+  - type: data
+    title: "Polizeiliche Kriminalstatistik (PKS), Kreis- und Bundesfalltabellen"
+    authors:
+      - name: "Bundeskriminalamt"
+    url: "https://www.bka.de/DE/AktuelleInformationen/StatistikenLagebilder/PolizeilicheKriminalstatistik/pks_node.html"
+    license: "dl-de/by-2-0"

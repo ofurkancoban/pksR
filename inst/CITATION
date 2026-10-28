@@ -1,0 +1,13 @@
+bibentry(
+  bibtype = "Manual",
+  title = "pksR: District-Level German Police Crime Statistics",
+  author = person("Ömer Furkan", "Çoban"),
+  year = format(Sys.Date(), "%Y"),
+  note = paste("R package version", meta$Version),
+  url = "https://github.com/ofurkancoban/pksR",
+  textVersion = paste0(
+    "Çoban, Ö. F. (", format(Sys.Date(), "%Y"), "). pksR: District-Level German Police Crime Statistics. ",
+    "R package version ", meta$Version, ". https://github.com/ofurkancoban/pksR. ",
+    "Cite the data release and the sources with pksR::pks_cite()."
+  )
+)
