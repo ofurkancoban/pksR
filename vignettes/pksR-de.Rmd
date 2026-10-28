@@ -49,7 +49,7 @@ Methoden und Annahmen beschreibt `vignette("harmonization-de")`.
 
 ## Straftaten auswählen
 
-`offence` nimmt für jedes Element einen Straftatenschlüssel (`"435*00"`), einen Kurznamen (`"wohnungseinbruch"` oder englisch `"residential_burglary"`), eine vollständige Bezeichnung in einer der beiden Sprachen oder einen Teil einer Bezeichnung (`"einbruch"` wählt beide Schlüssel zum Wohnungseinbruch und meldet das). Groß- und Kleinschreibung, Leerzeichen und Umlaute spielen keine Rolle, und ein genauer Schlüssel, Name oder eine genaue Bezeichnung hat Vorrang vor einem Teil. `pks_offences()` listet alle Schlüssel mit ihren Namen; die Namen sind Entwürfe, bis der Maintainer sie geprüft hat.
+`offence` nimmt für jedes Element einen Straftatenschlüssel (`"435*00"`), einen Kurznamen (`"wohnungseinbruch"` oder englisch `"residential_burglary"`), eine vollständige Bezeichnung in einer der beiden Sprachen oder einen Teil einer Bezeichnung (`"einbruch"` wählt beide Schlüssel zum Wohnungseinbruch und meldet das). Groß- und Kleinschreibung, Leerzeichen und Umlaute spielen keine Rolle, und ein genauer Schlüssel, Name oder eine genaue Bezeichnung hat Vorrang vor einem Teil. `pks_offences()` listet alle Schlüssel mit ihren Namen.
 
 ## Sprachen
 

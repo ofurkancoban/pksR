@@ -47,7 +47,7 @@ See `vignette("harmonization")` for the methods and their assumptions.
 
 ## Choosing offences
 
-`offence` takes, for each element, an offence key (`"435*00"`), a short name (`"residential_burglary"`, or the German `"wohnungseinbruch"`), a full label in either language, or a part of a label (`"einbruch"` selects both burglary keys and says so). Capitals, spaces and umlauts do not matter, and an exact key, name or label wins over a part. `pks_offences()` lists all keys with their names; the names are drafts until the maintainer has reviewed them.
+`offence` takes, for each element, an offence key (`"435*00"`), a short name (`"residential_burglary"`, or the German `"wohnungseinbruch"`), a full label in either language, or a part of a label (`"einbruch"` selects both burglary keys and says so). Capitals, spaces and umlauts do not matter, and an exact key, name or label wins over a part. `pks_offences()` lists all keys with their names.
 
 ## Languages
 
