@@ -29,7 +29,6 @@ Imports:
     tools,
     utils
 Suggests:
-    httptest2,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
