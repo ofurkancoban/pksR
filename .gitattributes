@@ -1,0 +1,4 @@
+# Test fixtures and example data are compared by SHA-256: no line ending
+# conversion on checkout (Windows)
+tests/testthat/fixtures/** -text
+inst/extdata/** -text

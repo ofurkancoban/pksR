@@ -38,7 +38,10 @@ served <- function(f) {
   file.path(out, f)
 }
 names <- c(sort(setdiff(list.files(out), "boundary_map.csv.gz")), "boundary_map.csv")
-real <- jsonlite::read_json(file.path(rel, "manifest.json"))
+# The data notes as the pipeline writes them into the manifest
+pipeline <- new.env()
+for (f in list.files(file.path(args[1], "R"), pattern = "[.]R$", full.names = TRUE)) sys.source(f, envir = pipeline)
+notes <- list(published = as.list(pipeline$published_notes), harmonized = as.list(pipeline$panel_notes))
 manifest <- list(
   data_version = "2026.1",
   created_at = "2026-10-28T12:00:00Z",
@@ -47,7 +50,7 @@ manifest <- list(
   years = c(2019L, 2021L),
   weights = c("area", "population"),
   validation = list(area = "pass", population = "pass"),
-  notes = real$notes,
+  notes = notes,
   license = "dl-de/by-2-0",
   license_url = "https://www.govdata.de/dl-de/by-2-0",
   zenodo_doi = NULL,
