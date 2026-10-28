@@ -12,6 +12,11 @@
 #'   separated by `;`, empty when all keys are affected), `variable`, `type`,
 #'   `comparable` (`yes`, `likely`, `unknown`, `no`), `description`,
 #'   `evidence` and `status`.
+#' @section Deutsch:
+#' Bekannte methodische Brüche der PKS: neue Definitionen, geänderte
+#' Schlüssel, geänderte Bezugsbevölkerung, Gebietsreformen und andere.
+#' `comparable` gibt an, ob Werte vor und nach dem Jahr vergleichbar sind
+#' (`yes`, `likely`, `unknown`, `no`). Vor jeder Zeitreihe prüfen.
 #' @family metadata
 #' @export
 #' @examples

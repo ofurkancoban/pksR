@@ -67,6 +67,33 @@ Bundeskriminalamt or harmonized to one territorial boundary and offence
 classification. Files are cached and checked against the SHA-256
 checksums of the release manifest.
 }
+\section{Deutsch}{
+
+Lädt die Kreistabellen der Polizeilichen Kriminalstatistik (PKS) aus einer
+versionierten Datenveröffentlichung, wie vom Bundeskriminalamt veröffentlicht
+oder auf einen Gebietsstand und eine Straftatenzuordnung harmonisiert. Jede
+Datei wird gegen die SHA-256-Prüfsumme des Manifests geprüft und im Cache
+abgelegt.
+\itemize{
+\item \code{years}: Berichtsjahre, \code{NULL} für alle.
+\item \code{offence}: Straftaten als Schlüssel (\code{"435*00"}), Kurzname auf Deutsch oder
+Englisch (\code{"wohnungseinbruch"}, \code{"burglary"}), vollständige Bezeichnung oder
+Teil einer Bezeichnung (\code{"einbruch"}). Groß- und Kleinschreibung,
+Leerzeichen und Umlaute spielen keine Rolle; eine genaue Übereinstimmung hat
+Vorrang. Übersicht: \code{\link[=pks_offences]{pks_offences()}}.
+\item \code{harmonize_to}: \code{"latest"} (Gebietsstand der Veröffentlichung), ein Jahr
+(Harmonisierung nur vorwärts) oder \code{NULL} (wie veröffentlicht).
+\item \code{weights}: Gewichtung geteilter Kreise, \code{"population"} oder \code{"area"}.
+\item \code{version}: Datenversion, etwa \code{"2026.1"}, oder \code{"latest"}.
+\item \code{lang}: Sprache der Bezeichnungen und Meldungen, \code{"de"} oder \code{"en"};
+Voreinstellung \code{options(pksR.lang)}, sonst die Sprache der R-Sitzung.
+}
+
+Ergebnis: ein Tibble mit einer Zeile je Jahr, Kreis und Straftatenschlüssel
+und den Attributen \code{data_version}, \code{retrieved_at}, \code{boundary_year}, \code{weights}
+und \code{source_urls}.
+}
+
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Total offences, harmonized to the latest boundary

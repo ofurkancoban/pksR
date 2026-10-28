@@ -41,6 +41,29 @@
 #'   Columns are described in `vignette("pksR")`. Attributes:
 #'   `data_version`, `retrieved_at`, `boundary_year`, `weights` and
 #'   `source_urls`.
+#' @section Deutsch:
+#' Lädt die Kreistabellen der Polizeilichen Kriminalstatistik (PKS) aus einer
+#' versionierten Datenveröffentlichung, wie vom Bundeskriminalamt veröffentlicht
+#' oder auf einen Gebietsstand und eine Straftatenzuordnung harmonisiert. Jede
+#' Datei wird gegen die SHA-256-Prüfsumme des Manifests geprüft und im Cache
+#' abgelegt.
+#'
+#' * `years`: Berichtsjahre, `NULL` für alle.
+#' * `offence`: Straftaten als Schlüssel (`"435*00"`), Kurzname auf Deutsch oder
+#'   Englisch (`"wohnungseinbruch"`, `"burglary"`), vollständige Bezeichnung oder
+#'   Teil einer Bezeichnung (`"einbruch"`). Groß- und Kleinschreibung,
+#'   Leerzeichen und Umlaute spielen keine Rolle; eine genaue Übereinstimmung hat
+#'   Vorrang. Übersicht: [pks_offences()].
+#' * `harmonize_to`: `"latest"` (Gebietsstand der Veröffentlichung), ein Jahr
+#'   (Harmonisierung nur vorwärts) oder `NULL` (wie veröffentlicht).
+#' * `weights`: Gewichtung geteilter Kreise, `"population"` oder `"area"`.
+#' * `version`: Datenversion, etwa `"2026.1"`, oder `"latest"`.
+#' * `lang`: Sprache der Bezeichnungen und Meldungen, `"de"` oder `"en"`;
+#'   Voreinstellung `options(pksR.lang)`, sonst die Sprache der R-Sitzung.
+#'
+#' Ergebnis: ein Tibble mit einer Zeile je Jahr, Kreis und Straftatenschlüssel
+#' und den Attributen `data_version`, `retrieved_at`, `boundary_year`, `weights`
+#' und `source_urls`.
 #' @family data
 #' @export
 #' @examplesIf interactive()

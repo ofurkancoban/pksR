@@ -14,6 +14,12 @@ and \code{modified}. The cache directory is attached as attribute \code{path}.
 Lists the release files that \code{\link[=pks_get]{pks_get()}} and \code{\link[=pks_manifest]{pks_manifest()}} have stored
 in the cache directory, \code{tools::R_user_dir("pksR", "cache")}.
 }
+\section{Deutsch}{
+
+Listet die im Cache (\code{tools::R_user_dir("pksR", "cache")}) gespeicherten
+Dateien, je Datenversion.
+}
+
 \examples{
 pks_cache_info()
 }

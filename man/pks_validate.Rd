@@ -36,6 +36,15 @@ year.
 50,000 and 400,000 (a warning otherwise).
 }
 }
+\section{Deutsch}{
+
+Prüft ein Panel auf Schema, Eindeutigkeit (eine Zeile je Jahr, Kreis und
+Schlüssel), Vorhandensein von Berlin und Hamburg in jedem Jahr, gleichen
+Kreisbestand in harmonisierten Daten, keine negativen Zahlen, nicht mehr
+Versuche als Fälle und plausible Einwohnerzahlen. Ergebnis: ein Tibble mit
+einer Zeile je Prüfung und dem Status \code{pass}, \code{warn} oder \code{fail}.
+}
+
 \examples{
 pks_validate(pks_example())
 }

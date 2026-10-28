@@ -20,6 +20,12 @@ The removed files as a tibble like \code{\link[=pks_cache_info]{pks_cache_info()
 Deletes cached release files, for all data versions or only for the ones
 given. The files are downloaded again when they are next needed.
 }
+\section{Deutsch}{
+
+Löscht Dateien aus dem Cache, für alle oder für die angegebenen
+Datenversionen. In interaktiven Sitzungen wird vorher nachgefragt.
+}
+
 \examples{
 \donttest{
 pks_cache_clear(ask = FALSE)

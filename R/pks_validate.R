@@ -22,6 +22,12 @@
 #' @return A tibble with one row per check: `check`, `status` (`pass`,
 #'   `warn` or `fail`), `problems` (number of offending rows or years) and
 #'   `details`.
+#' @section Deutsch:
+#' Prüft ein Panel auf Schema, Eindeutigkeit (eine Zeile je Jahr, Kreis und
+#' Schlüssel), Vorhandensein von Berlin und Hamburg in jedem Jahr, gleichen
+#' Kreisbestand in harmonisierten Daten, keine negativen Zahlen, nicht mehr
+#' Versuche als Fälle und plausible Einwohnerzahlen. Ergebnis: ein Tibble mit
+#' einer Zeile je Prüfung und dem Status `pass`, `warn` oder `fail`.
 #' @family analysis
 #' @export
 #' @examples

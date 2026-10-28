@@ -56,6 +56,9 @@ the <- new.env(parent = emptyenv())
 #'
 #' @return A tibble with one row per data release, newest first: `version`,
 #'   `tag`, `published_at`, `files` and `url`.
+#' @section Deutsch:
+#' Listet die veröffentlichten Datenversionen, die neueste zuerst. Eine
+#' Veröffentlichung ändert sich nie; Korrekturen erscheinen als neue Version.
 #' @family releases
 #' @export
 #' @examplesIf interactive()
@@ -133,6 +136,12 @@ read_manifest <- function(version, cache = TRUE) {
 #'   `pipeline_commit`, `target_boundary_year`, `years`, `validation`,
 #'   `notes`, `license`, `attribution`, ...) are attached as attribute
 #'   `manifest`.
+#' @section Deutsch:
+#' Liest das Manifest einer Datenveröffentlichung: wann und mit welchem
+#' Stand der Pipeline sie erstellt wurde, welche Jahre und welchen Gebietsstand
+#' sie abdeckt, das Ergebnis der Prüfung und jede Datei mit Prüfsumme, Größe und
+#' Zeilenzahl. Ergebnis: ein Tibble der Dateien, die übrigen Angaben im Attribut
+#' `manifest`.
 #' @family releases
 #' @export
 #' @examplesIf interactive()

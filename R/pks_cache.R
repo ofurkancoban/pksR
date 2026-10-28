@@ -20,6 +20,9 @@ cache_dir <- function(version, create = TRUE) {
 #'
 #' @return A tibble with one row per cached file: `version`, `file`, `bytes`
 #'   and `modified`. The cache directory is attached as attribute `path`.
+#' @section Deutsch:
+#' Listet die im Cache (`tools::R_user_dir("pksR", "cache")`) gespeicherten
+#' Dateien, je Datenversion.
 #' @family cache
 #' @export
 #' @examples
@@ -53,6 +56,9 @@ pks_cache_info <- function() {
 #' @param ask Ask for confirmation before deleting. Defaults to `TRUE` in
 #'   interactive sessions.
 #' @return The removed files as a tibble like [pks_cache_info()], invisibly.
+#' @section Deutsch:
+#' Löscht Dateien aus dem Cache, für alle oder für die angegebenen
+#' Datenversionen. In interaktiven Sitzungen wird vorher nachgefragt.
 #' @family cache
 #' @export
 #' @examples

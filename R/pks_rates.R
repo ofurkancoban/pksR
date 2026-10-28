@@ -20,6 +20,12 @@
 #' @return `data` with `hz` (cases per 100,000) and `clearance_rate`
 #'   recomputed, and a new column `rate` (cases per `per`). The population
 #'   used is in column `rate_population`.
+#' @section Deutsch:
+#' Berechnet Häufigkeitszahl (Fälle je 100.000 Einwohner) und
+#' Aufklärungsquote neu aus den Fallzahlen, etwa nach einer Harmonisierung, bei
+#' der veröffentlichte Quoten nicht übertragen werden können. `population` kann
+#' eine eigene Einwohnerzahl je Jahr und Kreis liefern; `per` setzt den Nenner
+#' der neuen Spalte `rate`.
 #' @family analysis
 #' @export
 #' @examples

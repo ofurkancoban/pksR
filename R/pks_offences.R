@@ -19,6 +19,12 @@
 #' @return A tibble with `offence_key`, `name` (the short name accepted by
 #'   `pks_get(offence = )`), `label`, `parent_key`, `valid_from`, `valid_to`,
 #'   `status` and `notes`.
+#' @section Deutsch:
+#' Listet die harmonisierten Straftatenschlüssel mit Kurzname, Bezeichnung
+#' auf Deutsch oder Englisch, übergeordnetem Schlüssel und Gültigkeitsjahren.
+#' `pattern` durchsucht Schlüssel, Kurznamen und Bezeichnungen beider Sprachen;
+#' `lang` wählt die Sprache der Spalten `name` und `label`. Zuordnungen mit
+#' `status = "draft"` sind noch nicht geprüft.
 #' @family metadata
 #' @export
 #' @examples

@@ -34,6 +34,15 @@ Cases come from \code{cases}, or from \code{cases_derived} in the PDF years, whe
 the BKA printed only rates. The clearance rate is 0 where cases are 0, as
 in the BKA tables.
 }
+\section{Deutsch}{
+
+Berechnet Häufigkeitszahl (Fälle je 100.000 Einwohner) und
+Aufklärungsquote neu aus den Fallzahlen, etwa nach einer Harmonisierung, bei
+der veröffentlichte Quoten nicht übertragen werden können. \code{population} kann
+eine eigene Einwohnerzahl je Jahr und Kreis liefern; \code{per} setzt den Nenner
+der neuen Spalte \code{rate}.
+}
+
 \examples{
 d <- pks_example()
 pks_rates(d, per = 1000)[, c("year", "ags", "cases", "hz", "rate")]

@@ -22,6 +22,14 @@ before interpreting changes over time.
 The table is a snapshot of \code{known_breaks.csv} of pksR-data that ships with
 the package; each data release contains its own copy.
 }
+\section{Deutsch}{
+
+Bekannte methodische Brüche der PKS: neue Definitionen, geänderte
+Schlüssel, geänderte Bezugsbevölkerung, Gebietsreformen und andere.
+\code{comparable} gibt an, ob Werte vor und nach dem Jahr vergleichbar sind
+(\code{yes}, \code{likely}, \code{unknown}, \code{no}). Vor jeder Zeitreihe prüfen.
+}
+
 \examples{
 b <- pks_breaks()
 b[b$comparable == "no", c("first_year", "offence_key", "description")]

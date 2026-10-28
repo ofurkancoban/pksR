@@ -19,6 +19,16 @@ boundary with population weights, built from pksR-data commit 785ac02
 Datenlizenz Deutschland, Namensnennung, Version 2.0; changed (harmonized)
 by pksR-data.
 }
+\section{Deutsch}{
+
+Ein kleines Beispielpanel, das mit dem Paket ausgeliefert wird: fünf
+Kreise, zwei Straftatenschlüssel und die Jahre 2019 bis 2025, harmonisiert
+auf den Gebietsstand 2025. Es stammt aus einem lokalen Lauf von pksR-data,
+nicht aus einer Datenveröffentlichung (\code{data_version = "example"}). Quelle:
+PKS Bundeskriminalamt, Datenlizenz Deutschland, Namensnennung, Version 2.0;
+verändert (harmonisiert).
+}
+
 \examples{
 pks_example()
 }

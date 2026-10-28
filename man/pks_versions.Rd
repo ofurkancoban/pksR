@@ -14,6 +14,12 @@ A tibble with one row per data release, newest first: \code{version},
 Data releases are versioned and never change; a correction is published as
 a new version. Versions are named \verb{<year>.<n>}, for example \code{"2026.1"}.
 }
+\section{Deutsch}{
+
+Listet die veröffentlichten Datenversionen, die neueste zuerst. Eine
+Veröffentlichung ändert sich nie; Korrekturen erscheinen als neue Version.
+}
+
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 pks_versions()

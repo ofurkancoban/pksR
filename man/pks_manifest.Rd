@@ -22,6 +22,15 @@ commit it was built, the years and target boundary year it covers, the
 validation result, and every file with its SHA-256, size and number of
 rows.
 }
+\section{Deutsch}{
+
+Liest das Manifest einer Datenveröffentlichung: wann und mit welchem
+Stand der Pipeline sie erstellt wurde, welche Jahre und welchen Gebietsstand
+sie abdeckt, das Ergebnis der Prüfung und jede Datei mit Prüfsumme, Größe und
+Zeilenzahl. Ergebnis: ein Tibble der Dateien, die übrigen Angaben im Attribut
+\code{manifest}.
+}
+
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 m <- pks_manifest()

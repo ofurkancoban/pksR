@@ -32,6 +32,15 @@ The table is a snapshot of the offence map of pksR-data that ships with the
 package, so it works offline. Each data release also contains its own
 \code{offence_map.csv}, which \code{\link[=pks_get]{pks_get()}} uses.
 }
+\section{Deutsch}{
+
+Listet die harmonisierten Straftatenschlüssel mit Kurzname, Bezeichnung
+auf Deutsch oder Englisch, übergeordnetem Schlüssel und Gültigkeitsjahren.
+\code{pattern} durchsucht Schlüssel, Kurznamen und Bezeichnungen beider Sprachen;
+\code{lang} wählt die Sprache der Spalten \code{name} und \code{label}. Zuordnungen mit
+\code{status = "draft"} sind noch nicht geprüft.
+}
+
 \examples{
 pks_offences("Diebstahl", lang = "de")
 pks_offences("theft", lang = "en")

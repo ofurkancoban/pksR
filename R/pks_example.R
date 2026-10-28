@@ -10,6 +10,13 @@
 #' by pksR-data.
 #'
 #' @return A tibble in the format of [pks_get()].
+#' @section Deutsch:
+#' Ein kleines Beispielpanel, das mit dem Paket ausgeliefert wird: fünf
+#' Kreise, zwei Straftatenschlüssel und die Jahre 2019 bis 2025, harmonisiert
+#' auf den Gebietsstand 2025. Es stammt aus einem lokalen Lauf von pksR-data,
+#' nicht aus einer Datenveröffentlichung (`data_version = "example"`). Quelle:
+#' PKS Bundeskriminalamt, Datenlizenz Deutschland, Namensnennung, Version 2.0;
+#' verändert (harmonisiert).
 #' @family data
 #' @export
 #' @examples

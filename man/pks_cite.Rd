@@ -25,6 +25,16 @@ licence Germany, attribution, version 2.0 (dl-de/by-2-0,
 and stating that the data were changed; the Destatis municipality
 directory may be reproduced with a source note.
 }
+\section{Deutsch}{
+
+Zitierangaben für das Paket, die verwendete Datenveröffentlichung und die
+Quellen: die PKS des Bundeskriminalamts und der Umsteigeschlüssel des BBSR
+(beide Datenlizenz Deutschland, Namensnennung, Version 2.0, die die Nennung
+der Quelle und einen Hinweis auf Veränderungen verlangt) sowie das
+Gemeindeverzeichnis von Destatis. Ergebnis: ein \code{\link[utils:bibentry]{utils::bibentry()}}-Objekt;
+\code{format(x, "bibtex")} liefert BibTeX.
+}
+
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 pks_cite()
