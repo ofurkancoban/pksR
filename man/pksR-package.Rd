@@ -8,6 +8,24 @@
 \description{
 Access to the district (Kreis) tables of the German Police Crime Statistics ('Polizeiliche Kriminalstatistik', PKS) published by the Bundeskriminalamt, from 2003 onwards. Data come from versioned, validated releases of the 'pksR-data' pipeline, either as published or harmonized to a common territorial boundary and offence classification. Downloads are cached and checked against SHA-256 checksums; rates can be recomputed after harmonization, panels validated, and data releases cited.
 }
+\section{Language}{
+
+Messages, warnings, errors and offence labels are available in English and
+German. The language is \code{options(pksR.lang = "en")} or
+\code{options(pksR.lang = "de")}, otherwise the language of the R session.
+\code{\link[=pks_get]{pks_get()}} and \code{\link[=pks_offences]{pks_offences()}} also take a \code{lang} argument.
+}
+
+\section{Deutsch}{
+
+pksR liefert die Kreistabellen der Polizeilichen Kriminalstatistik (PKS)
+des Bundeskriminalamts ab 2003, wie veröffentlicht oder auf einen
+Gebietsstand und eine Straftatenzuordnung harmonisiert, aus versionierten
+und geprüften Datenveröffentlichungen. Meldungen und Bezeichnungen gibt es
+auf Deutsch und Englisch: \code{options(pksR.lang = "de")} wählt Deutsch,
+sonst gilt die Sprache der R-Sitzung. Einstieg: \code{vignette("pksR-de")}.
+}
+
 \seealso{
 Useful links:
 \itemize{
