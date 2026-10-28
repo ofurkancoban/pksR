@@ -54,8 +54,7 @@ full label in either language, or a part of a label (`"einbruch"`
 selects both burglary keys and says so). Capitals, spaces and umlauts do
 not matter, and an exact key, name or label wins over a part.
 [`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md)
-lists all keys with their names; the names are drafts until the
-maintainer has reviewed them.
+lists all keys with their names.
 
 ## Languages
 

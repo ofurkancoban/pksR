@@ -60,8 +60,7 @@ Kleinschreibung, Leerzeichen und Umlaute spielen keine Rolle, und ein
 genauer Schlüssel, Name oder eine genaue Bezeichnung hat Vorrang vor
 einem Teil.
 [`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md)
-listet alle Schlüssel mit ihren Namen; die Namen sind Entwürfe, bis der
-Maintainer sie geprüft hat.
+listet alle Schlüssel mit ihren Namen.
 
 ## Sprachen
 
