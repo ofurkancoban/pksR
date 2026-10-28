@@ -1,0 +1,212 @@
+# Getting started with pksR
+
+`pksR` reads the district (Kreis) tables of the German Police Crime
+Statistics (*Polizeiliche Kriminalstatistik*, PKS) of the
+Bundeskriminalamt (BKA) from versioned data releases. This vignette
+shows the main functions and describes the columns. The examples that
+need the internet are shown but not run here; the others use
+[`pks_example()`](https://ofurkancoban.github.io/pksR/reference/pks_example.md),
+a small panel that ships with the package.
+
+``` r
+
+library(pksR)
+```
+
+## Getting data
+
+[`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md)
+downloads the years you ask for from the latest data release, checks
+every file against its SHA-256 checksum and keeps it in a local cache:
+
+``` r
+
+# Total offences, harmonized to the latest boundary (the default)
+total <- pks_get(offence_keys = "------")
+
+# Two years as published by the BKA, all offence keys
+published <- pks_get(years = 2024:2025, harmonize_to = NULL)
+
+# A fixed data release, for reproducible work
+d <- pks_get(years = 2015:2025, version = "2026.1")
+```
+
+The three choices of `harmonize_to`:
+
+| `harmonize_to` | Result |
+|----|----|
+| `"latest"` (default) | Harmonized to the boundary of the release, read as released |
+| a year, e.g. `2016` | The data as published, harmonized to that year’s boundary in your session (forward only) |
+| `NULL` | As published: each year with the districts of its own boundary |
+
+See
+[`vignette("harmonization")`](https://ofurkancoban.github.io/pksR/articles/harmonization.md)
+for the methods and their assumptions.
+
+## The example panel
+
+``` r
+
+d <- pks_example()
+d[, c("year", "ags", "region_name", "offence_key", "cases", "hz", "harmonized")]
+#> # A tibble: 70 × 7
+#>     year ags   region_name   offence_key   cases     hz harmonized
+#>    <int> <chr> <chr>         <chr>         <dbl>  <dbl> <lgl>     
+#>  1  2019 01001 Flensburg     ------        8617   9628. FALSE     
+#>  2  2019 02000 Hamburg       ------      206790  11231. FALSE     
+#>  3  2019 03159 Göttingen     ------       20829   6349. FALSE     
+#>  4  2019 11000 Berlin        ------      513426  14086. FALSE     
+#>  5  2019 16063 Wartburgkreis ------        7264.  4397. TRUE      
+#>  6  2019 01001 Flensburg     890000        8335   9312. FALSE     
+#>  7  2019 02000 Hamburg       890000      199833  10854. FALSE     
+#>  8  2019 03159 Göttingen     890000       20571   6270. FALSE     
+#>  9  2019 11000 Berlin        890000      495091  13583. FALSE     
+#> 10  2019 16063 Wartburgkreis 890000        7222.  4372. TRUE      
+#> # ℹ 60 more rows
+```
+
+Every object carries its provenance as attributes:
+
+``` r
+
+attributes(d)[c("data_version", "boundary_year", "weights")]
+#> $data_version
+#> [1] "example"
+#> 
+#> $boundary_year
+#> [1] 2025
+#> 
+#> $weights
+#> [1] "population"
+```
+
+For data from
+[`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md),
+`data_version` is the release version, `retrieved_at` the time of
+download and `source_urls` the release files the data came from.
+
+## Columns
+
+| Column | Content |
+|----|----|
+| `year` | Reporting year |
+| `ags` | District code (Kreisschlüssel), 5 digits with leading zero, e.g. `"02000"` for Hamburg |
+| `region_name` | District name as published, or the name at the target boundary for changed districts |
+| `offence_key` | Offence key (Straftatenschlüssel); in harmonized data the harmonized key, see [`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md) |
+| `offence_key_published` | Harmonized data only: the key as published, or `"KEY minus KEY"` for computed keys |
+| `offence_label` | German label as published |
+| `cases` | Recorded cases (published; `NA` in the PDF years 2003 to 2012) |
+| `attempts` | Attempted cases |
+| `hz` | Häufigkeitszahl: cases per 100,000 inhabitants |
+| `cleared` | Cleared cases |
+| `clearance_rate` | Aufklärungsquote in percent (0 where cases are 0, as in the BKA tables) |
+| `suspects` | Suspects (persons; not additive over offence keys) |
+| `cases_derived`, `cleared_derived` | PDF years only: `hz * population / 1e5`, because those tables print rates and population but no counts |
+| `population` | Published population (PDF years and 2020) |
+| `derived_population` | `cases / hz * 1e5`, derived from the published rate; one value per district and year |
+| `source_format`, `source_file` | Format and file of the BKA source |
+| `boundary_year` | Territorial boundary (Gebietsstand) of the row |
+| `harmonized` | `TRUE` if the district was changed by harmonization |
+| `weight_type` | `none`, `population` or `area` |
+| `estimated` | `TRUE` for shares of split districts and for derived counts (PDF years) |
+
+Counts in harmonized data are doubles: a split district passes fractions
+of its cases to its successors, and rounding them would change the
+national totals.
+
+## Offence keys and breaks
+
+``` r
+
+pks_offences("Diebstahl")[, c("offence_key", "label", "valid_from", "valid_to")]
+#> # A tibble: 12 × 4
+#>    offence_key label                                         valid_from valid_to
+#>    <chr>       <chr>                                              <int>    <int>
+#>  1 ****00      Diebstahl insgesamt                                 2014     2025
+#>  2 ***100      Diebstahl insgesamt von Kraftwagen einschl. …       2013     2025
+#>  3 ***200      Diebstahl insgesamt von Mopeds und Krafträde…       2014     2025
+#>  4 ***300      Diebstahl insgesamt von Fahrrädern einschl. …       2014     2025
+#>  5 *26*00      Ladendiebstahl insgesamt                            2023     2025
+#>  6 *50*00      Diebstahl insgesamt an/aus Kraftfahrzeugen          2003     2025
+#>  7 *90*00      Taschendiebstahl insgesamt                          2014     2025
+#>  8 3***00      Diebstahl ohne erschwerende Umstände §§ 242,…       2014     2025
+#>  9 326*00      Einfacher Ladendiebstahl                            2014     2025
+#> 10 4***00      Diebstahl unter erschwerenden Umständen §§ 2…       2014     2025
+#> 11 435*00      Wohnungseinbruchdiebstahl §§ 244 Abs. 1 Nr. …       2003     2025
+#> 12 436*00      Tageswohnungseinbruchdiebstahl §§ 244 Abs. 1…       2013     2025
+```
+
+The district tables contain only a selected set of offence keys, and
+keys change over time. Before reading a time series, check the known
+methodological breaks:
+
+``` r
+
+b <- pks_breaks()
+b[b$comparable == "no", c("first_year", "offence_key", "type")]
+#> # A tibble: 8 × 3
+#>   first_year offence_key                        type       
+#>        <int> <chr>                              <chr>      
+#> 1       2010 220000;222000                      key_change 
+#> 2       2013 NA                                 denominator
+#> 3       2024 NA                                 denominator
+#> 4       2017 111000                             definition 
+#> 5       2018 621020;621021;621100;621110;621120 key_change 
+#> 6       2012 *50*00                             definition 
+#> 7       2024 730000                             law_change 
+#> 8       2016 980100                             definition
+```
+
+## Rates, checks and citation
+
+After filtering or harmonizing, recompute rates from the counts and run
+the checks:
+
+``` r
+
+r <- pks_rates(d, per = 1000)
+head(r[, c("year", "ags", "offence_key", "cases", "rate")])
+#> # A tibble: 6 × 5
+#>    year ags   offence_key   cases  rate
+#>   <int> <chr> <chr>         <dbl> <dbl>
+#> 1  2019 01001 ------        8617   96.3
+#> 2  2019 02000 ------      206790  112. 
+#> 3  2019 03159 ------       20829   63.5
+#> 4  2019 11000 ------      513426  141. 
+#> 5  2019 16063 ------        7264.  44.0
+#> 6  2019 01001 890000        8335   93.1
+pks_validate(d)
+#> Validation: 6 passed, 0 warnings, 0 failed.
+#> # A tibble: 6 × 4
+#>   check       status problems details
+#>   <chr>       <chr>     <int> <chr>  
+#> 1 schema      pass          0 ""     
+#> 2 uniqueness  pass          0 ""     
+#> 3 city_states pass          0 ""     
+#> 4 coverage    pass          0 ""     
+#> 5 counts      pass          0 ""     
+#> 6 population  pass          0 ""
+```
+
+Work with these data should cite the package, the data release and the
+sources.
+[`pks_cite()`](https://ofurkancoban.github.io/pksR/reference/pks_cite.md)
+returns all five entries, including the licence of the BKA data
+(Datenlizenz Deutschland, Namensnennung, Version 2.0):
+
+``` r
+
+pks_cite()
+```
+
+## Cache
+
+Downloads are kept below `tools::R_user_dir("pksR", "cache")`, one
+folder per data version. A release never changes, so a cached file is
+used until its checksum fails.
+
+``` r
+
+pks_cache_info()
+pks_cache_clear(version = "2026.1")
+```
