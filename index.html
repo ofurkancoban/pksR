@@ -12,6 +12,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="District-Level German Police Crime Statistics">
 <meta name="description" content="Access to the district (Kreis) tables of the German Police Crime Statistics (Polizeiliche Kriminalstatistik, PKS) published by the Bundeskriminalamt, from 2003 onwards. Data come from versioned, validated releases of the pksR-data pipeline, either as published or harmonized to a common territorial boundary and offence classification. Downloads are cached and checked against SHA-256 checksums; rates can be recomputed after harmonization, panels validated, and data releases cited.">
 <meta property="og:description" content="Access to the district (Kreis) tables of the German Police Crime Statistics (Polizeiliche Kriminalstatistik, PKS) published by the Bundeskriminalamt, from 2003 onwards. Data come from versioned, validated releases of the pksR-data pipeline, either as published or harmonized to a common territorial boundary and offence classification. Downloads are cached and checked against SHA-256 checksums; rates can be recomputed after harmonization, panels validated, and data releases cited.">
+<meta property="og:image" content="https://ofurkancoban.github.io/pksR/logo.svg">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -59,12 +60,37 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="pksr-district-level-german-police-crime-statistics">pksR: District-Level German Police Crime Statistics<a class="anchor" aria-label="anchor" href="#pksr-district-level-german-police-crime-statistics"></a>
-</h1></div>
-<p><a href="README.de.html">Deutsch</a></p>
-<p><code>pksR</code> gives R users the district (Kreis) tables of the German Police Crime Statistics (<em>Polizeiliche Kriminalstatistik</em>, PKS) published by the Bundeskriminalamt, from 2003 onwards: as published, or harmonized to one territorial boundary and offence classification.</p>
-<p>The data come from versioned, validated releases of <a href="https://github.com/ofurkancoban/pksR-data" class="external-link">pksR-data</a>, the pipeline that downloads the original BKA files, extracts and harmonizes them and checks every release. <code>pksR</code> downloads only the years you ask for, keeps them in a local cache and checks every file against the SHA-256 checksums of the release.</p>
+<div class="page-header">
+<img src="logo.svg" class="logo" alt=""><h1 id="pksr-district-level-german-police-crime-statistics-">pksR: District-Level German Police Crime Statistics <a class="anchor" aria-label="anchor" href="#pksr-district-level-german-police-crime-statistics-"></a>
+</h1>
+</div>
+<p><strong>English</strong> | <a href="README.de.html">Deutsch</a></p>
+<!-- badges: start -->
+
+<p><code>pksR</code> gives R users the district (Kreis) tables of the German Police Crime Statistics (<em>Polizeiliche Kriminalstatistik</em>, PKS) of the Bundeskriminalamt (BKA) from 2003 onwards, either as published or harmonized to one territorial boundary and one offence classification, so that districts can be compared over time.</p>
 <p>Not to be confused with the CRAN package <code>pks</code> (probabilistic knowledge structures).</p>
+<div class="section level2">
+<h2 id="why-pksr">Why pksR<a class="anchor" aria-label="anchor" href="#why-pksr"></a>
+</h2>
+<p>The BKA publishes the district tables once a year: as PDF yearbooks up to 2012 and as spreadsheets from 2013, each with its own layout and its own district boundaries. Districts were merged and split several times (Sachsen-Anhalt 2007, Sachsen 2008, Mecklenburg-Vorpommern 2011, Göttingen 2016, Eisenach 2021), and offence keys change. <code>pksR</code> does this work once, openly and reproducibly:</p>
+<ul>
+<li>
+<strong>One table for all years.</strong> One row per year, district and offence key, with the same columns and types in every year.</li>
+<li>
+<strong>Harmonized boundaries.</strong> Counts are moved to one boundary with the BBSR transition keys (population or area weights); rates are recomputed afterwards, never averaged.</li>
+<li>
+<strong>Validated releases.</strong> Every data release passes consistency checks before it is published (national totals, conservation of totals, coverage, plausibility).</li>
+<li>
+<strong>Provenance.</strong> Every file has a version and a SHA-256 checksum, and every row can be traced to the BKA file it came from.</li>
+<li>
+<strong>English and German.</strong> Messages, offence labels and documentation in both languages.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
+</h2>
+<p>The package is under development and not yet on CRAN. <strong>The first data release is being prepared.</strong> Until it is published, <code><a href="reference/pks_get.html">pks_get()</a></code> has no data to download; <code><a href="reference/pks_example.html">pks_example()</a></code>, <code><a href="reference/pks_offences.html">pks_offences()</a></code> and <code><a href="reference/pks_breaks.html">pks_breaks()</a></code> work already, without internet.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -73,52 +99,243 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ofurkancoban/pksR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ofurkancoban/pksR" class="external-link">pksR</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Total offences in every district, harmonized to the latest boundary</span></span>
+<span><span class="co"># Total offences in every district and year, harmonized to the latest boundary</span></span>
 <span><span class="va">total</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="st">"total"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Offences by key, short name or label, in English or German</span></span>
-<span><span class="va">burglary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>offence <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residential_burglary"</span>, <span class="st">"435*00"</span>, <span class="st">"Wohnungseinbruchdiebstahl"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Several offences at once: by short name, offence key or label</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2015</span><span class="op">:</span><span class="fl">2025</span>, offence <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residential_burglary"</span>, <span class="st">"730000"</span>, <span class="st">"Gewaltkriminalität"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># As published by the BKA, two years</span></span>
+<span><span class="co"># As published by the BKA: each year with its own districts</span></span>
 <span><span class="va">published</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2024</span><span class="op">:</span><span class="fl">2025</span>, harmonize_to <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Harmonized to another boundary year, with area weights for split districts</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2015</span>, harmonize_to <span class="op">=</span> <span class="fl">2016</span>, weights <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
+<span><span class="co"># Harmonized to the boundary of 2016, area weights for split districts</span></span>
+<span><span class="va">d2016</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2015</span>, harmonize_to <span class="op">=</span> <span class="fl">2016</span>, weights <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Rates recomputed after harmonization, with your own population if you like</span></span>
-<span><span class="va">rates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_rates.html">pks_rates</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/pks_offences.html">pks_offences</a></span><span class="op">(</span><span class="st">"theft"</span><span class="op">)</span>       <span class="co"># offence keys, short names and labels</span></span>
-<span><span class="fu"><a href="reference/pks_breaks.html">pks_breaks</a></span><span class="op">(</span><span class="op">)</span>                <span class="co"># known methodological breaks</span></span>
-<span><span class="fu"><a href="reference/pks_validate.html">pks_validate</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>             <span class="co"># consistency checks</span></span>
-<span><span class="fu"><a href="reference/pks_versions.html">pks_versions</a></span><span class="op">(</span><span class="op">)</span>              <span class="co"># available data releases</span></span>
-<span><span class="fu"><a href="reference/pks_cite.html">pks_cite</a></span><span class="op">(</span><span class="op">)</span>                  <span class="co"># how to cite package, data release and sources</span></span></code></pre></div>
+<span><span class="co"># A fixed data release, for reproducible work</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_get.html">pks_get</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">"2026.1"</span>, offence <span class="op">=</span> <span class="st">"total"</span><span class="op">)</span></span></code></pre></div>
+<p>Without internet, try the small example panel shipped with the package:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pks_example.html">pks_example</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/pks_rates.html">pks_rates</a></span><span class="op">(</span><span class="va">d</span>, per <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>   <span class="co"># rates per 1,000 inhabitants</span></span>
+<span><span class="fu"><a href="reference/pks_validate.html">pks_validate</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>            <span class="co"># consistency checks</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="choosing-offences">Choosing offences<a class="anchor" aria-label="anchor" href="#choosing-offences"></a>
+</h2>
+<p><code>offence</code> takes, for each element, one of:</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Form</th>
+<th>Example</th>
+<th>Result</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Offence key</td>
+<td><code>"435*00"</code></td>
+<td>that key</td>
+</tr>
+<tr>
+<td>Short name, English or German</td>
+<td>
+<code>"residential_burglary"</code>, <code>"wohnungseinbruch"</code>
+</td>
+<td>that key</td>
+</tr>
+<tr>
+<td>Full label, either language</td>
+<td><code>"Residential burglary"</code></td>
+<td>that key</td>
+</tr>
+<tr>
+<td>Part of a label</td>
+<td><code>"einbruch"</code></td>
+<td>every matching key, with a message saying which</td>
+</tr>
+</tbody>
+</table>
+<p>Capitals, spaces and umlauts do not matter, and an exact key, name or label always wins over a part. <code><a href="reference/pks_offences.html">pks_offences()</a></code> lists all keys:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/pks_offences.html">pks_offences</a></span><span class="op">(</span><span class="st">"theft"</span><span class="op">)</span>              <span class="co"># search by name or label</span></span>
+<span><span class="fu"><a href="reference/pks_offences.html">pks_offences</a></span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"de"</span><span class="op">)</span>          <span class="co"># German names and labels</span></span></code></pre></div>
+<p>Some common short names:</p>
+<table class="table">
+<thead><tr>
+<th>Key</th>
+<th>English</th>
+<th>German</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>------</code></td>
+<td><code>total</code></td>
+<td><code>insgesamt</code></td>
+</tr>
+<tr>
+<td><code>****00</code></td>
+<td><code>theft</code></td>
+<td><code>diebstahl</code></td>
+</tr>
+<tr>
+<td><code>435*00</code></td>
+<td><code>residential_burglary</code></td>
+<td><code>wohnungseinbruch</code></td>
+</tr>
+<tr>
+<td><code>210000</code></td>
+<td><code>robbery</code></td>
+<td><code>raub</code></td>
+</tr>
+<tr>
+<td><code>892000</code></td>
+<td><code>violent_crime</code></td>
+<td><code>gewaltkriminalitaet</code></td>
+</tr>
+<tr>
+<td><code>674000</code></td>
+<td><code>criminal_damage</code></td>
+<td><code>sachbeschaedigung</code></td>
+</tr>
+<tr>
+<td><code>730000</code></td>
+<td><code>drug_offences</code></td>
+<td><code>rauschgiftdelikte</code></td>
+</tr>
+<tr>
+<td><code>899000</code></td>
+<td><code>street_crime</code></td>
+<td><code>strassenkriminalitaet</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="what-the-data-contain">What the data contain<a class="anchor" aria-label="anchor" href="#what-the-data-contain"></a>
+</h2>
+<ul>
+<li>
+<strong>Years:</strong> 2003 to 2025; new years are added by the pipeline once the BKA publishes them.</li>
+<li>
+<strong>Districts:</strong> all districts and independent cities, 400 on the latest boundary; Berlin and Hamburg in every year.</li>
+<li>
+<strong>Offences:</strong> the 46 offence keys of the district tables. The tables contain a selection of keys that changes over time: 6 keys cover all years 2003 to 2025, 37 keys cover 2014 to 2025.</li>
+<li>
+<strong>Measures:</strong> cases, attempts, frequency rate (HZ, cases per 100,000 inhabitants), cleared cases, clearance rate and suspects.</li>
+</ul>
+<p>All columns are described in <code><a href="articles/pksR.html">vignette("pksR")</a></code>.</p>
+</div>
+<div class="section level2">
+<h2 id="things-to-keep-in-mind">Things to keep in mind<a class="anchor" aria-label="anchor" href="#things-to-keep-in-mind"></a>
+</h2>
+<ul>
+<li>
+<strong>2003 to 2012</strong> come from PDF yearbooks that print rates and population but no case counts. Counts for these years are derived (<code>hz * population / 1e5</code>) and marked <code>estimated = TRUE</code>.</li>
+<li>
+<strong>Split districts</strong> are estimates: the weights assume that cases are distributed like inhabitants (or like area). Such rows are marked <code>estimated = TRUE</code>; merges are exact.</li>
+<li>
+<strong>Breaks:</strong> offence definitions, laws and recording practice change. Check <code><a href="reference/pks_breaks.html">pks_breaks()</a></code> before reading a time series.</li>
+<li>
+<strong>Harmonized data are changed data</strong>, not official BKA figures.</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="languages">Languages<a class="anchor" aria-label="anchor" href="#languages"></a>
 </h2>
-<p>Messages, errors and offence labels are available in English and German. <code>options(pksR.lang = "de")</code> switches to German; otherwise the language of the R session is used. <code><a href="reference/pks_get.html">pks_get()</a></code> and <code><a href="reference/pks_offences.html">pks_offences()</a></code> also take <code>lang = "de"</code> or <code>lang = "en"</code>. The vignettes and this README exist in both languages.</p>
+<p><code>options(pksR.lang = "de")</code> switches messages and offence labels to German, <code>options(pksR.lang = "en")</code> to English; otherwise the language of the R session is used. <code><a href="reference/pks_get.html">pks_get()</a></code> and <code><a href="reference/pks_offences.html">pks_offences()</a></code> also take <code>lang = "de"</code> or <code>lang = "en"</code>. Every help page has a German section.</p>
 </div>
 <div class="section level2">
-<h2 id="data-releases">Data releases<a class="anchor" aria-label="anchor" href="#data-releases"></a>
+<h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
-<p>Every data release has a version (<code>2026.1</code>, <code>2026.2</code>, …) and never changes; corrections become a new version. <code>pks_get(version = "2026.1")</code> gives the same data at any time later. Each release is validated before it is published: schema, one row per year, district and offence key, the expected number of districts, national totals, conservation of totals under harmonization and plausibility. See the <a href="https://github.com/ofurkancoban/pksR-data" class="external-link">pksR-data README</a> for details.</p>
+<p>The <a href="https://ofurkancoban.github.io/pksR/">package website</a> has the reference and three articles, each in English and German:</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Article</th>
+<th>English</th>
+<th>German</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Getting started</td>
+<td><a href="https://ofurkancoban.github.io/pksR/articles/pksR.html">pksR</a></td>
+<td><a href="https://ofurkancoban.github.io/pksR/articles/pksR-de.html">pksR-de</a></td>
+</tr>
+<tr>
+<td>Harmonization: methods, assumptions and sensitivity</td>
+<td><a href="https://ofurkancoban.github.io/pksR/articles/harmonization.html">harmonization</a></td>
+<td><a href="https://ofurkancoban.github.io/pksR/articles/harmonization-de.html">harmonization-de</a></td>
+</tr>
+<tr>
+<td>Data provenance and validation</td>
+<td><a href="https://ofurkancoban.github.io/pksR/articles/provenance.html">provenance</a></td>
+<td><a href="https://ofurkancoban.github.io/pksR/articles/provenance-de.html">provenance-de</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="data-releases-and-cache">Data releases and cache<a class="anchor" aria-label="anchor" href="#data-releases-and-cache"></a>
+</h2>
+<p>The data are produced by <a href="https://github.com/ofurkancoban/pksR-data" class="external-link">pksR-data</a>, a pipeline that downloads the original BKA files, extracts, harmonizes and validates them, and publishes each result as a GitHub release.</p>
+<ul>
+<li>Every release has a version (<code>2026.1</code>, <code>2026.2</code>, …) and never changes; corrections become a new version. <code><a href="reference/pks_versions.html">pks_versions()</a></code> lists them, <code><a href="reference/pks_manifest.html">pks_manifest()</a></code> shows the files of one release.</li>
+<li>
+<code><a href="reference/pks_get.html">pks_get()</a></code> downloads only the years you ask for and checks every file against the SHA-256 checksum in the release manifest.</li>
+<li>Downloads are cached in <code>tools::R_user_dir("pksR", "cache")</code>; <code><a href="reference/pks_cache_info.html">pks_cache_info()</a></code> and <code><a href="reference/pks_cache_clear.html">pks_cache_clear()</a></code> manage the cache.</li>
+<li>Every result carries its provenance as attributes: <code>data_version</code>, <code>retrieved_at</code>, <code>boundary_year</code>, <code>weights</code> and <code>source_urls</code>.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>Please cite the package, the data release and the sources. <code><a href="reference/pks_cite.html">pks_cite()</a></code> returns all entries, including BibTeX:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/pks_cite.html">pks_cite</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/pks_cite.html">pks_cite</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">"2026.1"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="sources-and-terms-of-reuse">Sources and terms of reuse<a class="anchor" aria-label="anchor" href="#sources-and-terms-of-reuse"></a>
 </h2>
 <p>The package code is MIT licensed. The data keep the terms of their sources:</p>
 <ul>
-<li>PKS tables: Bundeskriminalamt, <a href="https://www.govdata.de/dl-de/by-2-0" class="external-link">Datenlizenz Deutschland, Namensnennung, Version 2.0</a>. Source note: “PKS Bundeskriminalamt”, reporting year, version.</li>
-<li>Crosswalk: <a href="https://www.bbsr.bund.de" class="external-link">Bundesinstitut für Bau-, Stadt- und Raumforschung</a> (BBSR), Umsteigeschlüssel, Datenlizenz Deutschland, Namensnennung, Version 2.0. Source note: “BBSR Bonn”.</li>
-<li>Municipality changes: Statistisches Bundesamt (Destatis), Gemeindeverzeichnis.</li>
+<li>
+<strong>PKS tables:</strong> Bundeskriminalamt, <a href="https://www.govdata.de/dl-de/by-2-0" class="external-link">Datenlizenz Deutschland, Namensnennung, Version 2.0</a>. Source note: “PKS Bundeskriminalamt”, reporting year, version.</li>
+<li>
+<strong>Crosswalk:</strong> <a href="https://www.bbsr.bund.de" class="external-link">Bundesinstitut für Bau-, Stadt- und Raumforschung</a> (BBSR), Umsteigeschlüssel, Datenlizenz Deutschland, Namensnennung, Version 2.0. Source note: “BBSR Bonn”.</li>
+<li>
+<strong>Municipality changes:</strong> Statistisches Bundesamt (Destatis), Gemeindeverzeichnis.</li>
+<li>
+<strong>Logo:</strong> the map shows the 401 districts of 1 January 2020, coloured by the published 2020 frequency rate of total offences (PKS Bundeskriminalamt 2020). District geometries: <a href="https://www.bkg.bund.de" class="external-link">© GeoBasis-DE / BKG 2025 (Daten verändert)</a>, VG250, Datenlizenz Deutschland, Namensnennung, Version 2.0. Built by <code>data-raw/logo.R</code>.</li>
 </ul>
-<p>The harmonized data are changed data, not official BKA figures. <code><a href="reference/pks_cite.html">pks_cite()</a></code> returns the full citation.</p>
+</div>
+<div class="section level2">
+<h2 id="related-packages">Related packages<a class="anchor" aria-label="anchor" href="#related-packages"></a>
+</h2>
+<ul>
+<li>
+<a href="https://CRAN.R-project.org/package=inkaR" class="external-link"><code>inkaR</code></a>: regional indicators of the BBSR (INKAR), for example population and economic covariates for the same districts.</li>
+<li>
+<a href="https://CRAN.R-project.org/package=ags" class="external-link"><code>ags</code></a>: BBSR crosswalks for German district codes.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>Bug reports and suggestions are welcome in the <a href="https://github.com/ofurkancoban/pksR/issues" class="external-link">issue tracker</a>. Problems with the data themselves (a wrong value, a missing district) are best reported in the <a href="https://github.com/ofurkancoban/pksR-data/issues" class="external-link">pksR-data issues</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a>
@@ -157,7 +374,15 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml" class="external-link"><img src="https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml/badge.svg" alt="test-coverage"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
