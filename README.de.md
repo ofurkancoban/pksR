@@ -150,7 +150,7 @@ Der Code des Pakets steht unter der MIT-Lizenz. Für die Daten gelten die Beding
 - **PKS-Tabellen:** Bundeskriminalamt, [Datenlizenz Deutschland, Namensnennung, Version 2.0](https://www.govdata.de/dl-de/by-2-0). Quellenvermerk: „PKS Bundeskriminalamt“, Berichtsjahr, Version.
 - **Umsteigeschlüssel:** [Bundesinstitut für Bau-, Stadt- und Raumforschung](https://www.bbsr.bund.de) (BBSR), Datenlizenz Deutschland, Namensnennung, Version 2.0. Quellenvermerk: „BBSR Bonn“.
 - **Gebietsänderungen der Gemeinden:** Statistisches Bundesamt (Destatis), Gemeindeverzeichnis.
-- **Logo:** Die Karte zeigt die heutigen 400 Kreise, eingefärbt nach der veröffentlichten Häufigkeitszahl der Straftaten insgesamt 2025 (PKS Bundeskriminalamt 2025). Kreisgeometrien: [© GeoBasis-DE / BKG 2025 (Daten verändert)](https://www.bkg.bund.de), VG250 zum 1. Januar 2020, Eisenach mit dem Wartburgkreis zusammengelegt (2021), Datenlizenz Deutschland, Namensnennung, Version 2.0. Erstellt mit `data-raw/logo.R`.
+- **Logo:** Deutschland als Fingerabdruck. Die Linien sind Höhenlinien der veröffentlichten Häufigkeitszahl der Straftaten insgesamt 2025 in den 400 Kreisen (PKS Bundeskriminalamt 2025), zu einer Fläche geglättet und von Gold (niedrig) bis Rot (hoch) eingefärbt. Kreisgeometrien: [© GeoBasis-DE / BKG 2025 (Daten verändert)](https://www.bkg.bund.de), VG250 zum 1. Januar 2020, Eisenach mit dem Wartburgkreis zusammengelegt (2021), Datenlizenz Deutschland, Namensnennung, Version 2.0. Erstellt mit `data-raw/logo.R`.
 
 ## Verwandte Pakete
 
