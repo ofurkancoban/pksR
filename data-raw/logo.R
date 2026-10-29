@@ -18,8 +18,9 @@
 #
 # Geometries: BKG VG250 as of 1 January 2020 (401 districts), with Eisenach
 # (16056) merged into the Wartburgkreis (16063) as on 1 July 2021; the codes
-# then match the 2025 table one to one. Source note required by dl-de/by-2-0:
-# "(c) GeoBasis-DE / BKG 2025 (Daten veraendert)", see README.
+# then match the 2025 table one to one. Source note and change note as the
+# BKG terms for VG250 require them: "(c) BKG (2025) dl-de/by-2-0, Datenquellen"
+# with the year of the last download, see README.
 # The PNG is rendered with rsvg-convert (librsvg), which must be on the PATH.
 # In logo.svg the lettering is converted to outlines, so it looks the same on
 # systems without Avenir Next. logo.png is rendered from the same drawing with
