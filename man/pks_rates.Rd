@@ -49,6 +49,7 @@ pks_rates(d, per = 1000)[, c("year", "ags", "cases", "hz", "rate")]
 }
 \seealso{
 Other analysis: 
+\code{\link{pks_compare_weights}()},
 \code{\link{pks_validate}()}
 }
 \concept{analysis}

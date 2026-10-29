@@ -20,6 +20,7 @@ reference:
     contents:
       - pks_rates
       - pks_validate
+      - pks_compare_weights
   - title: Cache
     contents:
       - pks_cache_info

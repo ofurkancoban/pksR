@@ -50,6 +50,7 @@ pks_validate(pks_example())
 }
 \seealso{
 Other analysis: 
+\code{\link{pks_compare_weights}()},
 \code{\link{pks_rates}()}
 }
 \concept{analysis}

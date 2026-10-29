@@ -48,6 +48,24 @@ msgstr "{nrow(info)} Datei{?en} aus dem Cache gelöscht."
 msgid "Cannot read the manifest of data version {.val {version}}; the data release is not cited."
 msgstr "Das Manifest der Datenversion {.val {version}} ist nicht lesbar; die Datenveröffentlichung wird nicht zitiert."
 
+msgid "{.arg data} must be harmonized with population or area weights."
+msgstr "{.arg data} muss mit Bevölkerungs- oder Flächengewichten harmonisiert sein."
+
+msgid "Data as published ({.code harmonize_to = NULL}) have no weights to compare."
+msgstr "Daten wie veröffentlicht ({.code harmonize_to = NULL}) haben keine Gewichte zum Vergleichen."
+
+msgid "{.arg other} must have {other_weights} weights."
+msgstr "{.arg other} muss die Gewichte {other_weights} haben."
+
+msgid "{.arg data} and {.arg other} must have the same years, districts and offence keys."
+msgstr "{.arg data} und {.arg other} müssen dieselben Jahre, Kreise und Straftatenschlüssel haben."
+
+msgid "{sum(differs)} of {nrow(out)} row{?s} differ between population and area weights; the largest relative difference is {share} percent in {where}."
+msgstr "{sum(differs)} von {nrow(out)} Zeile{?n} unterscheiden sich zwischen Bevölkerungs- und Flächengewichten; der größte relative Unterschied beträgt {share} Prozent in {where}."
+
+msgid "Population and area weights give the same values for all {nrow(out)} row{?s}."
+msgstr "Bevölkerungs- und Flächengewichte ergeben für alle {nrow(out)} Zeile{?n} dieselben Werte."
+
 msgid "{.code source = \"bka\"} is not available yet."
 msgstr "{.code source = \"bka\"} ist noch nicht verfügbar."
 
