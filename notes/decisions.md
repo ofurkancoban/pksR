@@ -24,3 +24,8 @@
 ## 2026-10-28: No httptest2
 
 1. The brief (Section 10.3) asks for offline tests with `httptest2` fixtures. The tests are offline, but use `httr2::local_mocked_responses()` with a fake GitHub release in `tests/testthat/helper-release.R` and the files in `tests/testthat/fixtures`. `httptest2` was never used and is removed from `Suggests` (decided by the maintainer): one dependency less, and the fixed responses with checksums are easier to read than recorded request trees. `httr2` is already in `Imports`.
+
+## 2026-10-29: README and logo
+
+1. Both READMEs are rewritten with the same structure: why the package exists, status (the first data release is still being prepared, so `pks_get()` has no data yet), getting started, choosing offences, what the data contain, caveats, languages, documentation links, releases and cache, citation, sources, related packages. All facts (years, 400 districts, 46 keys, 6 keys for 2003 to 2025, 37 for 2014 to 2025) are taken from the offence map snapshot and the pipeline output on 2026-10-29.
+2. Hex logo (`man/figures/logo.png`, picked up by pkgdown): the 401 districts of BKG VG250 (1 January 2020) coloured by the published 2020 HZ of total offences in seven quantile classes; built by `data-raw/logo.R`. Both sources are on the 2020 boundary, so the join is exact. The VG250 licence (dl-de/by-2-0) requires the source note "© GeoBasis-DE / BKG <year of retrieval> (Daten verändert)" linked to bkg.bund.de; it is in both READMEs. The year 2025 is the date of the local copy of the files (4 September 2025) and should be checked by the maintainer. The SVG is kept in the repository but not in the package build.
