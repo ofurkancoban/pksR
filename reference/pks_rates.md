@@ -53,6 +53,7 @@ bei der veröffentlichte Quoten nicht übertragen werden können.
 ## See also
 
 Other analysis:
+[`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md),
 [`pks_validate()`](https://ofurkancoban.github.io/pksR/reference/pks_validate.md)
 
 ## Examples

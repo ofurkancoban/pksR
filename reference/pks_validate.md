@@ -56,6 +56,7 @@ mit einer Zeile je Prüfung und dem Status `pass`, `warn` oder `fail`.
 ## See also
 
 Other analysis:
+[`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md),
 [`pks_rates()`](https://ofurkancoban.github.io/pksR/reference/pks_rates.md)
 
 ## Examples

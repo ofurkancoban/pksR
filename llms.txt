@@ -143,6 +143,8 @@ All columns are described in
 - **Split districts** are estimates: the weights assume that cases are
   distributed like inhabitants (or like area). Such rows are marked
   `estimated = TRUE`; merges are exact.
+  [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md)
+  shows how much a panel changes between population and area weights.
 - **Breaks:** offence definitions, laws and recording practice change.
   Check
   [`pks_breaks()`](https://ofurkancoban.github.io/pksR/reference/pks_breaks.md)
@@ -226,10 +228,13 @@ sources:
   rate of total offences, smoothed over about 45 km; each ridge is about
   1.7 percent higher than the one below and is coloured from yellow
   (low) to red (high). It is a portrait of the regional pattern, not a
-  district map. District geometries: [© GeoBasis-DE / BKG 2025 (Daten
-  verändert)](https://www.bkg.bund.de), VG250 as of 1 January 2020 with
-  Eisenach merged into the Wartburgkreis (2021), Datenlizenz
-  Deutschland, Namensnennung, Version 2.0. Built by `data-raw/logo.R`.
+  district map. District geometries: ©
+  [BKG](https://www.bkg.bund.de) (2025)
+  [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0),
+  [Datenquellen](https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf);
+  VG250 as of 1 January 2020, changed: Eisenach merged into the
+  Wartburgkreis (2021), smoothed and drawn as contour lines. Built by
+  `data-raw/logo.R`.
 
 ## Related packages
 
@@ -245,7 +250,12 @@ Bug reports and suggestions are welcome in the [issue
 tracker](https://github.com/ofurkancoban/pksR/issues). Problems with the
 data themselves (a wrong value, a missing district) are best reported in
 the [pksR-data
-issues](https://github.com/ofurkancoban/pksR-data/issues).
+issues](https://github.com/ofurkancoban/pksR-data/issues). See the
+[contributing
+guide](https://ofurkancoban.github.io/pksR/CONTRIBUTING.md) for pull
+requests and the
+[roadmap](https://ofurkancoban.github.io/pksR/ROADMAP.md) for planned
+work.
 
 ## Author
 
@@ -282,6 +292,8 @@ issues](https://github.com/ofurkancoban/pksR-data/issues).
   : Recompute rates
 - [`pks_validate()`](https://ofurkancoban.github.io/pksR/reference/pks_validate.md)
   : Validate a panel
+- [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md)
+  : Compare population and area weights
 
 ## Cache
 

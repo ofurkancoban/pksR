@@ -1,8 +1,10 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://ofurkancoban.github.io/pksR/404.html</loc></url>
+<url><loc>https://ofurkancoban.github.io/pksR/CONTRIBUTING.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/LICENSE-text.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/LICENSE.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/README.de.html</loc></url>
+<url><loc>https://ofurkancoban.github.io/pksR/ROADMAP.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/articles/harmonization-de.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/articles/harmonization.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/articles/index.html</loc></url>
@@ -19,6 +21,7 @@
 <url><loc>https://ofurkancoban.github.io/pksR/reference/pks_cache_clear.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/reference/pks_cache_info.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/reference/pks_cite.html</loc></url>
+<url><loc>https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/reference/pks_example.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/reference/pks_get.html</loc></url>
 <url><loc>https://ofurkancoban.github.io/pksR/reference/pks_manifest.html</loc></url>

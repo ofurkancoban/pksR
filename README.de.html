@@ -169,7 +169,7 @@
 <ul><li>
 <strong>2003 bis 2012</strong> stammen aus PDF-Jahrbüchern, die Quoten und Einwohnerzahlen, aber keine Fallzahlen enthalten. Die Fallzahlen dieser Jahre sind abgeleitet (<code>hz * population / 1e5</code>) und mit <code>estimated = TRUE</code> gekennzeichnet.</li>
 <li>
-<strong>Geteilte Kreise</strong> sind Schätzungen: Die Gewichte unterstellen, dass sich die Fälle wie die Einwohner (oder wie die Fläche) verteilen. Solche Zeilen tragen <code>estimated = TRUE</code>; Zusammenlegungen sind exakt.</li>
+<strong>Geteilte Kreise</strong> sind Schätzungen: Die Gewichte unterstellen, dass sich die Fälle wie die Einwohner (oder wie die Fläche) verteilen. Solche Zeilen tragen <code>estimated = TRUE</code>; Zusammenlegungen sind exakt. <code><a href="reference/pks_compare_weights.html">pks_compare_weights()</a></code> zeigt, wie stark sich ein Panel zwischen Bevölkerungs- und Flächengewichten ändert.</li>
 <li>
 <strong>Brüche:</strong> Straftatendefinitionen, Gesetze und Erfassungspraxis ändern sich. Vor jeder Zeitreihe <code><a href="reference/pks_breaks.html">pks_breaks()</a></code> prüfen.</li>
 <li>
@@ -221,7 +221,7 @@
 <li>
 <strong>Gebietsänderungen der Gemeinden:</strong> Statistisches Bundesamt (Destatis), Gemeindeverzeichnis.</li>
 <li>
-<strong>Logo:</strong> Deutschland als Fingerabdruck, gezeichnet von den PKS-Daten 2025 (PKS Bundeskriminalamt 2025). Die Linien sind Höhenlinien der Häufigkeitszahl der Straftaten insgesamt, über etwa 45 km geglättet; jede Linie liegt etwa 1,7 Prozent über der vorherigen und ist von Gelb (niedrig) bis Rot (hoch) eingefärbt. Es ist ein Porträt des regionalen Musters, keine Kreiskarte. Kreisgeometrien: <a href="https://www.bkg.bund.de" class="external-link">© GeoBasis-DE / BKG 2025 (Daten verändert)</a>, VG250 zum 1. Januar 2020, Eisenach mit dem Wartburgkreis zusammengelegt (2021), Datenlizenz Deutschland, Namensnennung, Version 2.0. Erstellt mit <code>data-raw/logo.R</code>.</li>
+<strong>Logo:</strong> Deutschland als Fingerabdruck, gezeichnet von den PKS-Daten 2025 (PKS Bundeskriminalamt 2025). Die Linien sind Höhenlinien der Häufigkeitszahl der Straftaten insgesamt, über etwa 45 km geglättet; jede Linie liegt etwa 1,7 Prozent über der vorherigen und ist von Gelb (niedrig) bis Rot (hoch) eingefärbt. Es ist ein Porträt des regionalen Musters, keine Kreiskarte. Kreisgeometrien: © <a href="https://www.bkg.bund.de" class="external-link">BKG</a> (2025) <a href="https://www.govdata.de/dl-de/by-2-0" class="external-link">dl-de/by-2-0</a>, <a href="https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf" class="external-link">Datenquellen</a>; VG250 zum 1. Januar 2020, verändert: Eisenach mit dem Wartburgkreis zusammengelegt (2021), geglättet und als Höhenlinien gezeichnet. Erstellt mit <code>data-raw/logo.R</code>.</li>
 </ul></div>
 <div class="section level2">
 <h2 id="verwandte-pakete">Verwandte Pakete<a class="anchor" aria-label="anchor" href="#verwandte-pakete"></a></h2>
@@ -232,7 +232,7 @@
 </ul></div>
 <div class="section level2">
 <h2 id="mitwirken">Mitwirken<a class="anchor" aria-label="anchor" href="#mitwirken"></a></h2>
-<p>Fehlermeldungen und Vorschläge sind im <a href="https://github.com/ofurkancoban/pksR/issues" class="external-link">Issue-Tracker</a> willkommen. Probleme mit den Daten selbst (ein falscher Wert, ein fehlender Kreis) gehören am besten in die <a href="https://github.com/ofurkancoban/pksR-data/issues" class="external-link">Issues von pksR-data</a>.</p>
+<p>Fehlermeldungen und Vorschläge sind im <a href="https://github.com/ofurkancoban/pksR/issues" class="external-link">Issue-Tracker</a> willkommen. Probleme mit den Daten selbst (ein falscher Wert, ein fehlender Kreis) gehören am besten in die <a href="https://github.com/ofurkancoban/pksR-data/issues" class="external-link">Issues von pksR-data</a>. Hinweise für Pull Requests stehen im <a href="CONTRIBUTING.html#deutsch">Leitfaden</a>, geplante Arbeiten in der <a href="ROADMAP.html">Roadmap</a> (Englisch).</p>
 </div>
 <div class="section level2">
 <h2 id="autor">Autor<a class="anchor" aria-label="anchor" href="#autor"></a></h2>

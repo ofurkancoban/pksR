@@ -156,6 +156,9 @@ Alle Spalten beschreibt
 - **Geteilte Kreise** sind Schätzungen: Die Gewichte unterstellen, dass
   sich die Fälle wie die Einwohner (oder wie die Fläche) verteilen.
   Solche Zeilen tragen `estimated = TRUE`; Zusammenlegungen sind exakt.
+  [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md)
+  zeigt, wie stark sich ein Panel zwischen Bevölkerungs- und
+  Flächengewichten ändert.
 - **Brüche:** Straftatendefinitionen, Gesetze und Erfassungspraxis
   ändern sich. Vor jeder Zeitreihe
   [`pks_breaks()`](https://ofurkancoban.github.io/pksR/reference/pks_breaks.md)
@@ -239,11 +242,13 @@ Bedingungen ihrer Quellen:
   Häufigkeitszahl der Straftaten insgesamt, über etwa 45 km geglättet;
   jede Linie liegt etwa 1,7 Prozent über der vorherigen und ist von Gelb
   (niedrig) bis Rot (hoch) eingefärbt. Es ist ein Porträt des regionalen
-  Musters, keine Kreiskarte. Kreisgeometrien: [© GeoBasis-DE / BKG 2025
-  (Daten verändert)](https://www.bkg.bund.de), VG250 zum 1. Januar 2020,
-  Eisenach mit dem Wartburgkreis zusammengelegt (2021), Datenlizenz
-  Deutschland, Namensnennung, Version 2.0. Erstellt mit
-  `data-raw/logo.R`.
+  Musters, keine Kreiskarte. Kreisgeometrien: ©
+  [BKG](https://www.bkg.bund.de) (2025)
+  [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0),
+  [Datenquellen](https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf);
+  VG250 zum 1. Januar 2020, verändert: Eisenach mit dem Wartburgkreis
+  zusammengelegt (2021), geglättet und als Höhenlinien gezeichnet.
+  Erstellt mit `data-raw/logo.R`.
 
 ## Verwandte Pakete
 
@@ -259,7 +264,11 @@ Fehlermeldungen und Vorschläge sind im
 [Issue-Tracker](https://github.com/ofurkancoban/pksR/issues) willkommen.
 Probleme mit den Daten selbst (ein falscher Wert, ein fehlender Kreis)
 gehören am besten in die [Issues von
-pksR-data](https://github.com/ofurkancoban/pksR-data/issues).
+pksR-data](https://github.com/ofurkancoban/pksR-data/issues). Hinweise
+für Pull Requests stehen im
+[Leitfaden](https://ofurkancoban.github.io/pksR/CONTRIBUTING.html#deutsch),
+geplante Arbeiten in der
+[Roadmap](https://ofurkancoban.github.io/pksR/ROADMAP.md) (Englisch).
 
 ## Autor
 

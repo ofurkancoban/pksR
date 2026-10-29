@@ -172,7 +172,7 @@ b[b$comparable == "no", c("first_year", "offence_key", "type")]
 #> 4       2017 111000                             definition 
 #> 5       2018 621020;621021;621100;621110;621120 key_change 
 #> 6       2012 *50*00                             definition 
-#> 7       2024 730000                             law_change 
+#> 7       2024 730000;------;890000               law_change 
 #> 8       2016 980100                             definition
 ```
 

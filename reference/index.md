@@ -29,6 +29,8 @@
   : Recompute rates
 - [`pks_validate()`](https://ofurkancoban.github.io/pksR/reference/pks_validate.md)
   : Validate a panel
+- [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md)
+  : Compare population and area weights
 
 ## Cache
 

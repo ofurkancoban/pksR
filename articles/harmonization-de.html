@@ -195,21 +195,69 @@ bis 2025).</p>
 <div class="section level2">
 <h2 id="sensitivität">Sensitivität<a class="anchor" aria-label="anchor" href="#sensitivit%C3%A4t"></a>
 </h2>
-<p>Bevölkerungs- und Flächengewichte unterscheiden sich nur dort, wo
-Kreise geteilt wurden. Wie stark ein Ergebnis von der Wahl abhängt,
-zeigt der Vergleich:</p>
+<p>Jedes harmonisierte Panel beruht auf zwei Entscheidungen: der
+Gewichtung geteilter Kreise und der Harmonisierung selbst. Ergebnisse,
+die unter jeder Wahl gelten, hängen weniger von den genannten Annahmen
+ab.</p>
+<div class="section level3">
+<h3 id="bevölkerungs--oder-flächengewichte">Bevölkerungs- oder Flächengewichte<a class="anchor" aria-label="anchor" href="#bev%C3%B6lkerungs--oder-fl%C3%A4chengewichte"></a>
+</h3>
+<p>Die Gewichte unterscheiden sich nur dort, wo Kreise geteilt wurden.
+<code><a href="../reference/pks_compare_weights.html">pks_compare_weights()</a></code> stellt beide Fassungen eines Panels
+nebeneinander:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">bev</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2010</span>, offence <span class="op">=</span> <span class="st">"insgesamt"</span><span class="op">)</span></span>
-<span><span class="va">flaeche</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2010</span>, offence <span class="op">=</span> <span class="st">"insgesamt"</span>, weights <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="va">beide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">bev</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span>, <span class="st">"cases"</span><span class="op">)</span><span class="op">]</span>, <span class="va">flaeche</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span>, <span class="st">"cases"</span><span class="op">)</span><span class="op">]</span>,</span>
-<span>               by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span><span class="op">)</span>, suffixes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"_bevoelkerung"</span>, <span class="st">"_flaeche"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">beide</span><span class="op">$</span><span class="va">differenz</span> <span class="op">&lt;-</span> <span class="va">beide</span><span class="op">$</span><span class="va">cases_flaeche</span> <span class="op">-</span> <span class="va">beide</span><span class="op">$</span><span class="va">cases_bevoelkerung</span></span>
-<span><span class="va">beide</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">beide</span><span class="op">$</span><span class="va">differenz</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span>, <span class="op">]</span></span></code></pre></div>
-<p>Eine dritte Möglichkeit ist, gar nicht zu harmonisieren:
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2012</span>, offence <span class="op">=</span> <span class="st">"insgesamt"</span><span class="op">)</span></span>
+<span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_compare_weights.html">pks_compare_weights</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>   <span class="co"># lädt dieselbe Abfrage mit Flächengewichten</span></span>
+<span><span class="va">w</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">relative_difference</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.01</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span>, <span class="st">"region_name"</span>, <span class="st">"cases_population"</span>, <span class="st">"cases_area"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<p>Das Ergebnis enthält die Fälle und die neu berechnete HZ unter beiden
+Gewichtungen, die Differenz und die relative Differenz. Zusammengelegte
+und unveränderte Kreise sind gleich; die Bundessummen sind unter beiden
+Gewichtungen dieselben. Eine Regression lässt sich zweimal schätzen,
+einmal je Spalte, um zu sehen, ob sich ein Koeffizient bewegt:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">w</span><span class="op">$</span><span class="va">log_hz_population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">hz_population</span><span class="op">)</span></span>
+<span><span class="va">w</span><span class="op">$</span><span class="va">log_hz_area</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">hz_area</span><span class="op">)</span></span>
+<span><span class="co"># z. B. dasselbe Modell mit zweifach fixen Effekten auf log_hz_population und auf log_hz_area</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="harmonisiert-oder-wie-veröffentlicht">Harmonisiert oder wie veröffentlicht<a class="anchor" aria-label="anchor" href="#harmonisiert-oder-wie-ver%C3%B6ffentlicht"></a>
+</h3>
+<p>Die dritte Möglichkeit ist, gar nicht zu harmonisieren.
 <code>harmonize_to = NULL</code> liefert jedes Jahr mit seinen eigenen
-Kreisen, ein unbalanciertes Panel, in dem zusammengelegte und geteilte
-Kreise auftauchen und verschwinden. Ergebnisse, die unter allen drei
-Möglichkeiten gelten, hängen weniger von den genannten Annahmen ab.</p>
+Kreisen, ein unbalanciertes Panel: Zusammengelegte und geteilte Kreise
+tauchen auf und verschwinden, und kein Wert ist geschätzt.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">veroeffentlicht</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2012</span>, offence <span class="op">=</span> <span class="st">"insgesamt"</span>, harmonize_to <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">veroeffentlicht</span><span class="op">$</span><span class="va">year</span><span class="op">)</span>    <span class="co"># die Zahl der Kreise ändert sich mit den Reformen</span></span>
+<span><span class="va">harmonisiert</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_get.html">pks_get</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2012</span>, offence <span class="op">=</span> <span class="st">"insgesamt"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">harmonisiert</span><span class="op">$</span><span class="va">year</span><span class="op">)</span>       <span class="co"># jedes Jahr dieselben 400 Kreise</span></span></code></pre></div>
+<p>Zwei übliche Wege mit den veröffentlichten Daten:</p>
+<ul>
+<li>
+<strong>Unbalanciertes Panel:</strong> alle Kreise wie
+veröffentlicht, mit Kreis-fixen Effekten. Ein reformierter Kreis wird
+nach der Reform zu einer neuen Einheit.</li>
+<li>
+<strong>Balanciertes Panel unveränderter Kreise:</strong> nur
+Kreise, deren Schlüssel und Gebiet sich im Zeitraum nicht geändert
+haben. Nichts ist geschätzt, aber die reformierten Regionen (große Teile
+Ostdeutschlands zwischen 2007 und 2011) fallen heraus; das kann
+Ergebnisse verzerren, wenn sich die Kriminalität dort anders entwickelt
+hat.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Kreise, die in jedem Jahr des Zeitraums mit demselben Schlüssel vorkommen.</span></span>
+<span><span class="co"># Ein Kreis, der einen anderen aufnimmt, behält seinen Schlüssel (der</span></span>
+<span><span class="co"># Wartburgkreis 2021): auch solche Kreise anhand des Umsteigeschlüssels entfernen.</span></span>
+<span><span class="va">stabil</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Reduce</a></span><span class="op">(</span><span class="va">intersect</span>, <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="va">veroeffentlicht</span><span class="op">$</span><span class="va">ags</span>, <span class="va">veroeffentlicht</span><span class="op">$</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">balanciert</span> <span class="op">&lt;-</span> <span class="va">veroeffentlicht</span><span class="op">[</span><span class="va">veroeffentlicht</span><span class="op">$</span><span class="va">ags</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">stabil</span>, <span class="op">]</span></span>
+<span><span class="co"># Harmonisierte Zeilen, die auf Teilungsgewichten beruhen</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">harmonisiert</span><span class="op">$</span><span class="va">estimated</span><span class="op">)</span></span></code></pre></div>
+<p>Der Vergleich einer Schätzung auf dem harmonisierten Panel
+(Bevölkerungsgewichte), dem harmonisierten Panel (Flächengewichte), dem
+unbalancierten Panel und dem balancierten Panel unveränderter Kreise
+zeigt, wie stark sie von der Harmonisierung abhängt.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="quoten-mit-eigener-einwohnerzahl">Quoten mit eigener Einwohnerzahl<a class="anchor" aria-label="anchor" href="#quoten-mit-eigener-einwohnerzahl"></a>
@@ -217,7 +265,7 @@ Möglichkeiten gelten, hängen weniger von den genannten Annahmen ab.</p>
 <p>Die Einwohnerzahl für die Quoten ist die veröffentlichte, wo das BKA
 sie angibt (PDF-Jahre und 2020), sonst aus Fallzahl und Häufigkeitszahl
 abgeleitet. Eine amtliche Bevölkerungsreihe kann sie ersetzen:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_example.html">pks_example</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">bev</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">year</span>, ags <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">ags</span>, population <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">derived_population</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/pks_rates.html">pks_rates</a></span><span class="op">(</span><span class="va">d</span>, population <span class="op">=</span> <span class="va">bev</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span>, <span class="st">"offence_key"</span>, <span class="st">"hz"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>

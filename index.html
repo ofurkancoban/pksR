@@ -241,7 +241,7 @@
 <li>
 <strong>2003 to 2012</strong> come from PDF yearbooks that print rates and population but no case counts. Counts for these years are derived (<code>hz * population / 1e5</code>) and marked <code>estimated = TRUE</code>.</li>
 <li>
-<strong>Split districts</strong> are estimates: the weights assume that cases are distributed like inhabitants (or like area). Such rows are marked <code>estimated = TRUE</code>; merges are exact.</li>
+<strong>Split districts</strong> are estimates: the weights assume that cases are distributed like inhabitants (or like area). Such rows are marked <code>estimated = TRUE</code>; merges are exact. <code><a href="reference/pks_compare_weights.html">pks_compare_weights()</a></code> shows how much a panel changes between population and area weights.</li>
 <li>
 <strong>Breaks:</strong> offence definitions, laws and recording practice change. Check <code><a href="reference/pks_breaks.html">pks_breaks()</a></code> before reading a time series.</li>
 <li>
@@ -319,7 +319,7 @@
 <li>
 <strong>Municipality changes:</strong> Statistisches Bundesamt (Destatis), Gemeindeverzeichnis.</li>
 <li>
-<strong>Logo:</strong> Germany as a fingerprint drawn by the PKS data of 2025 (PKS Bundeskriminalamt 2025). The ridges are contour lines of the frequency rate of total offences, smoothed over about 45 km; each ridge is about 1.7 percent higher than the one below and is coloured from yellow (low) to red (high). It is a portrait of the regional pattern, not a district map. District geometries: <a href="https://www.bkg.bund.de" class="external-link">© GeoBasis-DE / BKG 2025 (Daten verändert)</a>, VG250 as of 1 January 2020 with Eisenach merged into the Wartburgkreis (2021), Datenlizenz Deutschland, Namensnennung, Version 2.0. Built by <code>data-raw/logo.R</code>.</li>
+<strong>Logo:</strong> Germany as a fingerprint drawn by the PKS data of 2025 (PKS Bundeskriminalamt 2025). The ridges are contour lines of the frequency rate of total offences, smoothed over about 45 km; each ridge is about 1.7 percent higher than the one below and is coloured from yellow (low) to red (high). It is a portrait of the regional pattern, not a district map. District geometries: © <a href="https://www.bkg.bund.de" class="external-link">BKG</a> (2025) <a href="https://www.govdata.de/dl-de/by-2-0" class="external-link">dl-de/by-2-0</a>, <a href="https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf" class="external-link">Datenquellen</a>; VG250 as of 1 January 2020, changed: Eisenach merged into the Wartburgkreis (2021), smoothed and drawn as contour lines. Built by <code>data-raw/logo.R</code>.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -335,7 +335,7 @@
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h2>
-<p>Bug reports and suggestions are welcome in the <a href="https://github.com/ofurkancoban/pksR/issues" class="external-link">issue tracker</a>. Problems with the data themselves (a wrong value, a missing district) are best reported in the <a href="https://github.com/ofurkancoban/pksR-data/issues" class="external-link">pksR-data issues</a>.</p>
+<p>Bug reports and suggestions are welcome in the <a href="https://github.com/ofurkancoban/pksR/issues" class="external-link">issue tracker</a>. Problems with the data themselves (a wrong value, a missing district) are best reported in the <a href="https://github.com/ofurkancoban/pksR-data/issues" class="external-link">pksR-data issues</a>. See the <a href="CONTRIBUTING.html">contributing guide</a> for pull requests and the <a href="ROADMAP.html">roadmap</a> for planned work.</p>
 </div>
 <div class="section level2">
 <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a>
@@ -359,6 +359,12 @@
 </ul>
 </div>
 
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+</ul>
+</div>
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
@@ -370,7 +376,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Ömer Furkan Çoban <br><small class="roles"> Author, maintainer, copyright holder </small>   </li>
+<li>Ömer Furkan Çoban <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0009-0005-3623-7178" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 

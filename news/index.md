@@ -15,3 +15,5 @@
   [`pks_cite()`](https://ofurkancoban.github.io/pksR/reference/pks_cite.md)
   and
   [`pks_example()`](https://ofurkancoban.github.io/pksR/reference/pks_example.md).
+- [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md)
+  puts a harmonized panel with population and area weights side by side.
