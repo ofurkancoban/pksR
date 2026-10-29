@@ -3,7 +3,7 @@
 #' A subset of the harmonized panel of pksR-data that ships with the package, for
 #' examples, tests and vignettes without internet access: five districts,
 #' two offence keys and the years 2019 to 2025, harmonized to the 2025
-#' boundary with population weights, built from pksR-data commit 785ac02
+#' boundary with population weights, built from pksR-data commit 9b6985d
 #' (`data-raw/example.R`), not from a data release, so `data_version` is
 #' `"example"`. Source: PKS Bundeskriminalamt,
 #' Datenlizenz Deutschland, Namensnennung, Version 2.0; changed (harmonized)
@@ -32,5 +32,5 @@ pks_example <- function() {
   d
 }
 
-# Built from pksR-data commit 785ac02 on 2026-10-28 (data-raw/example.R)
-example_info <- list(data_version = "example", retrieved_at = "2026-10-28 00:00:00", boundary_year = 2025L)
+# Built from pksR-data commit 9b6985d on 2026-10-29 (data-raw/example.R)
+example_info <- list(data_version = "example", retrieved_at = "2026-10-29 00:00:00", boundary_year = 2025L)

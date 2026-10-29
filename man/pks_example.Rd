@@ -13,7 +13,7 @@ A tibble in the format of \code{\link[=pks_get]{pks_get()}}.
 A subset of the harmonized panel of pksR-data that ships with the package, for
 examples, tests and vignettes without internet access: five districts,
 two offence keys and the years 2019 to 2025, harmonized to the 2025
-boundary with population weights, built from pksR-data commit 785ac02
+boundary with population weights, built from pksR-data commit 9b6985d
 (\code{data-raw/example.R}), not from a data release, so \code{data_version} is
 \code{"example"}. Source: PKS Bundeskriminalamt,
 Datenlizenz Deutschland, Namensnennung, Version 2.0; changed (harmonized)
