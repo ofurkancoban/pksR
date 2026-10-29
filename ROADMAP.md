@@ -56,4 +56,4 @@ Nothing here is promised for a date; suggestions are welcome in the
     [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md)
     and the harmonization vignette cover population versus area weights
     and harmonized versus published panels; further tools may follow
-    from the analyses for the maintainer’s master’s thesis.
+    from user feedback.

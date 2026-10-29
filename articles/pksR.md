@@ -174,8 +174,14 @@ b[b$comparable == "no", c("first_year", "offence_key", "type")]
 #> 5       2018 621020;621021;621100;621110;621120 key_change 
 #> 6       2012 *50*00                             definition 
 #> 7       2024 730000;------;890000               law_change 
-#> 8       2016 980100                             definition
+#> 8       2016 980100;897000                      definition
 ```
+
+The table lists changes in how crime is recorded or measured, not
+changes in crime itself. Real shocks such as the Covid-19 pandemic (2020
+and 2021) or the immigration of 2015 and 2016 are not breaks: they
+change recorded crime, not its measurement, and belong in the model, for
+example as year effects.
 
 ## Rates, checks and citation
 

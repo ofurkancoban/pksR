@@ -3,7 +3,9 @@
 Changes in the PKS that make values before and after a year incomparable
 or only partly comparable: new offence definitions, key changes, changes
 in the population denominator, boundary reforms and others. Check these
-before interpreting changes over time.
+before interpreting changes over time. Real shocks such as the Covid-19
+pandemic (2020 and 2021) are not breaks: they change recorded crime, not
+how it is measured.
 
 ## Usage
 
@@ -28,7 +30,9 @@ with the package; each data release contains its own copy.
 Bekannte methodische Brüche der PKS: neue Definitionen, geänderte
 Schlüssel, geänderte Bezugsbevölkerung, Gebietsreformen und andere.
 `comparable` gibt an, ob Werte vor und nach dem Jahr vergleichbar sind
-(`yes`, `likely`, `unknown`, `no`). Vor jeder Zeitreihe prüfen.
+(`yes`, `likely`, `unknown`, `no`). Vor jeder Zeitreihe prüfen. Echte
+Schocks wie die Covid-19-Pandemie (2020 und 2021) sind keine Brüche: Sie
+verändern die erfasste Kriminalität, nicht ihre Messung.
 
 ## See also
 
@@ -50,5 +54,5 @@ b[b$comparable == "no", c("first_year", "offence_key", "description")]
 #> 5       2018 621020;621021;621100;621110;621120 "621020 and 621021 (until 2017)…
 #> 6       2012 *50*00                             "Theft in/from motor vehicles (…
 #> 7       2024 730000;------;890000               "Cannabis Act (KCanG) in force …
-#> 8       2016 980100                             "The list of component keys dis…
+#> 8       2016 980100;897000                      "The list of component keys dis…
 ```

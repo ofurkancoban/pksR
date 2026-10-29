@@ -184,8 +184,14 @@ b[b$comparable == "no", c("first_year", "offence_key", "type")]
 #> 5       2018 621020;621021;621100;621110;621120 key_change 
 #> 6       2012 *50*00                             definition 
 #> 7       2024 730000;------;890000               law_change 
-#> 8       2016 980100                             definition
+#> 8       2016 980100;897000                      definition
 ```
+
+Die Tabelle enthält Änderungen daran, wie Kriminalität erfasst oder
+gemessen wird, nicht Änderungen der Kriminalität selbst. Echte Schocks
+wie die Covid-19-Pandemie (2020 und 2021) oder die Zuwanderung 2015 und
+2016 sind keine Brüche: Sie verändern die erfasste Kriminalität, nicht
+ihre Messung, und gehören ins Modell, zum Beispiel als Jahreseffekte.
 
 ## Quoten, Prüfungen und Zitieren
 
