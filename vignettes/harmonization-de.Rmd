@@ -112,6 +112,20 @@ sum(harmonisiert$estimated)
 
 Der Vergleich einer Schätzung auf dem harmonisierten Panel (Bevölkerungsgewichte), dem harmonisierten Panel (Flächengewichte), dem unbalancierten Panel und dem balancierten Panel unveränderter Kreise zeigt, wie stark sie von der Harmonisierung abhängt.
 
+## Quoten auf einer Zensusbasis
+
+Das BKA teilt die Fälle des Jahres t durch die Einwohnerzahl zum 31.12. des Jahres t - 1, auf der Zensusbasis ihrer Zeit: ältere Register bis 2012, Zensus 2011 für 2013 bis 2023 und Zensus 2022 ab 2024. Beide Zensus fanden weniger Einwohner als die Register, in einzelnen Kreisen bis zu 8 Prozent. Die Quoten springen daher 2013 und 2024, ohne dass sich die Kriminalität ändert (`pks_breaks()`, BRK-004 und BRK-005).
+
+Die Spalte `population_corrected` enthält die zensuskorrigierte Einwohnerzahl des BBSR (INKAR-Indikator „Bevölkerung mit BBSR-Zensuskorrekturen“): Die bei jedem Zensus festgestellte Abweichung wird linear auf die Jahre davor verteilt, sodass die Reihe keinen Zensusbruch hat. Sie bezieht sich auf denselben 31.12. wie die HZ und wird wie die Fallzahlen auf den Gebietsstand jeder Zeile übertragen. `pks_rates()` nutzt sie mit `population = "corrected"`:
+
+```{r}
+d <- pks_example()
+r <- pks_rates(d, population = "corrected")
+head(r[, c("year", "ags", "offence_key", "hz", "rate_population")])
+```
+
+Die Korrektur ist eine Schätzung des BBSR, keine amtliche Revision; für 2025 wird die Einwohnerzahl hinter der HZ verwendet, die bereits auf der Basis des Zensus 2022 steht.
+
 ## Quoten mit eigener Einwohnerzahl
 
 Die Einwohnerzahl für die Quoten ist die veröffentlichte, wo das BKA sie angibt (PDF-Jahre und 2020), sonst aus Fallzahl und Häufigkeitszahl abgeleitet. Eine amtliche Bevölkerungsreihe kann sie ersetzen:

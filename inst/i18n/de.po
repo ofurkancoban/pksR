@@ -126,6 +126,9 @@ msgstr "Der Umsteigeschlüssel hat keine Periode {p}-{p + 1}."
 msgid "District {d$ags[1]}: published population differs between offence keys."
 msgstr "Kreis {d$ags[1]}: Die veröffentlichte Einwohnerzahl unterscheidet sich zwischen Straftatenschlüsseln."
 
+msgid "District {d$ags[1]}: corrected population differs between offence keys."
+msgstr "Kreis {d$ags[1]}: Die korrigierte Einwohnerzahl unterscheidet sich zwischen Straftatenschlüsseln."
+
 msgid "Data to harmonize must have one boundary year."
 msgstr "Zu harmonisierende Daten müssen einen einzigen Gebietsstand haben."
 
@@ -210,8 +213,14 @@ msgstr "{.arg pattern} muss eine einzelne Zeichenkette sein."
 msgid "{.arg per} must be one positive number."
 msgstr "{.arg per} muss eine einzelne positive Zahl sein."
 
-msgid "{.arg population} must be a data frame with columns {.field year}, {.field ags} and {.field population}."
-msgstr "{.arg population} muss ein Data Frame mit den Spalten {.field year}, {.field ags} und {.field population} sein."
+msgid "{.arg data} has no census-corrected population for every row."
+msgstr "{.arg data} hat nicht für jede Zeile eine zensuskorrigierte Einwohnerzahl."
+
+msgid "It comes with data releases from 2026.1 on; use {.fn pks_get} with such a release."
+msgstr "Sie ist in Datenveröffentlichungen ab 2026.1 enthalten; {.fn pks_get} mit einer solchen Veröffentlichung verwenden."
+
+msgid "{.arg population} must be {.code NULL}, {.val corrected} or a data frame with columns {.field year}, {.field ags} and {.field population}."
+msgstr "{.arg population} muss {.code NULL}, {.val corrected} oder ein Data Frame mit den Spalten {.field year}, {.field ags} und {.field population} sein."
 
 msgid "{.arg population} has several values for one year and district."
 msgstr "{.arg population} hat mehrere Werte für ein Jahr und einen Kreis."

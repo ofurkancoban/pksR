@@ -23,7 +23,8 @@ canonical_spec <- c(
   harmonized = "logical",
   weight_type = "character",
   estimated = "logical",
-  derived_population = "double"
+  derived_population = "double",
+  population_corrected = "double"
 )
 
 count_columns <- c("cases", "attempts", "cleared", "suspects")

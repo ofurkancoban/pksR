@@ -26,6 +26,22 @@ test_that("an external population replaces the one of the data", {
   expect_error(pks_rates(d, per = -1), "positive")
 })
 
+test_that("the census-corrected population puts all years on one base", {
+  d <- pks_example()
+  expect_false(anyNA(d$population_corrected))
+  r <- pks_rates(d, population = "corrected")
+  expect_equal(r$rate_population, d$population_corrected)
+  cases <- dplyr::coalesce(d$cases, d$cases_derived)
+  expect_equal(r$hz, cases / d$population_corrected * 1e5)
+  # Counts and the published rates stay as they are
+  expect_identical(r$cases, d$cases)
+  d$population_corrected[1] <- NA
+  expect_error(pks_rates(d, population = "corrected"), "census-corrected population")
+  d$population_corrected <- NULL
+  expect_error(pks_rates(d, population = "corrected"), "census-corrected population")
+  expect_error(pks_rates(pks_example(), population = "registers"), "must be")
+})
+
 test_that("zero cases give a clearance rate of 0, as in the BKA tables", {
   d <- pks_example()[1:2, ]
   d$cases <- c(0, 10)

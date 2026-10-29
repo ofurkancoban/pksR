@@ -31,6 +31,9 @@ test_that("the data as published keep the published codes and keys", {
   h <- suppressMessages(pks_get(years = 2019, offence = "total", harmonize_to = 2021))
   merged <- sum(d$cases[d$ags %in% c("16056", "16063") & d$offence_key == "------"])
   expect_equal(h$cases[h$ags == "16063"], merged)
+  # The census-corrected population moves with the districts
+  corrected <- sum(d$population_corrected[d$ags %in% c("16056", "16063") & d$offence_key == "------"])
+  expect_equal(h$population_corrected[h$ags == "16063"], corrected)
 })
 
 test_that("area weights read the area panel", {

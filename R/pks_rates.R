@@ -10,12 +10,21 @@
 #' the BKA printed only rates. The clearance rate is 0 where cases are 0, as
 #' in the BKA tables.
 #'
+#' The BKA divides by the population of 31 December of the year before, on
+#' the census base of its time: older registers until 2012, Zensus 2011 for
+#' 2013 to 2023, Zensus 2022 from 2024. Rates therefore jump in 2013 and 2024
+#' without any change in crime (see [pks_breaks()]). With `population =
+#' "corrected"` every year uses the census-corrected population of the BBSR
+#' (INKAR), at the same date and on the same boundary, so rates are on one
+#' base over the whole period.
+#'
 #' @param data A tibble from [pks_get()].
-#' @param population `NULL` (default) to use the population in `data`
-#'   (published where available, otherwise derived from cases and HZ), or a
-#'   data frame with columns `year`, `ags` and `population`, for example from
-#'   an official population source. Every row of `data` must find a
-#'   population.
+#' @param population `NULL` (default) to use the population behind the
+#'   published HZ (published where available, otherwise derived from cases
+#'   and HZ); `"corrected"` for the census-corrected population in column
+#'   `population_corrected`; or a data frame with columns `year`, `ags` and
+#'   `population`, for example from an official population source. Every row
+#'   of `data` must find a population.
 #' @param per Rate denominator for column `rate` (default 100,000).
 #' @return `data` with `hz` (cases per 100,000) and `clearance_rate`
 #'   recomputed, and a new column `rate` (cases per `per`). The population
@@ -25,12 +34,19 @@
 #' Aufklärungsquote neu aus den Fallzahlen, etwa nach einer Harmonisierung, bei
 #' der veröffentlichte Quoten nicht übertragen werden können. `population` kann
 #' eine eigene Einwohnerzahl je Jahr und Kreis liefern; `per` setzt den Nenner
-#' der neuen Spalte `rate`.
+#' der neuen Spalte `rate`. Das BKA teilt durch die Einwohnerzahl zum 31.12.
+#' des Vorjahres auf der Zensusbasis ihrer Zeit, daher springen die Quoten 2013
+#' und 2024. `population = "corrected"` nutzt für alle Jahre die
+#' zensuskorrigierte Einwohnerzahl des BBSR (INKAR) und macht die Quoten über
+#' den ganzen Zeitraum vergleichbar.
 #' @family analysis
 #' @export
 #' @examples
 #' d <- pks_example()
 #' pks_rates(d, per = 1000)[, c("year", "ags", "cases", "hz", "rate")]
+#'
+#' # One census base for all years
+#' pks_rates(d, population = "corrected")[, c("year", "ags", "hz", "rate_population")]
 pks_rates <- function(data, population = NULL, per = 1e5) {
   check_panel(data)
   if (!is.numeric(per) || length(per) != 1 || is.na(per) || per <= 0) {
@@ -38,9 +54,17 @@ pks_rates <- function(data, population = NULL, per = 1e5) {
   }
   if (is.null(population)) {
     pop <- dplyr::coalesce(data$population, data$derived_population)
+  } else if (identical(population, "corrected")) {
+    if (!"population_corrected" %in% names(data) || anyNA(data$population_corrected)) {
+      cli::cli_abort(c(
+        tr("{.arg data} has no census-corrected population for every row."),
+        "i" = tr("It comes with data releases from 2026.1 on; use {.fn pks_get} with such a release.")
+      ))
+    }
+    pop <- data$population_corrected
   } else {
     if (!is.data.frame(population) || !all(c("year", "ags", "population") %in% names(population))) {
-      cli::cli_abort(tr("{.arg population} must be a data frame with columns {.field year}, {.field ags} and {.field population}."))
+      cli::cli_abort(tr("{.arg population} must be {.code NULL}, {.val corrected} or a data frame with columns {.field year}, {.field ags} and {.field population}."))
     }
     population <- unique(tibble::tibble(
       year = as.integer(population$year), ags = as.character(population$ags), population = as.numeric(population$population)

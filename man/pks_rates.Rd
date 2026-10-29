@@ -9,11 +9,12 @@ pks_rates(data, population = NULL, per = 1e+05)
 \arguments{
 \item{data}{A tibble from \code{\link[=pks_get]{pks_get()}}.}
 
-\item{population}{\code{NULL} (default) to use the population in \code{data}
-(published where available, otherwise derived from cases and HZ), or a
-data frame with columns \code{year}, \code{ags} and \code{population}, for example from
-an official population source. Every row of \code{data} must find a
-population.}
+\item{population}{\code{NULL} (default) to use the population behind the
+published HZ (published where available, otherwise derived from cases
+and HZ); \code{"corrected"} for the census-corrected population in column
+\code{population_corrected}; or a data frame with columns \code{year}, \code{ags} and
+\code{population}, for example from an official population source. Every row
+of \code{data} must find a population.}
 
 \item{per}{Rate denominator for column \code{rate} (default 100,000).}
 }
@@ -33,6 +34,13 @@ you supply.
 Cases come from \code{cases}, or from \code{cases_derived} in the PDF years, where
 the BKA printed only rates. The clearance rate is 0 where cases are 0, as
 in the BKA tables.
+
+The BKA divides by the population of 31 December of the year before, on
+the census base of its time: older registers until 2012, Zensus 2011 for
+2013 to 2023, Zensus 2022 from 2024. Rates therefore jump in 2013 and 2024
+without any change in crime (see \code{\link[=pks_breaks]{pks_breaks()}}). With \code{population = "corrected"} every year uses the census-corrected population of the BBSR
+(INKAR), at the same date and on the same boundary, so rates are on one
+base over the whole period.
 }
 \section{Deutsch}{
 
@@ -40,12 +48,19 @@ Berechnet Häufigkeitszahl (Fälle je 100.000 Einwohner) und
 Aufklärungsquote neu aus den Fallzahlen, etwa nach einer Harmonisierung, bei
 der veröffentlichte Quoten nicht übertragen werden können. \code{population} kann
 eine eigene Einwohnerzahl je Jahr und Kreis liefern; \code{per} setzt den Nenner
-der neuen Spalte \code{rate}.
+der neuen Spalte \code{rate}. Das BKA teilt durch die Einwohnerzahl zum 31.12.
+des Vorjahres auf der Zensusbasis ihrer Zeit, daher springen die Quoten 2013
+und 2024. \code{population = "corrected"} nutzt für alle Jahre die
+zensuskorrigierte Einwohnerzahl des BBSR (INKAR) und macht die Quoten über
+den ganzen Zeitraum vergleichbar.
 }
 
 \examples{
 d <- pks_example()
 pks_rates(d, per = 1000)[, c("year", "ags", "cases", "hz", "rate")]
+
+# One census base for all years
+pks_rates(d, population = "corrected")[, c("year", "ags", "hz", "rate_population")]
 }
 \seealso{
 Other analysis: 
