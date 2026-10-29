@@ -221,10 +221,11 @@ sources:
   “BBSR Bonn”.
 - **Municipality changes:** Statistisches Bundesamt (Destatis),
   Gemeindeverzeichnis.
-- **Logo:** the map shows the 401 districts of 1 January 2020, coloured
-  by the published 2020 frequency rate of total offences (PKS
-  Bundeskriminalamt 2020). District geometries: [© GeoBasis-DE / BKG
-  2025 (Daten verändert)](https://www.bkg.bund.de), VG250, Datenlizenz
+- **Logo:** the map shows the 400 districts of today, coloured by the
+  published 2025 frequency rate of total offences (PKS Bundeskriminalamt
+  2025). District geometries: [© GeoBasis-DE / BKG 2025 (Daten
+  verändert)](https://www.bkg.bund.de), VG250 as of 1 January 2020 with
+  Eisenach merged into the Wartburgkreis (2021), Datenlizenz
   Deutschland, Namensnennung, Version 2.0. Built by `data-raw/logo.R`.
 
 ## Related packages

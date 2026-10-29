@@ -234,12 +234,13 @@ Bedingungen ihrer Quellen:
   Deutschland, Namensnennung, Version 2.0. Quellenvermerk: „BBSR Bonn“.
 - **Gebietsänderungen der Gemeinden:** Statistisches Bundesamt
   (Destatis), Gemeindeverzeichnis.
-- **Logo:** Die Karte zeigt die 401 Kreise zum 1. Januar 2020,
-  eingefärbt nach der veröffentlichten Häufigkeitszahl der Straftaten
-  insgesamt 2020 (PKS Bundeskriminalamt 2020). Kreisgeometrien: [©
-  GeoBasis-DE / BKG 2025 (Daten verändert)](https://www.bkg.bund.de),
-  VG250, Datenlizenz Deutschland, Namensnennung, Version 2.0. Erstellt
-  mit `data-raw/logo.R`.
+- **Logo:** Die Karte zeigt die heutigen 400 Kreise, eingefärbt nach der
+  veröffentlichten Häufigkeitszahl der Straftaten insgesamt 2025 (PKS
+  Bundeskriminalamt 2025). Kreisgeometrien: [© GeoBasis-DE / BKG 2025
+  (Daten verändert)](https://www.bkg.bund.de), VG250 zum 1. Januar 2020,
+  Eisenach mit dem Wartburgkreis zusammengelegt (2021), Datenlizenz
+  Deutschland, Namensnennung, Version 2.0. Erstellt mit
+  `data-raw/logo.R`.
 
 ## Verwandte Pakete
 
