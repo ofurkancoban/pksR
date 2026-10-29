@@ -109,6 +109,8 @@ b <- pks_breaks()
 b[b$comparable == "no", c("first_year", "offence_key", "type")]
 ```
 
+The table lists changes in how crime is recorded or measured, not changes in crime itself. Real shocks such as the Covid-19 pandemic (2020 and 2021) or the immigration of 2015 and 2016 are not breaks: they change recorded crime, not its measurement, and belong in the model, for example as year effects.
+
 ## Rates, checks and citation
 
 After filtering or harmonizing, recompute rates from the counts and run the checks:

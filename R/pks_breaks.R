@@ -4,6 +4,8 @@
 #' or only partly comparable: new offence definitions, key changes, changes in
 #' the population denominator, boundary reforms and others. Check these
 #' before interpreting changes over time.
+#' Real shocks such as the Covid-19 pandemic (2020 and 2021) are not
+#' breaks: they change recorded crime, not how it is measured.
 #'
 #' The table is a snapshot of `known_breaks.csv` of pksR-data that ships with
 #' the package; each data release contains its own copy.
@@ -17,6 +19,8 @@
 #' Schlüssel, geänderte Bezugsbevölkerung, Gebietsreformen und andere.
 #' `comparable` gibt an, ob Werte vor und nach dem Jahr vergleichbar sind
 #' (`yes`, `likely`, `unknown`, `no`). Vor jeder Zeitreihe prüfen.
+#' Echte Schocks wie die Covid-19-Pandemie (2020 und 2021) sind keine
+#' Brüche: Sie verändern die erfasste Kriminalität, nicht ihre Messung.
 #' @family metadata
 #' @export
 #' @examples
