@@ -107,7 +107,7 @@ Alle Spalten beschreibt `vignette("pksR-de")`.
 ## Was zu beachten ist
 
 - **2003 bis 2012** stammen aus PDF-Jahrbüchern, die Quoten und Einwohnerzahlen, aber keine Fallzahlen enthalten. Die Fallzahlen dieser Jahre sind abgeleitet (`hz * population / 1e5`) und mit `estimated = TRUE` gekennzeichnet.
-- **Geteilte Kreise** sind Schätzungen: Die Gewichte unterstellen, dass sich die Fälle wie die Einwohner (oder wie die Fläche) verteilen. Solche Zeilen tragen `estimated = TRUE`; Zusammenlegungen sind exakt.
+- **Geteilte Kreise** sind Schätzungen: Die Gewichte unterstellen, dass sich die Fälle wie die Einwohner (oder wie die Fläche) verteilen. Solche Zeilen tragen `estimated = TRUE`; Zusammenlegungen sind exakt. `pks_compare_weights()` zeigt, wie stark sich ein Panel zwischen Bevölkerungs- und Flächengewichten ändert.
 - **Brüche:** Straftatendefinitionen, Gesetze und Erfassungspraxis ändern sich. Vor jeder Zeitreihe `pks_breaks()` prüfen.
 - **Harmonisierte Daten sind veränderte Daten**, keine amtlichen Zahlen des BKA.
 

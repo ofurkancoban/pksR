@@ -64,18 +64,53 @@ Der neueste Gebietsstand wird so gelesen, wie er veröffentlicht ist, und ist am
 
 ## Sensitivität
 
-Bevölkerungs- und Flächengewichte unterscheiden sich nur dort, wo Kreise geteilt wurden. Wie stark ein Ergebnis von der Wahl abhängt, zeigt der Vergleich:
+Jedes harmonisierte Panel beruht auf zwei Entscheidungen: der Gewichtung geteilter Kreise und der Harmonisierung selbst. Ergebnisse, die unter jeder Wahl gelten, hängen weniger von den genannten Annahmen ab.
+
+### Bevölkerungs- oder Flächengewichte
+
+Die Gewichte unterscheiden sich nur dort, wo Kreise geteilt wurden. `pks_compare_weights()` stellt beide Fassungen eines Panels nebeneinander:
 
 ```{r, eval = FALSE}
-bev <- pks_get(years = 2005:2010, offence = "insgesamt")
-flaeche <- pks_get(years = 2005:2010, offence = "insgesamt", weights = "area")
-beide <- merge(bev[, c("year", "ags", "cases")], flaeche[, c("year", "ags", "cases")],
-               by = c("year", "ags"), suffixes = c("_bevoelkerung", "_flaeche"))
-beide$differenz <- beide$cases_flaeche - beide$cases_bevoelkerung
-beide[abs(beide$differenz) > 0.5, ]
+d <- pks_get(years = 2005:2012, offence = "insgesamt")
+w <- pks_compare_weights(d)   # lädt dieselbe Abfrage mit Flächengewichten
+w[abs(w$relative_difference) > 0.01, c("year", "ags", "region_name", "cases_population", "cases_area")]
 ```
 
-Eine dritte Möglichkeit ist, gar nicht zu harmonisieren: `harmonize_to = NULL` liefert jedes Jahr mit seinen eigenen Kreisen, ein unbalanciertes Panel, in dem zusammengelegte und geteilte Kreise auftauchen und verschwinden. Ergebnisse, die unter allen drei Möglichkeiten gelten, hängen weniger von den genannten Annahmen ab.
+Das Ergebnis enthält die Fälle und die neu berechnete HZ unter beiden Gewichtungen, die Differenz und die relative Differenz. Zusammengelegte und unveränderte Kreise sind gleich; die Bundessummen sind unter beiden Gewichtungen dieselben. Eine Regression lässt sich zweimal schätzen, einmal je Spalte, um zu sehen, ob sich ein Koeffizient bewegt:
+
+```{r, eval = FALSE}
+w$log_hz_population <- log(w$hz_population)
+w$log_hz_area <- log(w$hz_area)
+# z. B. dasselbe Modell mit zweifach fixen Effekten auf log_hz_population und auf log_hz_area
+```
+
+### Harmonisiert oder wie veröffentlicht
+
+Die dritte Möglichkeit ist, gar nicht zu harmonisieren. `harmonize_to = NULL` liefert jedes Jahr mit seinen eigenen Kreisen, ein unbalanciertes Panel: Zusammengelegte und geteilte Kreise tauchen auf und verschwinden, und kein Wert ist geschätzt.
+
+```{r, eval = FALSE}
+veroeffentlicht <- pks_get(years = 2005:2012, offence = "insgesamt", harmonize_to = NULL)
+table(veroeffentlicht$year)    # die Zahl der Kreise ändert sich mit den Reformen
+harmonisiert <- pks_get(years = 2005:2012, offence = "insgesamt")
+table(harmonisiert$year)       # jedes Jahr dieselben 400 Kreise
+```
+
+Zwei übliche Wege mit den veröffentlichten Daten:
+
+- **Unbalanciertes Panel:** alle Kreise wie veröffentlicht, mit Kreis-fixen Effekten. Ein reformierter Kreis wird nach der Reform zu einer neuen Einheit.
+- **Balanciertes Panel unveränderter Kreise:** nur Kreise, deren Schlüssel und Gebiet sich im Zeitraum nicht geändert haben. Nichts ist geschätzt, aber die reformierten Regionen (große Teile Ostdeutschlands zwischen 2007 und 2011) fallen heraus; das kann Ergebnisse verzerren, wenn sich die Kriminalität dort anders entwickelt hat.
+
+```{r, eval = FALSE}
+# Kreise, die in jedem Jahr des Zeitraums mit demselben Schlüssel vorkommen.
+# Ein Kreis, der einen anderen aufnimmt, behält seinen Schlüssel (der
+# Wartburgkreis 2021): auch solche Kreise anhand des Umsteigeschlüssels entfernen.
+stabil <- Reduce(intersect, split(veroeffentlicht$ags, veroeffentlicht$year))
+balanciert <- veroeffentlicht[veroeffentlicht$ags %in% stabil, ]
+# Harmonisierte Zeilen, die auf Teilungsgewichten beruhen
+sum(harmonisiert$estimated)
+```
+
+Der Vergleich einer Schätzung auf dem harmonisierten Panel (Bevölkerungsgewichte), dem harmonisierten Panel (Flächengewichte), dem unbalancierten Panel und dem balancierten Panel unveränderter Kreise zeigt, wie stark sie von der Harmonisierung abhängt.
 
 ## Quoten mit eigener Einwohnerzahl
 

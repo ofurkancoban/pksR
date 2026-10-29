@@ -63,18 +63,53 @@ The latest boundary is read as released and is fastest. Other target years are c
 
 ## Sensitivity
 
-Population and area weights differ only where districts were split. To see how much a result depends on the choice, compare both:
+Every harmonized panel rests on two choices: the weights for split districts, and harmonizing at all. Results that hold under every choice rest less on the assumptions above.
+
+### Population or area weights
+
+The weights differ only where districts were split. `pks_compare_weights()` puts both versions of a panel side by side:
 
 ```{r, eval = FALSE}
-pop <- pks_get(years = 2005:2010, offence = "total")
-area <- pks_get(years = 2005:2010, offence = "total", weights = "area")
-both <- merge(pop[, c("year", "ags", "cases")], area[, c("year", "ags", "cases")],
-              by = c("year", "ags"), suffixes = c("_population", "_area"))
-both$difference <- both$cases_area - both$cases_population
-both[abs(both$difference) > 0.5, ]
+d <- pks_get(years = 2005:2012, offence = "total")
+w <- pks_compare_weights(d)   # downloads the same request with area weights
+w[abs(w$relative_difference) > 0.01, c("year", "ags", "region_name", "cases_population", "cases_area")]
 ```
 
-A third choice is not to harmonize at all: `harmonize_to = NULL` gives each year with its own districts, an unbalanced panel in which merged and split districts appear and disappear. Results that hold under all three choices rest less on the assumptions above.
+The result has the cases and the recomputed HZ under both weights, the difference and the relative difference. Merged and unchanged districts are identical; national totals are the same under both weights. A regression can be run twice, once on each column, to see whether a coefficient moves:
+
+```{r, eval = FALSE}
+w$log_hz_population <- log(w$hz_population)
+w$log_hz_area <- log(w$hz_area)
+# e.g. the same two-way fixed effects model on log_hz_population and on log_hz_area
+```
+
+### Harmonized or as published
+
+Not harmonizing at all is the third choice. `harmonize_to = NULL` gives each year with its own districts, an unbalanced panel: districts that were merged or split appear and disappear, and no value is estimated.
+
+```{r, eval = FALSE}
+published <- pks_get(years = 2005:2012, offence = "total", harmonize_to = NULL)
+table(published$year)          # the number of districts changes with the reforms
+harmonized <- pks_get(years = 2005:2012, offence = "total")
+table(harmonized$year)         # the same 400 districts every year
+```
+
+Two common ways to use the published data:
+
+- **Unbalanced panel:** all districts as published, with district fixed effects. A reformed district becomes a new unit after the reform.
+- **Balanced panel of unchanged districts:** only districts whose code and area did not change over the period. Nothing is estimated, but the reformed regions (much of eastern Germany between 2007 and 2011) drop out, which can bias results if crime there developed differently.
+
+```{r, eval = FALSE}
+# Districts that exist with the same code in every year of the period.
+# A district that absorbed another keeps its code (the Wartburgkreis in
+# 2021): drop such districts too, using the crosswalk of the release.
+stable <- Reduce(intersect, split(published$ags, published$year))
+balanced <- published[published$ags %in% stable, ]
+# Harmonized rows that rest on split weights
+sum(harmonized$estimated)
+```
+
+Comparing an estimate on the harmonized panel (population weights), the harmonized panel (area weights), the unbalanced panel and the balanced panel of unchanged districts shows how much it depends on harmonization.
 
 ## Rates with your own population
 

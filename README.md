@@ -106,7 +106,7 @@ All columns are described in `vignette("pksR")`.
 ## Things to keep in mind
 
 - **2003 to 2012** come from PDF yearbooks that print rates and population but no case counts. Counts for these years are derived (`hz * population / 1e5`) and marked `estimated = TRUE`.
-- **Split districts** are estimates: the weights assume that cases are distributed like inhabitants (or like area). Such rows are marked `estimated = TRUE`; merges are exact.
+- **Split districts** are estimates: the weights assume that cases are distributed like inhabitants (or like area). Such rows are marked `estimated = TRUE`; merges are exact. `pks_compare_weights()` shows how much a panel changes between population and area weights.
 - **Breaks:** offence definitions, laws and recording practice change. Check `pks_breaks()` before reading a time series.
 - **Harmonized data are changed data**, not official BKA figures.
 
