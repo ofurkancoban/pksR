@@ -23,4 +23,4 @@ Planned work for pksR and the pksR-data pipeline, roughly in order. Nothing here
 
 ## Research support
 
-1. **Sensitivity of econometric results to harmonization.** `pks_compare_weights()` and the harmonization vignette cover population versus area weights and harmonized versus published panels; further tools may follow from the analyses for the maintainer's master's thesis.
+1. **Sensitivity of econometric results to harmonization.** `pks_compare_weights()` and the harmonization vignette cover population versus area weights and harmonized versus published panels; further tools may follow from user feedback.
