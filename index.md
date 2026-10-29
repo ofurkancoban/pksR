@@ -221,14 +221,15 @@ sources:
   “BBSR Bonn”.
 - **Municipality changes:** Statistisches Bundesamt (Destatis),
   Gemeindeverzeichnis.
-- **Logo:** Germany as a fingerprint. The ridges are contour lines of
-  the published 2025 frequency rate of total offences in the 400
-  districts (PKS Bundeskriminalamt 2025), smoothed into a surface and
-  coloured from gold (low) to red (high). District geometries: [©
-  GeoBasis-DE / BKG 2025 (Daten verändert)](https://www.bkg.bund.de),
-  VG250 as of 1 January 2020 with Eisenach merged into the Wartburgkreis
-  (2021), Datenlizenz Deutschland, Namensnennung, Version 2.0. Built by
-  `data-raw/logo.R`.
+- **Logo:** Germany as a fingerprint drawn by the PKS data of 2025 (PKS
+  Bundeskriminalamt 2025). The ridges are contour lines of the frequency
+  rate of total offences, smoothed over about 45 km; each ridge is about
+  1.7 percent higher than the one below and is coloured from yellow
+  (low) to red (high). It is a portrait of the regional pattern, not a
+  district map. District geometries: [© GeoBasis-DE / BKG 2025 (Daten
+  verändert)](https://www.bkg.bund.de), VG250 as of 1 January 2020 with
+  Eisenach merged into the Wartburgkreis (2021), Datenlizenz
+  Deutschland, Namensnennung, Version 2.0. Built by `data-raw/logo.R`.
 
 ## Related packages
 

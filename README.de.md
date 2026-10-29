@@ -234,12 +234,13 @@ Bedingungen ihrer Quellen:
   Deutschland, Namensnennung, Version 2.0. Quellenvermerk: „BBSR Bonn“.
 - **Gebietsänderungen der Gemeinden:** Statistisches Bundesamt
   (Destatis), Gemeindeverzeichnis.
-- **Logo:** Deutschland als Fingerabdruck. Die Linien sind Höhenlinien
-  der veröffentlichten Häufigkeitszahl der Straftaten insgesamt 2025 in
-  den 400 Kreisen (PKS Bundeskriminalamt 2025), zu einer Fläche
-  geglättet und von Gold (niedrig) bis Rot (hoch) eingefärbt.
-  Kreisgeometrien: [© GeoBasis-DE / BKG 2025 (Daten
-  verändert)](https://www.bkg.bund.de), VG250 zum 1. Januar 2020,
+- **Logo:** Deutschland als Fingerabdruck, gezeichnet von den PKS-Daten
+  2025 (PKS Bundeskriminalamt 2025). Die Linien sind Höhenlinien der
+  Häufigkeitszahl der Straftaten insgesamt, über etwa 45 km geglättet;
+  jede Linie liegt etwa 1,7 Prozent über der vorherigen und ist von Gelb
+  (niedrig) bis Rot (hoch) eingefärbt. Es ist ein Porträt des regionalen
+  Musters, keine Kreiskarte. Kreisgeometrien: [© GeoBasis-DE / BKG 2025
+  (Daten verändert)](https://www.bkg.bund.de), VG250 zum 1. Januar 2020,
   Eisenach mit dem Wartburgkreis zusammengelegt (2021), Datenlizenz
   Deutschland, Namensnennung, Version 2.0. Erstellt mit
   `data-raw/logo.R`.
