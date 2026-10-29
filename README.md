@@ -149,7 +149,7 @@ The package code is MIT licensed. The data keep the terms of their sources:
 - **PKS tables:** Bundeskriminalamt, [Datenlizenz Deutschland, Namensnennung, Version 2.0](https://www.govdata.de/dl-de/by-2-0). Source note: "PKS Bundeskriminalamt", reporting year, version.
 - **Crosswalk:** [Bundesinstitut für Bau-, Stadt- und Raumforschung](https://www.bbsr.bund.de) (BBSR), Umsteigeschlüssel, Datenlizenz Deutschland, Namensnennung, Version 2.0. Source note: "BBSR Bonn".
 - **Municipality changes:** Statistisches Bundesamt (Destatis), Gemeindeverzeichnis.
-- **Logo:** the map shows the 401 districts of 1 January 2020, coloured by the published 2020 frequency rate of total offences (PKS Bundeskriminalamt 2020). District geometries: [© GeoBasis-DE / BKG 2025 (Daten verändert)](https://www.bkg.bund.de), VG250, Datenlizenz Deutschland, Namensnennung, Version 2.0. Built by `data-raw/logo.R`.
+- **Logo:** the map shows the 400 districts of today, coloured by the published 2025 frequency rate of total offences (PKS Bundeskriminalamt 2025). District geometries: [© GeoBasis-DE / BKG 2025 (Daten verändert)](https://www.bkg.bund.de), VG250 as of 1 January 2020 with Eisenach merged into the Wartburgkreis (2021), Datenlizenz Deutschland, Namensnennung, Version 2.0. Built by `data-raw/logo.R`.
 
 ## Related packages
 
