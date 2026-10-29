@@ -128,6 +128,7 @@ download and `source_urls` the release files the data came from.
 | `cases_derived`, `cleared_derived` | PDF years only: `hz * population / 1e5`, because those tables print rates and population but no counts |
 | `population` | Published population (PDF years and 2020) |
 | `derived_population` | `cases / hz * 1e5`, derived from the published rate; one value per district and year |
+| `population_corrected` | Census-corrected population of the BBSR (INKAR) at 31 December of the year before, the date the HZ refers to; one census base for all years, see `pks_rates(population = "corrected")` |
 | `source_format`, `source_file` | Format and file of the BKA source |
 | `boundary_year` | Territorial boundary (Gebietsstand) of the row |
 | `harmonized` | `TRUE` if the district was changed by harmonization |

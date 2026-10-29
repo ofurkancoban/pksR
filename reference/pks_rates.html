@@ -73,11 +73,12 @@ you supply.</p>
 
 
 <dt id="arg-population">population<a class="anchor" aria-label="anchor" href="#arg-population"></a></dt>
-<dd><p><code>NULL</code> (default) to use the population in <code>data</code>
-(published where available, otherwise derived from cases and HZ), or a
-data frame with columns <code>year</code>, <code>ags</code> and <code>population</code>, for example from
-an official population source. Every row of <code>data</code> must find a
-population.</p></dd>
+<dd><p><code>NULL</code> (default) to use the population behind the
+published HZ (published where available, otherwise derived from cases
+and HZ); <code>"corrected"</code> for the census-corrected population in column
+<code>population_corrected</code>; or a data frame with columns <code>year</code>, <code>ags</code> and
+<code>population</code>, for example from an official population source. Every row
+of <code>data</code> must find a population.</p></dd>
 
 
 <dt id="arg-per">per<a class="anchor" aria-label="anchor" href="#arg-per"></a></dt>
@@ -95,6 +96,12 @@ used is in column <code>rate_population</code>.</p>
     <p>Cases come from <code>cases</code>, or from <code>cases_derived</code> in the PDF years, where
 the BKA printed only rates. The clearance rate is 0 where cases are 0, as
 in the BKA tables.</p>
+<p>The BKA divides by the population of 31 December of the year before, on
+the census base of its time: older registers until 2012, Zensus 2011 for
+2013 to 2023, Zensus 2022 from 2024. Rates therefore jump in 2013 and 2024
+without any change in crime (see <code><a href="pks_breaks.html">pks_breaks()</a></code>). With <code>population = "corrected"</code> every year uses the census-corrected population of the BBSR
+(INKAR), at the same date and on the same boundary, so rates are on one
+base over the whole period.</p>
     </div>
     <div class="section level2">
     <h2 id="deutsch">Deutsch<a class="anchor" aria-label="anchor" href="#deutsch"></a></h2>
@@ -104,7 +111,11 @@ in the BKA tables.</p>
 Aufklärungsquote neu aus den Fallzahlen, etwa nach einer Harmonisierung, bei
 der veröffentlichte Quoten nicht übertragen werden können. <code>population</code> kann
 eine eigene Einwohnerzahl je Jahr und Kreis liefern; <code>per</code> setzt den Nenner
-der neuen Spalte <code>rate</code>.</p>
+der neuen Spalte <code>rate</code>. Das BKA teilt durch die Einwohnerzahl zum 31.12.
+des Vorjahres auf der Zensusbasis ihrer Zeit, daher springen die Quoten 2013
+und 2024. <code>population = "corrected"</code> nutzt für alle Jahre die
+zensuskorrigierte Einwohnerzahl des BBSR (INKAR) und macht die Quoten über
+den ganzen Zeitraum vergleichbar.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -130,6 +141,23 @@ der neuen Spalte <code>rate</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>019 03159  <span style="text-decoration: underline;">20</span>571   <span style="text-decoration: underline;">6</span>270.  62.7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>019 11000 <span style="text-decoration: underline;">495</span>091  <span style="text-decoration: underline;">13</span>583. 136. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>019 16063   <span style="text-decoration: underline;">7</span>222.  <span style="text-decoration: underline;">4</span>372.  43.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 60 more rows</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># One census base for all years</span></span></span>
+<span class="r-in"><span><span class="fu">pks_rates</span><span class="op">(</span><span class="va">d</span>, population <span class="op">=</span> <span class="st">"corrected"</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span>, <span class="st">"hz"</span>, <span class="st">"rate_population"</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 70 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     year ags       hz rate_population</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>019 01001  <span style="text-decoration: underline;">9</span>383.          <span style="text-decoration: underline;">91</span>838 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>019 02000 <span style="text-decoration: underline;">11</span>467.        1<span style="text-decoration: underline;">803</span>349 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>019 03159  <span style="text-decoration: underline;">6</span>354.         <span style="text-decoration: underline;">327</span>807 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>019 11000 <span style="text-decoration: underline;">14</span>394.        3<span style="text-decoration: underline;">566</span>936 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>019 16063  <span style="text-decoration: underline;">4</span>449.         <span style="text-decoration: underline;">163</span>267.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>019 01001  <span style="text-decoration: underline;">9</span>076.          <span style="text-decoration: underline;">91</span>838 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>019 02000 <span style="text-decoration: underline;">11</span>081.        1<span style="text-decoration: underline;">803</span>349 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>019 03159  <span style="text-decoration: underline;">6</span>275.         <span style="text-decoration: underline;">327</span>807 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>019 11000 <span style="text-decoration: underline;">13</span>880.        3<span style="text-decoration: underline;">566</span>936 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>019 16063  <span style="text-decoration: underline;">4</span>424.         <span style="text-decoration: underline;">163</span>267.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 60 more rows</span></span>
 </code></pre></div>
     </div>

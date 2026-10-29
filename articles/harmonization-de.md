@@ -168,6 +168,46 @@ Der Vergleich einer Schätzung auf dem harmonisierten Panel
 unbalancierten Panel und dem balancierten Panel unveränderter Kreise
 zeigt, wie stark sie von der Harmonisierung abhängt.
 
+## Quoten auf einer Zensusbasis
+
+Das BKA teilt die Fälle des Jahres t durch die Einwohnerzahl zum 31.12.
+des Jahres t - 1, auf der Zensusbasis ihrer Zeit: ältere Register bis
+2012, Zensus 2011 für 2013 bis 2023 und Zensus 2022 ab 2024. Beide
+Zensus fanden weniger Einwohner als die Register, in einzelnen Kreisen
+bis zu 8 Prozent. Die Quoten springen daher 2013 und 2024, ohne dass
+sich die Kriminalität ändert
+([`pks_breaks()`](https://ofurkancoban.github.io/pksR/reference/pks_breaks.md),
+BRK-004 und BRK-005).
+
+Die Spalte `population_corrected` enthält die zensuskorrigierte
+Einwohnerzahl des BBSR (INKAR-Indikator „Bevölkerung mit
+BBSR-Zensuskorrekturen“): Die bei jedem Zensus festgestellte Abweichung
+wird linear auf die Jahre davor verteilt, sodass die Reihe keinen
+Zensusbruch hat. Sie bezieht sich auf denselben 31.12. wie die HZ und
+wird wie die Fallzahlen auf den Gebietsstand jeder Zeile übertragen.
+[`pks_rates()`](https://ofurkancoban.github.io/pksR/reference/pks_rates.md)
+nutzt sie mit `population = "corrected"`:
+
+``` r
+
+d <- pks_example()
+r <- pks_rates(d, population = "corrected")
+head(r[, c("year", "ags", "offence_key", "hz", "rate_population")])
+#> # A tibble: 6 × 5
+#>    year ags   offence_key     hz rate_population
+#>   <int> <chr> <chr>        <dbl>           <dbl>
+#> 1  2019 01001 ------       9383.          91838 
+#> 2  2019 02000 ------      11467.        1803349 
+#> 3  2019 03159 ------       6354.         327807 
+#> 4  2019 11000 ------      14394.        3566936 
+#> 5  2019 16063 ------       4449.         163267.
+#> 6  2019 01001 890000       9076.          91838
+```
+
+Die Korrektur ist eine Schätzung des BBSR, keine amtliche Revision; für
+2025 wird die Einwohnerzahl hinter der HZ verwendet, die bereits auf der
+Basis des Zensus 2022 steht.
+
 ## Quoten mit eigener Einwohnerzahl
 
 Die Einwohnerzahl für die Quoten ist die veröffentlichte, wo das BKA sie

@@ -17,3 +17,7 @@
   [`pks_example()`](https://ofurkancoban.github.io/pksR/reference/pks_example.md).
 - [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/reference/pks_compare_weights.md)
   puts a harmonized panel with population and area weights side by side.
+- New column `population_corrected` (census-corrected population of the
+  BBSR at the HZ reference date) and
+  `pks_rates(population = "corrected")`, which puts all years on one
+  census base.

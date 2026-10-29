@@ -249,12 +249,45 @@ harmonization.</p>
 </div>
 </div>
 <div class="section level2">
+<h2 id="rates-on-one-census-base">Rates on one census base<a class="anchor" aria-label="anchor" href="#rates-on-one-census-base"></a>
+</h2>
+<p>The BKA divides the cases of year t by the population of 31 December
+of year t - 1, on the census base of its time: older registers until
+2012, Zensus 2011 for 2013 to 2023 and Zensus 2022 from 2024. Both
+censuses found fewer inhabitants than the registers, by up to 8 percent
+in single districts. Rates therefore jump in 2013 and 2024 without any
+change in crime (<code><a href="../reference/pks_breaks.html">pks_breaks()</a></code>, BRK-004 and BRK-005).</p>
+<p>Column <code>population_corrected</code> holds the census-corrected
+population of the BBSR (INKAR indicator “Bevölkerung mit
+BBSR-Zensuskorrekturen”): the gap found at each census is spread back
+linearly over the years before, so the series has no census break. It is
+dated to the same 31 December as the HZ and moved to the boundary of
+each row like the counts. <code><a href="../reference/pks_rates.html">pks_rates()</a></code> uses it with
+<code>population = "corrected"</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_example.html">pks_example</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_rates.html">pks_rates</a></span><span class="op">(</span><span class="va">d</span>, population <span class="op">=</span> <span class="st">"corrected"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span>, <span class="st">"offence_key"</span>, <span class="st">"hz"</span>, <span class="st">"rate_population"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
+<span><span class="co">#&gt;    year ags   offence_key     hz rate_population</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>019 01001 ------       <span style="text-decoration: underline;">9</span>383.          <span style="text-decoration: underline;">91</span>838 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>019 02000 ------      <span style="text-decoration: underline;">11</span>467.        1<span style="text-decoration: underline;">803</span>349 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 03159 ------       <span style="text-decoration: underline;">6</span>354.         <span style="text-decoration: underline;">327</span>807 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>019 11000 ------      <span style="text-decoration: underline;">14</span>394.        3<span style="text-decoration: underline;">566</span>936 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>019 16063 ------       <span style="text-decoration: underline;">4</span>449.         <span style="text-decoration: underline;">163</span>267.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>019 01001 890000       <span style="text-decoration: underline;">9</span>076.          <span style="text-decoration: underline;">91</span>838</span></span></code></pre></div>
+<p>The correction is an estimate of the BBSR, not an official revision;
+for 2025 the population behind the HZ is used, which is already on the
+Zensus 2022 base.</p>
+</div>
+<div class="section level2">
 <h2 id="rates-with-your-own-population">Rates with your own population<a class="anchor" aria-label="anchor" href="#rates-with-your-own-population"></a>
 </h2>
 <p>The population used for the rates is the published one where the BKA
 prints it (the PDF years and 2020), otherwise derived from cases and HZ.
 An official population series can replace it:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pks_example.html">pks_example</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">year</span>, ags <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">ags</span>, population <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">derived_population</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/pks_rates.html">pks_rates</a></span><span class="op">(</span><span class="va">d</span>, population <span class="op">=</span> <span class="va">pop</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"ags"</span>, <span class="st">"offence_key"</span>, <span class="st">"hz"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>

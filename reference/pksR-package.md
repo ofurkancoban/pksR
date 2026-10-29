@@ -44,5 +44,5 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Ömer Furkan Çoban <ofurkancoban@gmail.com> \[copyright
-holder\]
+**Maintainer**: Ömer Furkan Çoban <ofurkancoban@gmail.com>
+([ORCID](https://orcid.org/0009-0005-3623-7178)) \[copyright holder\]

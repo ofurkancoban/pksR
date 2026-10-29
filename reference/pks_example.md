@@ -4,7 +4,7 @@ A subset of the harmonized panel of pksR-data that ships with the
 package, for examples, tests and vignettes without internet access: five
 districts, two offence keys and the years 2019 to 2025, harmonized to
 the 2025 boundary with population weights, built from pksR-data commit
-785ac02 (`data-raw/example.R`), not from a data release, so
+9b6985d (`data-raw/example.R`), not from a data release, so
 `data_version` is `"example"`. Source: PKS Bundeskriminalamt,
 Datenlizenz Deutschland, Namensnennung, Version 2.0; changed
 (harmonized) by pksR-data.
@@ -38,7 +38,7 @@ Other data:
 
 ``` r
 pks_example()
-#> # A tibble: 70 × 22
+#> # A tibble: 70 × 23
 #>     year ags   region_name   offence_key offence_key_published offence_label    
 #>    <int> <chr> <chr>         <chr>       <chr>                 <chr>            
 #>  1  2019 01001 Flensburg     ------      ------                Straftaten insge…
@@ -52,9 +52,10 @@ pks_example()
 #>  9  2019 11000 Berlin        890000      890000                Straftaten insge…
 #> 10  2019 16063 Wartburgkreis 890000      890000                Straftaten insge…
 #> # ℹ 60 more rows
-#> # ℹ 16 more variables: cases <dbl>, attempts <dbl>, hz <dbl>, cleared <dbl>,
+#> # ℹ 17 more variables: cases <dbl>, attempts <dbl>, hz <dbl>, cleared <dbl>,
 #> #   clearance_rate <dbl>, suspects <dbl>, cases_derived <dbl>,
 #> #   cleared_derived <dbl>, population <dbl>, source_format <chr>,
 #> #   source_file <chr>, boundary_year <int>, harmonized <lgl>,
-#> #   weight_type <chr>, estimated <lgl>, derived_population <dbl>
+#> #   weight_type <chr>, estimated <lgl>, derived_population <dbl>,
+#> #   population_corrected <dbl>
 ```

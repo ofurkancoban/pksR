@@ -133,6 +133,7 @@ die Daten stammen.
 | `cases_derived`, `cleared_derived` | Nur PDF-Jahre: `hz * population / 1e5`, weil diese Tabellen Quoten und Einwohnerzahlen, aber keine Fallzahlen enthalten |
 | `population` | Veröffentlichte Einwohnerzahl (PDF-Jahre und 2020) |
 | `derived_population` | `cases / hz * 1e5`, aus der veröffentlichten Quote abgeleitet; ein Wert je Kreis und Jahr |
+| `population_corrected` | Zensuskorrigierte Einwohnerzahl des BBSR (INKAR) zum 31.12. des Vorjahres, dem Stichtag der HZ; eine Zensusbasis für alle Jahre, siehe `pks_rates(population = "corrected")` |
 | `source_format`, `source_file` | Format und Datei der BKA-Quelle |
 | `boundary_year` | Gebietsstand der Zeile |
 | `harmonized` | `TRUE`, wenn der Kreis durch die Harmonisierung verändert wurde |

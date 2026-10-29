@@ -160,6 +160,45 @@ Comparing an estimate on the harmonized panel (population weights), the
 harmonized panel (area weights), the unbalanced panel and the balanced
 panel of unchanged districts shows how much it depends on harmonization.
 
+## Rates on one census base
+
+The BKA divides the cases of year t by the population of 31 December of
+year t - 1, on the census base of its time: older registers until 2012,
+Zensus 2011 for 2013 to 2023 and Zensus 2022 from 2024. Both censuses
+found fewer inhabitants than the registers, by up to 8 percent in single
+districts. Rates therefore jump in 2013 and 2024 without any change in
+crime
+([`pks_breaks()`](https://ofurkancoban.github.io/pksR/reference/pks_breaks.md),
+BRK-004 and BRK-005).
+
+Column `population_corrected` holds the census-corrected population of
+the BBSR (INKAR indicator “Bevölkerung mit BBSR-Zensuskorrekturen”): the
+gap found at each census is spread back linearly over the years before,
+so the series has no census break. It is dated to the same 31 December
+as the HZ and moved to the boundary of each row like the counts.
+[`pks_rates()`](https://ofurkancoban.github.io/pksR/reference/pks_rates.md)
+uses it with `population = "corrected"`:
+
+``` r
+
+d <- pks_example()
+r <- pks_rates(d, population = "corrected")
+head(r[, c("year", "ags", "offence_key", "hz", "rate_population")])
+#> # A tibble: 6 × 5
+#>    year ags   offence_key     hz rate_population
+#>   <int> <chr> <chr>        <dbl>           <dbl>
+#> 1  2019 01001 ------       9383.          91838 
+#> 2  2019 02000 ------      11467.        1803349 
+#> 3  2019 03159 ------       6354.         327807 
+#> 4  2019 11000 ------      14394.        3566936 
+#> 5  2019 16063 ------       4449.         163267.
+#> 6  2019 01001 890000       9076.          91838
+```
+
+The correction is an estimate of the BBSR, not an official revision; for
+2025 the population behind the HZ is used, which is already on the
+Zensus 2022 base.
+
 ## Rates with your own population
 
 The population used for the rates is the published one where the BKA
