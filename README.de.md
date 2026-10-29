@@ -159,7 +159,7 @@ Der Code des Pakets steht unter der MIT-Lizenz. Für die Daten gelten die Beding
 
 ## Mitwirken
 
-Fehlermeldungen und Vorschläge sind im [Issue-Tracker](https://github.com/ofurkancoban/pksR/issues) willkommen. Probleme mit den Daten selbst (ein falscher Wert, ein fehlender Kreis) gehören am besten in die [Issues von pksR-data](https://github.com/ofurkancoban/pksR-data/issues).
+Fehlermeldungen und Vorschläge sind im [Issue-Tracker](https://github.com/ofurkancoban/pksR/issues) willkommen. Probleme mit den Daten selbst (ein falscher Wert, ein fehlender Kreis) gehören am besten in die [Issues von pksR-data](https://github.com/ofurkancoban/pksR-data/issues). Hinweise für Pull Requests stehen im [Leitfaden](.github/CONTRIBUTING.md#deutsch), geplante Arbeiten in der [Roadmap](ROADMAP.md) (Englisch).
 
 ## Autor
 

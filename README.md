@@ -158,7 +158,7 @@ The package code is MIT licensed. The data keep the terms of their sources:
 
 ## Contributing
 
-Bug reports and suggestions are welcome in the [issue tracker](https://github.com/ofurkancoban/pksR/issues). Problems with the data themselves (a wrong value, a missing district) are best reported in the [pksR-data issues](https://github.com/ofurkancoban/pksR-data/issues).
+Bug reports and suggestions are welcome in the [issue tracker](https://github.com/ofurkancoban/pksR/issues). Problems with the data themselves (a wrong value, a missing district) are best reported in the [pksR-data issues](https://github.com/ofurkancoban/pksR-data/issues). See the [contributing guide](.github/CONTRIBUTING.md) for pull requests and the [roadmap](ROADMAP.md) for planned work.
 
 ## Author
 
