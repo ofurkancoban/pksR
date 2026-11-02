@@ -22,5 +22,7 @@
   `pks_rates(population = "corrected")`, which puts all years on one
   census base.
 - [`pks_cite()`](https://ofurkancoban.github.io/pksR/reference/pks_cite.md)
-  gives the Zenodo DOI of the data release (concept DOI for a version
-  the package does not know yet).
+  gives the Zenodo DOI of the data release, and
+  [`pks_versions()`](https://ofurkancoban.github.io/pksR/reference/pks_versions.md)
+  has a new column `doi`. The DOI is read from the release notes; until
+  Zenodo has archived a version, the concept DOI is used.

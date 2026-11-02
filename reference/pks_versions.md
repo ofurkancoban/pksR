@@ -13,13 +13,14 @@ pks_versions()
 ## Value
 
 A tibble with one row per data release, newest first: `version`, `tag`,
-`published_at`, `files` and `url`.
+`published_at`, `files`, `url` and `doi` (Zenodo DOI of the version,
+`NA` until Zenodo has archived it).
 
 ## Deutsch
 
 Listet die veröffentlichten Datenversionen, die neueste zuerst. Eine
 Veröffentlichung ändert sich nie; Korrekturen erscheinen als neue
-Version.
+Version. Die Spalte `doi` enthält die Zenodo-DOI der Version.
 
 ## See also
 
