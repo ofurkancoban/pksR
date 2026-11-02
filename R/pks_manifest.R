@@ -7,16 +7,50 @@
 
 release_tag_pattern <- "^v([0-9]{4}\\.[0-9]+)$"
 
-github_request <- function(url) {
+github_request <- function(url, token = github_token()) {
   req <- httr2::request(url) |>
     httr2::req_user_agent(user_agent()) |>
     httr2::req_headers(Accept = "application/vnd.github+json") |>
     httr2::req_retry(max_tries = 3) |>
-    httr2::req_timeout(60)
+    httr2::req_timeout(60) |>
+    httr2::req_error(body = github_error_hint)
   # A token raises GitHub's limit of 60 unauthenticated requests per hour
-  token <- Sys.getenv("GITHUB_PAT", Sys.getenv("GITHUB_TOKEN"))
   if (nzchar(token)) req <- httr2::req_auth_bearer_token(req, token)
   req
+}
+
+github_token <- function() {
+  Sys.getenv("GITHUB_PAT", Sys.getenv("GITHUB_TOKEN"))
+}
+
+# What the user can do about an HTTP error from GitHub, added to the error
+# message (NULL when there is nothing to add)
+github_error_hint <- function(resp) {
+  status <- httr2::resp_status(resp)
+  if (status == 401) {
+    return(tr("GitHub rejected the token in GITHUB_PAT or GITHUB_TOKEN. Data releases are public and need no token: renew or unset it."))
+  }
+  limited <- identical(httr2::resp_header(resp, "x-ratelimit-remaining"), "0")
+  if (status %in% c(403, 429) && limited) {
+    if (nzchar(github_token())) return(tr("GitHub's rate limit for your token is reached; try again later."))
+    return(tr("GitHub's limit of 60 requests per hour without a token is reached. Try again later, or set GITHUB_PAT to a GitHub token."))
+  }
+  NULL
+}
+
+# GET a GitHub API url as parsed JSON. A token GitHub rejects (expired or
+# revoked, HTTP 401) would block public data that needs no token, so the
+# request is repeated without it.
+github_json <- function(url) {
+  resp <- tryCatch(
+    httr2::req_perform(github_request(url)),
+    httr2_http_401 = function(e) {
+      if (!nzchar(github_token())) stop(e)
+      cli::cli_warn(tr("GitHub rejected the token in GITHUB_PAT or GITHUB_TOKEN; continuing without it."))
+      httr2::req_perform(github_request(url, token = ""))
+    }
+  )
+  httr2::resp_body_json(resp)
 }
 
 # Published data releases, newest first. Kept for the session, because the
@@ -28,7 +62,7 @@ release_index <- function(refresh = FALSE) {
   page <- 1
   repeat {
     url <- sprintf("https://api.github.com/repos/%s/releases?per_page=100&page=%d", data_repo(), page)
-    batch <- httr2::resp_body_json(httr2::req_perform(github_request(url)))
+    batch <- github_json(url)
     out <- c(out, batch)
     if (length(batch) < 100) break
     page <- page + 1
@@ -93,10 +127,10 @@ resolve_version <- function(version = "latest") {
       return(cached[1])
     }
     if (version %in% cached) return(version)
-    cli::cli_abort(c(
+    cli::cli_abort(
       tr("Cannot reach GitHub to list the data releases, and version {.val {version}} is not cached."),
-      "i" = conditionMessage(index)
-    ), parent = index)
+      parent = index
+    )
   }
   if (nrow(index) == 0) cli::cli_abort(tr("{.val {data_repo()}} has no published data release yet."))
   if (version == "latest") return(index$version[1])

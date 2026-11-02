@@ -171,6 +171,18 @@ msgstr "Nur die Harmonisierung vorwärts ist möglich: Jahre mit Gebietsstand {.
 msgid "Request years up to {target}, or a later {.arg harmonize_to}."
 msgstr "Wählen Sie Jahre bis {target} oder ein späteres {.arg harmonize_to}."
 
+msgid "GitHub rejected the token in GITHUB_PAT or GITHUB_TOKEN. Data releases are public and need no token: renew or unset it."
+msgstr "GitHub hat das Token in GITHUB_PAT oder GITHUB_TOKEN abgelehnt. Die Datenveröffentlichungen sind öffentlich und brauchen kein Token: erneuern oder entfernen Sie es."
+
+msgid "GitHub's rate limit for your token is reached; try again later."
+msgstr "Das GitHub-Anfragelimit für Ihr Token ist erreicht; versuchen Sie es später erneut."
+
+msgid "GitHub's limit of 60 requests per hour without a token is reached. Try again later, or set GITHUB_PAT to a GitHub token."
+msgstr "Das GitHub-Limit von 60 Anfragen pro Stunde ohne Token ist erreicht. Versuchen Sie es später erneut, oder setzen Sie GITHUB_PAT auf ein GitHub-Token."
+
+msgid "GitHub rejected the token in GITHUB_PAT or GITHUB_TOKEN; continuing without it."
+msgstr "GitHub hat das Token in GITHUB_PAT oder GITHUB_TOKEN abgelehnt; es geht ohne Token weiter."
+
 msgid "{.arg version} must be one string, such as {.val latest} or {.val 2026.1}."
 msgstr "{.arg version} muss eine einzelne Zeichenkette sein, etwa {.val latest} oder {.val 2026.1}."
 
@@ -189,6 +201,9 @@ msgstr "Die Datenversion {.val {version}} gibt es nicht."
 msgid "Available: {.val {index$version}}"
 msgstr "Verfügbar: {.val {index$version}}"
 
+msgid "The manifest of {.val {version}} cannot be read."
+msgstr "Das Manifest von {.val {version}} kann nicht gelesen werden."
+
 msgid "The manifest of {.val {version}} names version {.val {m$data_version}}."
 msgstr "Das Manifest von {.val {version}} nennt die Version {.val {m$data_version}}."
 
@@ -201,14 +216,14 @@ msgstr "{.file {name}} der Datenveröffentlichung {.val {version}} besteht die P
 msgid "Manifest: {expected}"
 msgstr "Manifest: {expected}"
 
-msgid "The manifest of {.val {version}} cannot be read."
-msgstr "Das Manifest von {.val {version}} kann nicht gelesen werden."
-
 msgid "Download: {actual}"
 msgstr "Download: {actual}"
 
 msgid "Download of {.url {url}} failed."
 msgstr "Der Download von {.url {url}} ist fehlgeschlagen."
+
+msgid "Cannot write {.file {path}}."
+msgstr "{.file {path}} kann nicht geschrieben werden."
 
 msgid "{.arg pattern} must be one string."
 msgstr "{.arg pattern} muss eine einzelne Zeichenkette sein."
@@ -224,9 +239,6 @@ msgstr "Sie ist in Datenveröffentlichungen ab 2026.1 enthalten; {.fn pks_get} m
 
 msgid "{.arg population} must be {.code NULL}, {.val corrected} or a data frame with columns {.field year}, {.field ags} and {.field population}."
 msgstr "{.arg population} muss {.code NULL}, {.val corrected} oder ein Data Frame mit den Spalten {.field year}, {.field ags} und {.field population} sein."
-
-msgid "Cannot write {.file {path}}."
-msgstr "{.file {path}} kann nicht geschrieben werden."
 
 msgid "{.arg population} has several values for one year and district."
 msgstr "{.arg population} hat mehrere Werte für ein Jahr und einen Kreis."

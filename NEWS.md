@@ -14,3 +14,6 @@
 * Several R sessions can fill the same cache at once: each download writes
   to a temporary file of its own.
 * A damaged `manifest.json` in the cache is downloaded again.
+* An expired or revoked `GITHUB_PAT` no longer blocks the public data
+  releases: the release listing is repeated without it, with a warning.
+  GitHub's rate limit errors say how to get around them.

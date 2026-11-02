@@ -41,3 +41,29 @@ test_that("a damaged manifest in the cache is downloaded again", {
   }
 })
 
+test_that("a token that GitHub rejects does not block the public releases", {
+  local_fake_release()
+  withr::local_envvar(GITHUB_PAT = "expired")
+  with_token <- 0
+  httr2::local_mocked_responses(function(req) {
+    if (!is.null(req$headers$Authorization)) {
+      with_token <<- with_token + 1
+      return(httr2::response(401))
+    }
+    httr2::response_json(body = fake_listing("test/pksR-data"))
+  })
+  expect_warning(v <- pks_versions(), "rejected the token")
+  expect_identical(v$version, c("2026.1", "2025.1"))
+  expect_identical(with_token, 1)
+})
+
+test_that("HTTP errors from GitHub say what the user can do", {
+  local_fake_release()
+  httr2::local_mocked_responses(function(req) httr2::response(403, headers = list("x-ratelimit-remaining" = "0")))
+  expect_error(pks_versions(), "60 requests per hour")
+  withr::local_envvar(GITHUB_PAT = "valid")
+  expect_error(pks_versions(), "rate limit for your token")
+  httr2::local_mocked_responses(function(req) httr2::response(401))
+  expect_error(suppressWarnings(pks_versions()), "renew or unset")
+})
+
