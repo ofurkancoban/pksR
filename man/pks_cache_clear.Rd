@@ -27,9 +27,11 @@ Datenversionen. In interaktiven Sitzungen wird vorher nachgefragt.
 }
 
 \examples{
-\donttest{
+# A temporary cache, so the example leaves your own cache alone
+old <- Sys.getenv("R_USER_CACHE_DIR", NA)
+Sys.setenv(R_USER_CACHE_DIR = tempfile())
 pks_cache_clear(ask = FALSE)
-}
+if (is.na(old)) Sys.unsetenv("R_USER_CACHE_DIR") else Sys.setenv(R_USER_CACHE_DIR = old)
 }
 \seealso{
 Other cache: 
