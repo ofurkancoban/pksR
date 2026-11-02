@@ -30,6 +30,8 @@ cache_dir <- function(version, create = TRUE) {
 pks_cache_info <- function() {
   root <- cache_root()
   files <- if (dir.exists(root)) list.files(root, recursive = TRUE, full.names = TRUE) else character(0)
+  # Downloads in progress, or left by a session that was killed
+  files <- files[!endsWith(files, ".part")]
   info <- file.info(files)
   out <- tibble::tibble(
     version = basename(dirname(files)),
@@ -83,7 +85,11 @@ pks_cache_clear <- function(version = NULL, ask = interactive()) {
   }
   dirs <- file.path(cache_root(), unique(info$version))
   unlink(file.path(cache_root(), info$version, info$file))
-  for (d in dirs) if (length(list.files(d)) == 0) unlink(d, recursive = TRUE)
+  for (d in dirs) {
+    # Partial downloads left by a killed session go as well
+    unlink(list.files(d, pattern = "[.]part$", full.names = TRUE))
+    if (length(list.files(d)) == 0) unlink(d, recursive = TRUE)
+  }
   cli::cli_inform(tr("Removed {nrow(info)} file{?s} from the cache."))
   invisible(info)
 }

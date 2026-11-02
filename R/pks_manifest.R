@@ -196,18 +196,24 @@ release_file <- function(version, name, manifest, cache = TRUE) {
 }
 
 # Download `url` to `path` via a temporary file, so an interrupted transfer
-# never leaves a partial file in the cache.
+# never leaves a partial file in the cache. The temporary name is unique, so
+# R sessions filling the same cache at once never touch each other's file;
+# the last rename wins, and every session writes the same content.
 download <- function(url, path) {
-  tmp <- paste0(path, ".part")
+  tmp <- tempfile(paste0(basename(path), "."), tmpdir = dirname(path), fileext = ".part")
   on.exit(unlink(tmp), add = TRUE)
   resp <- tryCatch(
     httr2::req_perform(github_request(url), path = tmp),
     error = function(e) {
-      cli::cli_abort(c(tr("Download of {.url {url}} failed."), "i" = conditionMessage(e)), parent = e, call = NULL)
+      cli::cli_abort(tr("Download of {.url {url}} failed."), parent = e, call = NULL)
     }
   )
   # A mocked response (tests) keeps its body in memory instead of `tmp`
   if (!file.exists(tmp)) writeBin(httr2::resp_body_raw(resp), tmp)
-  file.rename(tmp, path)
+  # On Windows the rename fails while another session reads `path`; that
+  # session's copy is then used and checked against the manifest as usual
+  if (!suppressWarnings(file.rename(tmp, path)) && !file.exists(path)) {
+    cli::cli_abort(tr("Cannot write {.file {path}}."))
+  }
   invisible(path)
 }

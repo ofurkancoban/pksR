@@ -222,6 +222,9 @@ msgstr "Sie ist in Datenveröffentlichungen ab 2026.1 enthalten; {.fn pks_get} m
 msgid "{.arg population} must be {.code NULL}, {.val corrected} or a data frame with columns {.field year}, {.field ags} and {.field population}."
 msgstr "{.arg population} muss {.code NULL}, {.val corrected} oder ein Data Frame mit den Spalten {.field year}, {.field ags} und {.field population} sein."
 
+msgid "Cannot write {.file {path}}."
+msgstr "{.file {path}} kann nicht geschrieben werden."
+
 msgid "{.arg population} has several values for one year and district."
 msgstr "{.arg population} hat mehrere Werte für ein Jahr und einen Kreis."
 
