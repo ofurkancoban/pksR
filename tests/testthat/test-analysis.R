@@ -92,7 +92,9 @@ test_that("the citation names the package, the release and the three sources", {
   ci <- pks_cite()
   expect_s3_class(ci, "bibentry")
   expect_length(ci, 5)
-  text <- paste(format(ci, "text"), collapse = " ")
+  # Line breaks depend on the locale (escaped umlauts are longer in the C
+  # locale), so whitespace is normalized before matching phrases
+  text <- gsub("\\s+", " ", paste(format(ci, "text"), collapse = " "))
   expect_match(text, "Data version 2026.1")
   expect_match(text, "dl-de/by-2-0", fixed = TRUE)
   expect_match(text, "Bundeskriminalamt")
