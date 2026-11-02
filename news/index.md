@@ -1,6 +1,6 @@
 # Changelog
 
-## pksR 0.0.0.9000
+## pksR 0.1.0
 
 - First version:
   [`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md),

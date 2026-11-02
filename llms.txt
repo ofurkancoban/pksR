@@ -232,7 +232,7 @@ sources:
   1.7 percent higher than the one below and is coloured from yellow
   (low) to red (high). It is a portrait of the regional pattern, not a
   district map. District geometries: ©
-  [BKG](https://www.bkg.bund.de) (2025)
+  [BKG](https://gdz.bkg.bund.de) (2025)
   [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0),
   [Datenquellen](https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf);
   VG250 as of 1 January 2020, changed: Eisenach merged into the

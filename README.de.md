@@ -7,7 +7,7 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status:
-WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![DOI (data
 releases)](https://zenodo.org/badge/DOI/10.5281/zenodo.23858428.svg)](https://doi.org/10.5281/zenodo.23858428)
 
@@ -248,7 +248,7 @@ Bedingungen ihrer Quellen:
   jede Linie liegt etwa 1,7 Prozent über der vorherigen und ist von Gelb
   (niedrig) bis Rot (hoch) eingefärbt. Es ist ein Porträt des regionalen
   Musters, keine Kreiskarte. Kreisgeometrien: ©
-  [BKG](https://www.bkg.bund.de) (2025)
+  [BKG](https://gdz.bkg.bund.de) (2025)
   [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0),
   [Datenquellen](https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf);
   VG250 zum 1. Januar 2020, verändert: Eisenach mit dem Wartburgkreis
