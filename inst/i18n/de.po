@@ -172,16 +172,16 @@ msgid "Request years up to {target}, or a later {.arg harmonize_to}."
 msgstr "Wählen Sie Jahre bis {target} oder ein späteres {.arg harmonize_to}."
 
 msgid "GitHub rejected the token in GITHUB_PAT or GITHUB_TOKEN. Data releases are public and need no token: renew or unset it."
-msgstr "GitHub hat das Token in GITHUB_PAT oder GITHUB_TOKEN abgelehnt. Die Datenveröffentlichungen sind öffentlich und brauchen kein Token: erneuern oder entfernen Sie es."
+msgstr "GitHub hat das Token in GITHUB_PAT oder GITHUB_TOKEN abgelehnt. Die Datenveröffentlichungen sind öffentlich und brauchen kein Token: Erneuern oder entfernen Sie es."
 
 msgid "GitHub's rate limit for your token is reached; try again later."
 msgstr "Das GitHub-Anfragelimit für Ihr Token ist erreicht; versuchen Sie es später erneut."
 
 msgid "GitHub's limit of 60 requests per hour without a token is reached. Try again later, or set GITHUB_PAT to a GitHub token."
-msgstr "Das GitHub-Limit von 60 Anfragen pro Stunde ohne Token ist erreicht. Versuchen Sie es später erneut, oder setzen Sie GITHUB_PAT auf ein GitHub-Token."
+msgstr "Das GitHub-Limit von 60 Anfragen pro Stunde ohne Token ist erreicht. Versuchen Sie es später erneut oder hinterlegen Sie ein GitHub-Token in GITHUB_PAT."
 
 msgid "GitHub rejected the token in GITHUB_PAT or GITHUB_TOKEN; continuing without it."
-msgstr "GitHub hat das Token in GITHUB_PAT oder GITHUB_TOKEN abgelehnt; es geht ohne Token weiter."
+msgstr "GitHub hat das Token in GITHUB_PAT oder GITHUB_TOKEN abgelehnt; pksR fährt ohne Token fort."
 
 msgid "{.arg version} must be one string, such as {.val latest} or {.val 2026.1}."
 msgstr "{.arg version} muss eine einzelne Zeichenkette sein, etwa {.val latest} oder {.val 2026.1}."
