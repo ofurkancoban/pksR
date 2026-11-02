@@ -18,7 +18,7 @@
 #' * `population`: the median district population per year lies between
 #'   50,000 and 400,000 (a warning otherwise).
 #'
-#' @param data A tibble from [pks_get()].
+#' @inheritParams pks_rates
 #' @return A tibble with one row per check: `check`, `status` (`pass`,
 #'   `warn` or `fail`), `problems` (number of offending rows or years) and
 #'   `details`.
