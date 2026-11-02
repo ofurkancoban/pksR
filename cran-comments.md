@@ -7,6 +7,7 @@
 ## Test environments
 
 * local: macOS 26.6 (aarch64), R 4.6.0
+* win-builder: R-release 4.6.2 (1 note: new submission, spelling)
 * GitHub Actions: macOS (release), Windows (release), Ubuntu (devel,
   release, oldrel-1)
 
@@ -24,6 +25,8 @@
 * Files are written only to tools::R_user_dir("pksR", "cache"), and only
   when the user downloads data. The example of pks_cache_clear() points
   that directory to tempfile() first.
-* Words in DESCRIPTION such as 'Kriminalstatistik', 'Polizeiliche',
-  'Bundeskriminalamt', 'Kreis' and 'PKS' are German names of the data
-  source, not misspellings.
+* The words flagged in DESCRIPTION are spelled correctly:
+  'Bundeskriminalamt' (German Federal Criminal Police Office), 'Kreis'
+  (district) and 'PKS' (abbreviation of 'Polizeiliche
+  Kriminalstatistik') are German names of the data source; 'SHA' and
+  'checksums' refer to SHA-256 file checksums.

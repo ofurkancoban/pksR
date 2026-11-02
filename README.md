@@ -1,6 +1,6 @@
 # pksR: District-Level German Police Crime Statistics <img src="man/figures/logo.png" align="right" height="139" alt="pksR logo" />
 
-**English** | [Deutsch](README.de.md)
+**English** | [Deutsch](https://github.com/ofurkancoban/pksR/blob/main/README.de.md)
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml)
@@ -161,7 +161,7 @@ The package code is MIT licensed. The data keep the terms of their sources:
 
 ## Contributing
 
-Bug reports and suggestions are welcome in the [issue tracker](https://github.com/ofurkancoban/pksR/issues). Problems with the data themselves (a wrong value, a missing district) are best reported in the [pksR-data issues](https://github.com/ofurkancoban/pksR-data/issues). See the [contributing guide](.github/CONTRIBUTING.md) for pull requests and the [roadmap](ROADMAP.md) for planned work.
+Bug reports and suggestions are welcome in the [issue tracker](https://github.com/ofurkancoban/pksR/issues). Problems with the data themselves (a wrong value, a missing district) are best reported in the [pksR-data issues](https://github.com/ofurkancoban/pksR-data/issues). See the [contributing guide](https://github.com/ofurkancoban/pksR/blob/main/.github/CONTRIBUTING.md) for pull requests and the [roadmap](https://github.com/ofurkancoban/pksR/blob/main/ROADMAP.md) for planned work.
 
 ## Author
 
