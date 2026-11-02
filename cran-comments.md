@@ -6,8 +6,11 @@
 
 ## Test environments
 
-* local: macOS 26.6 (aarch64), R 4.6.0
-* win-builder: R-release 4.6.2 (1 note: new submission, spelling)
+* local: macOS 26.6 (aarch64), R 4.6.0; also without Suggests packages
+  (`_R_CHECK_DEPENDS_ONLY_=true`), in the de_DE.UTF-8 and C locales and
+  with TZ=Pacific/Kiritimati: all OK
+* win-builder: R-release 4.6.2 and R-devel (2026-11-01 r90825), both
+  1 note: new submission, spelling
 * GitHub Actions: macOS (release), Windows (release), Ubuntu (devel,
   release, oldrel-1)
 
