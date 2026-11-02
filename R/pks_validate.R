@@ -82,9 +82,10 @@ check_city_states <- function(data) {
 }
 
 check_coverage <- function(data) {
-  if (!"harmonized" %in% names(data) || !"offence_key_published" %in% names(data)) {
+  if (!"harmonized" %in% names(data) || !"offence_key_published" %in% names(data) || nrow(data) == 0) {
     return(check_result("coverage", 0, ""))
   }
+  if (!all(c("year", "ags") %in% names(data))) return(check_result("coverage", 1, tr("year or ags missing")))
   sets <- lapply(split(data$ags, data$year), function(a) sort(unique(a)))
   ref <- sets[[which.max(lengths(sets))]]
   differ <- names(sets)[!vapply(sets, identical, TRUE, ref)]

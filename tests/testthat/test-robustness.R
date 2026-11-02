@@ -72,3 +72,10 @@ test_that("arguments the stress test found unchecked are refused", {
   expect_error(pks_rates(pks_example(), per = Inf), "positive number")
 })
 
+test_that("pks_validate() reports instead of failing on empty or incomplete data", {
+  harmonized <- pks_example()
+  expect_s3_class(suppressMessages(pks_validate(harmonized[0, ])), "tbl_df")
+  out <- suppressMessages(pks_validate(harmonized[setdiff(names(harmonized), "ags")]))
+  expect_identical(out$status[out$check == "schema"], "fail")
+  expect_identical(out$status[out$check == "coverage"], "fail")
+})
