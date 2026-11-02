@@ -1,0 +1,61 @@
+# Settings of the German site, laid over _pkgdown.yml by
+# pkgdown/build-site.R (destination docs/de, home page README.de.md).
+url: https://ofurkancoban.github.io/pksR/de/
+lang: de
+
+home:
+  title: "pksR: Polizeiliche Kriminalstatistik auf Kreisebene"
+  description: >
+    Kreistabellen der Polizeilichen Kriminalstatistik (PKS) des
+    Bundeskriminalamts ab 2003, wie veröffentlicht oder harmonisiert, mit
+    geprüften Downloads, Cache und Zitierhinweisen.
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, lang, github, lightswitch]
+  components:
+    intro:
+      text: Erste Schritte
+      href: articles/pksR-de.html
+    lang:
+      text: English
+      href: https://ofurkancoban.github.io/pksR/
+      aria-label: English version
+
+reference:
+  - title: Daten
+    contents:
+      - pks_get
+      - pks_example
+  - title: Veröffentlichungen und Zitieren
+    contents:
+      - pks_versions
+      - pks_manifest
+      - pks_cite
+  - title: Metadaten
+    contents:
+      - pks_offences
+      - pks_breaks
+  - title: Analyse
+    contents:
+      - pks_rates
+      - pks_validate
+      - pks_compare_weights
+  - title: Cache
+    contents:
+      - pks_cache_info
+      - pks_cache_clear
+
+articles:
+  - title: Artikel
+    navbar: ~
+    contents:
+      - pksR-de
+      - harmonization-de
+      - provenance-de
+  - title: English
+    contents:
+      - pksR
+      - harmonization
+      - provenance

@@ -2,6 +2,18 @@ url: https://ofurkancoban.github.io/pksR/
 template:
   bootstrap: 5
 
+# The German site is built into docs/de by pkgdown/build-site.R; the
+# button switches to the same page there (pkgdown/extra.js)
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, lang, github, lightswitch]
+  components:
+    lang:
+      text: Deutsch
+      href: https://ofurkancoban.github.io/pksR/de/
+      aria-label: Deutsche Version
+
 reference:
   - title: Data
     contents:
@@ -34,7 +46,6 @@ articles:
       - harmonization
       - provenance
   - title: Deutsch
-    navbar: Deutsch
     contents:
       - pksR-de
       - harmonization-de
