@@ -67,3 +67,8 @@ test_that("HTTP errors from GitHub say what the user can do", {
   expect_error(suppressWarnings(pks_versions()), "renew or unset")
 })
 
+test_that("arguments the stress test found unchecked are refused", {
+  expect_error(pks_get(years = integer(0)), "whole numbers")
+  expect_error(pks_rates(pks_example(), per = Inf), "positive number")
+})
+

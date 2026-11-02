@@ -156,7 +156,7 @@ pks_get <- function(years = NULL,
 
 check_years <- function(years) {
   if (is.null(years)) return(invisible())
-  if (!is.numeric(years) || anyNA(years) || any(years != round(years))) {
+  if (!is.numeric(years) || !length(years) || anyNA(years) || any(years != round(years))) {
     cli::cli_abort(tr("{.arg years} must be whole numbers, such as {.code 2015:2025}."))
   }
 }

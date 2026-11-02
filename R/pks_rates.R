@@ -49,7 +49,7 @@
 #' pks_rates(d, population = "corrected")[, c("year", "ags", "hz", "rate_population")]
 pks_rates <- function(data, population = NULL, per = 1e5) {
   check_panel(data)
-  if (!is.numeric(per) || length(per) != 1 || is.na(per) || per <= 0) {
+  if (!is.numeric(per) || length(per) != 1 || !is.finite(per) || per <= 0) {
     cli::cli_abort(tr("{.arg per} must be one positive number."))
   }
   if (is.null(population)) {
