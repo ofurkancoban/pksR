@@ -39,7 +39,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Ömer Furkan Çoban \email{ofurkancoban@gmail.com} (\href{https://orcid.org/0009-0005-3623-7178}{ORCID}) [copyright holder]
+\strong{Maintainer}: Ömer Furkan Çoban \email{oemer.furkan.coban@uni-oldenburg.de} (\href{https://orcid.org/0009-0005-3623-7178}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

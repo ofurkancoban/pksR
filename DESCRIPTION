@@ -2,7 +2,7 @@ Package: pksR
 Title: District-Level German Police Crime Statistics
 Version: 0.1.0
 Authors@R:
-    person("Ömer Furkan", "Çoban", , "ofurkancoban@gmail.com", role = c("aut", "cre", "cph"),
+    person("Ömer Furkan", "Çoban", , "oemer.furkan.coban@uni-oldenburg.de", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0005-3623-7178"))
 Description: Access to the district (Kreis) tables of the German Police Crime
     Statistics ('Polizeiliche Kriminalstatistik', PKS) published by the
