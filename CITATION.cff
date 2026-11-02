@@ -12,6 +12,14 @@ authors:
     orcid: "https://orcid.org/0009-0005-3623-7178"
 references:
   - type: data
+    title: "pksR-data: Pipeline and Registries for District-Level German Police Crime Statistics (PKS)"
+    authors:
+      - family-names: "Çoban"
+        given-names: "Ömer Furkan"
+        orcid: "https://orcid.org/0009-0005-3623-7178"
+    doi: "10.5281/zenodo.23858428"
+    repository-code: "https://github.com/ofurkancoban/pksR-data"
+  - type: data
     title: "Polizeiliche Kriminalstatistik (PKS), Kreis- und Bundesfalltabellen"
     authors:
       - name: "Bundeskriminalamt"

@@ -7,6 +7,7 @@
 [![test-coverage](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status: WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![DOI (data releases)](https://zenodo.org/badge/DOI/10.5281/zenodo.23858428.svg)](https://doi.org/10.5281/zenodo.23858428)
 <!-- badges: end -->
 
 `pksR` gives R users the district (Kreis) tables of the German Police Crime Statistics (*Polizeiliche Kriminalstatistik*, PKS) of the Bundeskriminalamt (BKA) from 2003 onwards, either as published or harmonized to one territorial boundary and one offence classification, so that districts can be compared over time.
@@ -25,7 +26,7 @@ The BKA publishes the district tables once a year: as PDF yearbooks up to 2012 a
 
 ## Status
 
-The package is under development and not yet on CRAN. **The first data release is being prepared.** Until it is published, `pks_get()` has no data to download; `pks_example()`, `pks_offences()` and `pks_breaks()` work already, without internet.
+The package is under development and not yet on CRAN. The first data release, [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1) (reporting years 2003 to 2025, boundary of 2025), was published on 1 November 2026 ([doi:10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429)).
 
 ## Installation
 
@@ -141,6 +142,8 @@ Please cite the package, the data release and the sources. `pks_cite()` returns 
 pks_cite()
 pks_cite(version = "2026.1")
 ```
+
+Every data release is archived on Zenodo. The concept DOI [10.5281/zenodo.23858428](https://doi.org/10.5281/zenodo.23858428) always resolves to the latest version; cite the DOI of the version you used, for `2026.1` [10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429).
 
 ## Sources and terms of reuse
 
