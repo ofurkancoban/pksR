@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use pksR, please cite the package, the data release (see pksR::pks_cite()) and the original sources."
 type: software
 title: "pksR: District-Level German Police Crime Statistics"
-version: 0.0.0.9000
+version: 0.1.0
 license: MIT
 repository-code: "https://github.com/ofurkancoban/pksR"
 authors:

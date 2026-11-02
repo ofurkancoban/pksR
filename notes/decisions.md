@@ -46,3 +46,11 @@
 ## 2026-11-02: DOIs of the data releases
 
 Zenodo archives every release of pksR-data and mints the DOI after the release is published, so the immutable `manifest.json` keeps `zenodo_doi = null`. The pipeline waits for the Zenodo record of the new tag and appends a line `DOI: <doi>` to the release notes (pksR-data `ci/zenodo_doi.R`). `pks_versions()` reads it from the release listing it already downloads (column `doi`), and `pks_cite()` uses it, so a new version needs no package release. Until Zenodo has archived a version, or without access to GitHub, `pks_cite()` gives the concept DOI 10.5281/zenodo.23858428; other repositories (option `pksR.repo`) get no fallback. Version 2026.1: 10.5281/zenodo.23858429. Not chosen: a table of DOIs in the package (one package release per data release), a lookup in the Zenodo API at run time (a second service and request), and a pull request from pksR-data to pksR (a token across repositories). Editing the notes leaves data, tag and manifest unchanged, so the release stays immutable in the sense of the brief.
+
+## 2026-11-02: Checks before the first CRAN submission
+
+1. Version 0.1.0. The repostatus badge is "Active" (a data release exists); the lifecycle badge stays "experimental" until 1.0.0, because the API may still change.
+2. `Language: en-GB`: the texts use British spelling (offence, licence, coloured). With the en_GB dictionary, the spell check of README, NEWS and the English vignettes finds only names, German terms and abbreviations.
+3. The example of `pks_cache_clear()` ran under `\donttest{}`, which `R CMD check --as-cran` runs, and cleared the real user cache. It now points `R_USER_CACHE_DIR` to `tempfile()` first; a file placed in the real cache survives the check.
+4. www.bkg.bund.de answers HEAD requests with HTTP 400, which the CRAN URL check uses; the README links the BKG data portal gdz.bkg.bund.de instead.
+5. pkgcheck findings left as they are: lines over 80 characters, cyclomatic complexity of four functions (pks_rates, resolve_version, pks_get, resolve_target), test style lints; "duplicate arguments" are repeated `"i" =` bullets of cli messages, and the "unused internal function" is `%||%`, whose infix use the linter does not see.
