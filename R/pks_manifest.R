@@ -126,12 +126,31 @@ read_manifest <- function(version, cache = TRUE) {
   if (!file.exists(path)) {
     download(asset_url(version, "manifest.json"), path)
   }
-  m <- jsonlite::read_json(path)
+  m <- read_manifest_file(path)
+  if (is.null(m)) {
+    # A damaged copy in the cache (the release itself never changes): fetch
+    # it once more instead of failing until the user clears the cache
+    unlink(path)
+    download(asset_url(version, "manifest.json"), path)
+    m <- read_manifest_file(path)
+    if (is.null(m)) {
+      unlink(path)
+      cli::cli_abort(tr("The manifest of {.val {version}} cannot be read."))
+    }
+  }
   if (!identical(m$data_version, version)) {
     unlink(path)
     cli::cli_abort(tr("The manifest of {.val {version}} names version {.val {m$data_version}}."))
   }
   m
+}
+
+# The manifest at `path`, or NULL unless it parses and names a version, the
+# years and the files.
+read_manifest_file <- function(path) {
+  m <- tryCatch(jsonlite::read_json(path), error = function(e) NULL)
+  ok <- is.list(m) && is.character(m$data_version) && length(m$years) == 2 && length(m$files) > 0
+  if (ok) m else NULL
 }
 
 #' Read the manifest of a data release

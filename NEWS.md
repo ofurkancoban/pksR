@@ -13,3 +13,4 @@
   notes; until Zenodo has archived a version, the concept DOI is used.
 * Several R sessions can fill the same cache at once: each download writes
   to a temporary file of its own.
+* A damaged `manifest.json` in the cache is downloaded again.

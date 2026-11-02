@@ -201,6 +201,9 @@ msgstr "{.file {name}} der Datenveröffentlichung {.val {version}} besteht die P
 msgid "Manifest: {expected}"
 msgstr "Manifest: {expected}"
 
+msgid "The manifest of {.val {version}} cannot be read."
+msgstr "Das Manifest von {.val {version}} kann nicht gelesen werden."
+
 msgid "Download: {actual}"
 msgstr "Download: {actual}"
 

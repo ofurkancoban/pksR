@@ -27,3 +27,17 @@ test_that("partial downloads are neither listed nor kept by pks_cache_clear()", 
   expect_false(dir.exists(dir))
 })
 
+test_that("a damaged manifest in the cache is downloaded again", {
+  log <- local_fake_release()
+  pks_manifest()
+  path <- file.path(Sys.getenv("R_USER_CACHE_DIR"), "R", "pksR", "2026.1", "manifest.json")
+  for (damaged in c("{\"data_version\": \"2026.1\", \"files\": [", "{\"data_version\": \"2026.1\", \"files\": []}")) {
+    writeLines(damaged, path)
+    n <- sum(endsWith(log$requests, "manifest.json"))
+    m <- pks_manifest()
+    expect_identical(attr(m, "manifest")$data_version, "2026.1")
+    expect_gt(nrow(m), 0)
+    expect_identical(sum(endsWith(log$requests, "manifest.json")), n + 1L)
+  }
+})
+
