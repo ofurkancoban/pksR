@@ -1,7 +1,7 @@
 # pksR: District-Level German Police Crime Statistics
 
 **English** \|
-[Deutsch](https://ofurkancoban.github.io/pksR/README.de.md)
+[Deutsch](https://github.com/ofurkancoban/pksR/blob/main/README.de.md)
 
 `pksR` gives R users the district (Kreis) tables of the German Police
 Crime Statistics (*Polizeiliche Kriminalstatistik*, PKS) of the
@@ -255,10 +255,10 @@ data themselves (a wrong value, a missing district) are best reported in
 the [pksR-data
 issues](https://github.com/ofurkancoban/pksR-data/issues). See the
 [contributing
-guide](https://ofurkancoban.github.io/pksR/CONTRIBUTING.md) for pull
-requests and the
-[roadmap](https://ofurkancoban.github.io/pksR/ROADMAP.md) for planned
-work.
+guide](https://github.com/ofurkancoban/pksR/blob/main/.github/CONTRIBUTING.md)
+for pull requests and the
+[roadmap](https://github.com/ofurkancoban/pksR/blob/main/ROADMAP.md) for
+planned work.
 
 ## Author
 
