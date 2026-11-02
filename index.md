@@ -36,15 +36,12 @@ this work once, openly and reproducibly:
 
 ## Status
 
-The package is under development and not yet on CRAN. **The first data
-release is being prepared.** Until it is published,
-[`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md)
-has no data to download;
-[`pks_example()`](https://ofurkancoban.github.io/pksR/reference/pks_example.md),
-[`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md)
-and
-[`pks_breaks()`](https://ofurkancoban.github.io/pksR/reference/pks_breaks.md)
-work already, without internet.
+The package is under development and not yet on CRAN. The first data
+release,
+[`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
+(reporting years 2003 to 2025, boundary of 2025), was published on 1
+November 2026
+([doi:10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429)).
 
 ## Installation
 
@@ -208,6 +205,12 @@ returns all entries, including BibTeX:
 pks_cite()
 pks_cite(version = "2026.1")
 ```
+
+Every data release is archived on Zenodo. The concept DOI
+[10.5281/zenodo.23858428](https://doi.org/10.5281/zenodo.23858428)
+always resolves to the latest version; cite the DOI of the version you
+used, for `2026.1`
+[10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429).
 
 ## Sources and terms of reuse
 

@@ -8,6 +8,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![DOI (data
+releases)](https://zenodo.org/badge/DOI/10.5281/zenodo.23858428.svg)](https://doi.org/10.5281/zenodo.23858428)
 
 `pksR` stellt in R die Kreistabellen der Polizeilichen Kriminalstatistik
 (PKS) des Bundeskriminalamts (BKA) ab 2003 bereit: wie veröffentlicht
@@ -44,15 +46,12 @@ Göttingen 2016, Eisenach 2021), und Straftatenschlüssel ändern sich.
 
 ## Stand
 
-Das Paket ist in Entwicklung und noch nicht auf CRAN. **Die erste
-Datenveröffentlichung wird vorbereitet.** Bis sie erscheint, hat
-[`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md)
-keine Daten zum Herunterladen;
-[`pks_example()`](https://ofurkancoban.github.io/pksR/reference/pks_example.md),
-[`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md)
-und
-[`pks_breaks()`](https://ofurkancoban.github.io/pksR/reference/pks_breaks.md)
-funktionieren schon, auch ohne Internet.
+Das Paket ist in Entwicklung und noch nicht auf CRAN. Die erste
+Datenveröffentlichung,
+[`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
+(Berichtsjahre 2003 bis 2025, Gebietsstand 2025), ist am 1. November
+2026 erschienen
+([doi:10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429)).
 
 ## Installation
 
@@ -223,6 +222,12 @@ liefert alle Einträge, auch als BibTeX:
 pks_cite()
 pks_cite(version = "2026.1")
 ```
+
+Jede Datenveröffentlichung ist auf Zenodo archiviert. Die Konzept-DOI
+[10.5281/zenodo.23858428](https://doi.org/10.5281/zenodo.23858428) führt
+immer zur neuesten Version; zitieren Sie die DOI der verwendeten
+Version, für `2026.1`
+[10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429).
 
 ## Quellen und Nutzungsbedingungen
 
