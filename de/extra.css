@@ -1,0 +1,15 @@
+/* A larger logo than the pkgdown default (120 px on the home page,
+   100 px elsewhere, 80 px on small screens) */
+img.logo {
+  width: 130px;
+}
+
+.template-home img.logo {
+  width: 180px;
+}
+
+@media (max-width: 575.98px) {
+  img.logo {
+    width: 110px;
+  }
+}

@@ -1,0 +1,34 @@
+# Changelog
+
+## pksR 0.1.0
+
+- First version:
+  [`pks_get()`](https://ofurkancoban.github.io/pksR/de/reference/pks_get.md),
+  [`pks_manifest()`](https://ofurkancoban.github.io/pksR/de/reference/pks_manifest.md),
+  [`pks_versions()`](https://ofurkancoban.github.io/pksR/de/reference/pks_versions.md),
+  [`pks_cache_info()`](https://ofurkancoban.github.io/pksR/de/reference/pks_cache_info.md),
+  [`pks_cache_clear()`](https://ofurkancoban.github.io/pksR/de/reference/pks_cache_clear.md),
+  [`pks_rates()`](https://ofurkancoban.github.io/pksR/de/reference/pks_rates.md),
+  [`pks_offences()`](https://ofurkancoban.github.io/pksR/de/reference/pks_offences.md),
+  [`pks_breaks()`](https://ofurkancoban.github.io/pksR/de/reference/pks_breaks.md),
+  [`pks_validate()`](https://ofurkancoban.github.io/pksR/de/reference/pks_validate.md),
+  [`pks_cite()`](https://ofurkancoban.github.io/pksR/de/reference/pks_cite.md)
+  and
+  [`pks_example()`](https://ofurkancoban.github.io/pksR/de/reference/pks_example.md).
+- [`pks_compare_weights()`](https://ofurkancoban.github.io/pksR/de/reference/pks_compare_weights.md)
+  puts a harmonized panel with population and area weights side by side.
+- New column `population_corrected` (census-corrected population of the
+  BBSR at the HZ reference date) and
+  `pks_rates(population = "corrected")`, which puts all years on one
+  census base.
+- [`pks_cite()`](https://ofurkancoban.github.io/pksR/de/reference/pks_cite.md)
+  gives the Zenodo DOI of the data release, and
+  [`pks_versions()`](https://ofurkancoban.github.io/pksR/de/reference/pks_versions.md)
+  has a new column `doi`. The DOI is read from the release notes; until
+  Zenodo has archived a version, the concept DOI is used.
+- Several R sessions can fill the same cache at once: each download
+  writes to a temporary file of its own.
+- A damaged `manifest.json` in the cache is downloaded again.
+- An expired or revoked `GITHUB_PAT` no longer blocks the public data
+  releases: the release listing is repeated without it, with a warning.
+  GitHub’s rate limit errors say how to get around them.

@@ -1,7 +1,6 @@
 # pksR: District-Level German Police Crime Statistics
 
-**English** \|
-[Deutsch](https://github.com/ofurkancoban/pksR/blob/main/README.de.md)
+**English** \| [Deutsch](https://ofurkancoban.github.io/pksR/de/)
 
 `pksR` gives R users the district (Kreis) tables of the German Police
 Crime Statistics (*Polizeiliche Kriminalstatistik*, PKS) of the
