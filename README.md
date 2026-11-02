@@ -1,4 +1,4 @@
-# pksR: District-Level German Police Crime Statistics <img src="man/figures/logo.png" align="right" height="139" alt="pksR logo" />
+# pksR: District-Level German Police Crime Statistics <img src="man/figures/logo.png" align="right" height="200" alt="pksR logo" />
 
 **English** | [Deutsch](https://github.com/ofurkancoban/pksR/blob/main/README.de.md)
 

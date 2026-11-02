@@ -1,4 +1,4 @@
-# pksR: Polizeiliche Kriminalstatistik auf Kreisebene <img src="man/figures/logo.png" align="right" height="139" alt="pksR-Logo" />
+# pksR: Polizeiliche Kriminalstatistik auf Kreisebene <img src="man/figures/logo.png" align="right" height="200" alt="pksR-Logo" />
 
 [English](README.md) | **Deutsch**
 
