@@ -26,3 +26,9 @@
   [`pks_versions()`](https://ofurkancoban.github.io/pksR/reference/pks_versions.md)
   has a new column `doi`. The DOI is read from the release notes; until
   Zenodo has archived a version, the concept DOI is used.
+- Several R sessions can fill the same cache at once: each download
+  writes to a temporary file of its own.
+- A damaged `manifest.json` in the cache is downloaded again.
+- An expired or revoked `GITHUB_PAT` no longer blocks the public data
+  releases: the release listing is repeated without it, with a warning.
+  GitHub’s rate limit errors say how to get around them.

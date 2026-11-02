@@ -50,6 +50,9 @@
 <li>New column <code>population_corrected</code> (census-corrected population of the BBSR at the HZ reference date) and <code>pks_rates(population = "corrected")</code>, which puts all years on one census base.</li>
 <li>
 <code><a href="../reference/pks_cite.html">pks_cite()</a></code> gives the Zenodo DOI of the data release, and <code><a href="../reference/pks_versions.html">pks_versions()</a></code> has a new column <code>doi</code>. The DOI is read from the release notes; until Zenodo has archived a version, the concept DOI is used.</li>
+<li>Several R sessions can fill the same cache at once: each download writes to a temporary file of its own.</li>
+<li>A damaged <code>manifest.json</code> in the cache is downloaded again.</li>
+<li>An expired or revoked <code>GITHUB_PAT</code> no longer blocks the public data releases: the release listing is repeated without it, with a warning. GitHub’s rate limit errors say how to get around them.</li>
 </ul></div>
   </main></div>
 
