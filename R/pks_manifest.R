@@ -39,11 +39,20 @@ release_index <- function(refresh = FALSE) {
     tag = vapply(keep, function(r) r$tag_name, ""),
     published_at = as.POSIXct(vapply(keep, function(r) r$published_at %||% NA_character_, ""), format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
     files = vapply(keep, function(r) length(r$assets), 1L),
-    url = vapply(keep, function(r) r$html_url, "")
+    url = vapply(keep, function(r) r$html_url, ""),
+    doi = vapply(keep, function(r) release_notes_doi(r$body), "")
   )
   index <- index[order(numeric_version(index$version), decreasing = TRUE), ]
   the[[key]] <- index
   index
+}
+
+# Zenodo DOI from the line "DOI: <doi>" that pksR-data appends to the release
+# notes once Zenodo has archived the release (NA until then).
+release_notes_doi <- function(body) {
+  body <- body %||% ""
+  m <- regmatches(body, regexec("(?m)^DOI: (10\\.\\S+)\\s*$", body, perl = TRUE))[[1]]
+  if (length(m) == 2) m[2] else NA_character_
 }
 
 # Session state (release index, notes already shown).
@@ -55,10 +64,12 @@ the <- new.env(parent = emptyenv())
 #' a new version. Versions are named `<year>.<n>`, for example `"2026.1"`.
 #'
 #' @return A tibble with one row per data release, newest first: `version`,
-#'   `tag`, `published_at`, `files` and `url`.
+#'   `tag`, `published_at`, `files`, `url` and `doi` (Zenodo DOI of the
+#'   version, `NA` until Zenodo has archived it).
 #' @section Deutsch:
 #' Listet die veröffentlichten Datenversionen, die neueste zuerst. Eine
 #' Veröffentlichung ändert sich nie; Korrekturen erscheinen als neue Version.
+#' Die Spalte `doi` enthält die Zenodo-DOI der Version.
 #' @family releases
 #' @export
 #' @examplesIf interactive()

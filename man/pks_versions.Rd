@@ -8,7 +8,8 @@ pks_versions()
 }
 \value{
 A tibble with one row per data release, newest first: \code{version},
-\code{tag}, \code{published_at}, \code{files} and \code{url}.
+\code{tag}, \code{published_at}, \code{files}, \code{url} and \code{doi} (Zenodo DOI of the
+version, \code{NA} until Zenodo has archived it).
 }
 \description{
 Data releases are versioned and never change; a correction is published as
@@ -18,6 +19,7 @@ a new version. Versions are named \verb{<year>.<n>}, for example \code{"2026.1"}
 
 Listet die veröffentlichten Datenversionen, die neueste zuerst. Eine
 Veröffentlichung ändert sich nie; Korrekturen erscheinen als neue Version.
+Die Spalte \code{doi} enthält die Zenodo-DOI der Version.
 }
 
 \examples{

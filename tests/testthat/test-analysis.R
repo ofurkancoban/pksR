@@ -100,10 +100,20 @@ test_that("the citation names the package, the release and the three sources", {
   expect_match(text, "Destatis")
 })
 
-test_that("the data release carries its Zenodo DOI", {
-  expect_equal(release_doi("2026.1", "ofurkancoban/pksR-data"), "10.5281/zenodo.23858429")
-  expect_equal(release_doi("2099.1", "ofurkancoban/pksR-data"), "10.5281/zenodo.23858428")
-  expect_null(release_doi("2026.1", "someone/fork"))
+test_that("the data release carries the Zenodo DOI from its release notes", {
+  local_fake_release()
+  expect_equal(release_doi("2026.1"), "10.5281/zenodo.1")
+  expect_match(paste(format(pks_cite("2026.1"), "text"), collapse = " "), "10.5281/zenodo.1", fixed = TRUE)
+  # Not archived yet: the concept DOI for the official repository, none for others
+  expect_null(release_doi("2025.1"))
+  expect_equal(release_doi("2025.1", repo = "ofurkancoban/pksR-data"), release_concept_doi)
+})
+
+test_that("the DOI line of the release notes is read as written by pksR-data", {
+  expect_equal(release_notes_doi("Data version: 2026.1\n\nDOI: 10.5281/zenodo.23858429\n"), "10.5281/zenodo.23858429")
+  expect_equal(release_notes_doi("Data version\r\n\r\nDOI: 10.5281/zenodo.2\r\n"), "10.5281/zenodo.2")
+  expect_true(is.na(release_notes_doi("Data version: 2026.1")))
+  expect_true(is.na(release_notes_doi(NULL)))
 })
 
 test_that("offline, the citation leaves out the data release", {

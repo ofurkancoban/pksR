@@ -10,8 +10,9 @@
 #' directory may be reproduced with a source note.
 #'
 #' Each data release is archived on Zenodo. The data release entry carries
-#' the DOI of its version; for a version the package does not know yet, it
-#' carries the concept DOI, which resolves to the latest version.
+#' the DOI of its version, read from the release notes; until Zenodo has
+#' archived a new version, it carries the concept DOI, which resolves to the
+#' latest version.
 #'
 #' @param version Data version such as `"2026.1"`, or `"latest"` (default).
 #'   Without internet access, only the package and the sources are cited.
@@ -24,8 +25,9 @@
 #' (beide Datenlizenz Deutschland, Namensnennung, Version 2.0, die die Nennung
 #' der Quelle und einen Hinweis auf Veränderungen verlangt) sowie das
 #' Gemeindeverzeichnis von Destatis. Jede Datenveröffentlichung ist auf
-#' Zenodo archiviert; der Eintrag trägt die DOI ihrer Version oder, für eine
-#' dem Paket noch unbekannte Version, die Konzept-DOI. Ergebnis: ein [utils::bibentry()]-Objekt;
+#' Zenodo archiviert; der Eintrag trägt die DOI ihrer Version aus den
+#' Release-Notizen oder, solange Zenodo sie noch nicht archiviert hat, die
+#' Konzept-DOI. Ergebnis: ein [utils::bibentry()]-Objekt;
 #' `format(x, "bibtex")` liefert BibTeX.
 #' @family releases
 #' @export
@@ -99,15 +101,15 @@ pks_cite <- function(version = "latest") {
   do.call(c, entries)
 }
 
-# Zenodo mints a DOI only after a release is published, so the immutable
-# manifest cannot hold it. Add each new version here.
-release_dois <- c("2026.1" = "10.5281/zenodo.23858429")
+# Concept DOI of the data releases: resolves to the latest version
 release_concept_doi <- "10.5281/zenodo.23858428"
 
-# DOI of a data version of the official repository; the concept DOI for a
-# version not listed yet, and NULL for other repositories (forks, tests).
+# DOI of a data version, from its release notes (release_index()). The
+# concept DOI stands in until Zenodo has archived the version or when GitHub
+# cannot be reached; other repositories (forks, tests) get no fallback.
 release_doi <- function(version, repo = data_repo()) {
-  if (!identical(repo, "ofurkancoban/pksR-data")) return(NULL)
-  doi <- unname(release_dois[version])
-  if (is.na(doi)) release_concept_doi else doi
+  index <- tryCatch(release_index(), error = function(e) NULL)
+  doi <- if (is.null(index)) character(0) else index$doi[index$version == version]
+  if (length(doi) == 1 && !is.na(doi)) return(doi)
+  if (identical(repo, "ofurkancoban/pksR-data")) release_concept_doi else NULL
 }

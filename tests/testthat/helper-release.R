@@ -5,14 +5,14 @@
 fixture_dir <- function() test_path("fixtures", "release")
 
 fake_listing <- function(repo) {
-  release <- function(tag, draft = FALSE, prerelease = FALSE) {
-    list(tag_name = tag, draft = draft, prerelease = prerelease,
+  release <- function(tag, draft = FALSE, prerelease = FALSE, body = "Data version") {
+    list(tag_name = tag, draft = draft, prerelease = prerelease, body = body,
          published_at = if (draft) NULL else "2026-10-28T12:00:00Z",
          html_url = sprintf("https://github.com/%s/releases/tag/%s", repo, tag),
          assets = list())
   }
   list(release("test-2026.2-run10", draft = TRUE, prerelease = TRUE), release("raw-mirror", draft = TRUE),
-       release("v2026.1"), release("v2025.1"))
+       release("v2026.1", body = "Data version: 2026.1\n\nDOI: 10.5281/zenodo.1\n"), release("v2025.1"))
 }
 
 fake_body <- function(name) {
