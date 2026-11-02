@@ -8,3 +8,5 @@
 * New column `population_corrected` (census-corrected population of the BBSR
   at the HZ reference date) and `pks_rates(population = "corrected")`, which
   puts all years on one census base.
+* `pks_cite()` gives the Zenodo DOI of the data release (concept DOI for a
+  version the package does not know yet).

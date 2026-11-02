@@ -25,13 +25,20 @@ licence Germany, attribution, version 2.0 (dl-de/by-2-0,
 and stating that the data were changed; the Destatis municipality
 directory may be reproduced with a source note.
 }
+\details{
+Each data release is archived on Zenodo. The data release entry carries
+the DOI of its version; for a version the package does not know yet, it
+carries the concept DOI, which resolves to the latest version.
+}
 \section{Deutsch}{
 
 Zitierangaben für das Paket, die verwendete Datenveröffentlichung und die
 Quellen: die PKS des Bundeskriminalamts und der Umsteigeschlüssel des BBSR
 (beide Datenlizenz Deutschland, Namensnennung, Version 2.0, die die Nennung
 der Quelle und einen Hinweis auf Veränderungen verlangt) sowie das
-Gemeindeverzeichnis von Destatis. Ergebnis: ein \code{\link[utils:bibentry]{utils::bibentry()}}-Objekt;
+Gemeindeverzeichnis von Destatis. Jede Datenveröffentlichung ist auf
+Zenodo archiviert; der Eintrag trägt die DOI ihrer Version oder, für eine
+dem Paket noch unbekannte Version, die Konzept-DOI. Ergebnis: ein \code{\link[utils:bibentry]{utils::bibentry()}}-Objekt;
 \code{format(x, "bibtex")} liefert BibTeX.
 }
 

@@ -9,6 +9,10 @@
 #' and stating that the data were changed; the Destatis municipality
 #' directory may be reproduced with a source note.
 #'
+#' Each data release is archived on Zenodo. The data release entry carries
+#' the DOI of its version; for a version the package does not know yet, it
+#' carries the concept DOI, which resolves to the latest version.
+#'
 #' @param version Data version such as `"2026.1"`, or `"latest"` (default).
 #'   Without internet access, only the package and the sources are cited.
 #' @return A [utils::bibentry()] object with one entry each for the package,
@@ -19,7 +23,9 @@
 #' Quellen: die PKS des Bundeskriminalamts und der Umsteigeschlüssel des BBSR
 #' (beide Datenlizenz Deutschland, Namensnennung, Version 2.0, die die Nennung
 #' der Quelle und einen Hinweis auf Veränderungen verlangt) sowie das
-#' Gemeindeverzeichnis von Destatis. Ergebnis: ein [utils::bibentry()]-Objekt;
+#' Gemeindeverzeichnis von Destatis. Jede Datenveröffentlichung ist auf
+#' Zenodo archiviert; der Eintrag trägt die DOI ihrer Version oder, für eine
+#' dem Paket noch unbekannte Version, die Konzept-DOI. Ergebnis: ein [utils::bibentry()]-Objekt;
 #' `format(x, "bibtex")` liefert BibTeX.
 #' @family releases
 #' @export
@@ -55,7 +61,7 @@ pks_cite <- function(version = "latest") {
       note = paste0("Data version ", m$data_version, ", pipeline commit ", substr(m$pipeline_commit, 1, 7),
                     ". Contains data of the Bundeskriminalamt (dl-de/by-2-0), changed: harmonized and validated"),
       url = sprintf("https://github.com/%s/releases/tag/v%s", data_repo(), m$data_version),
-      doi = m$zenodo_doi
+      doi = m$zenodo_doi %||% release_doi(m$data_version)
     )))
   }
 
@@ -91,4 +97,17 @@ pks_cite <- function(version = "latest") {
     )
   ))
   do.call(c, entries)
+}
+
+# Zenodo mints a DOI only after a release is published, so the immutable
+# manifest cannot hold it. Add each new version here.
+release_dois <- c("2026.1" = "10.5281/zenodo.23858429")
+release_concept_doi <- "10.5281/zenodo.23858428"
+
+# DOI of a data version of the official repository; the concept DOI for a
+# version not listed yet, and NULL for other repositories (forks, tests).
+release_doi <- function(version, repo = data_repo()) {
+  if (!identical(repo, "ofurkancoban/pksR-data")) return(NULL)
+  doi <- unname(release_dois[version])
+  if (is.na(doi)) release_concept_doi else doi
 }
