@@ -2,8 +2,6 @@
 
 [English](https://ofurkancoban.github.io/pksR/README.md) \| **Deutsch**
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/pksR)](https://CRAN.R-project.org/package=pksR)
 [![R-CMD-check](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml)
 [![Lifecycle:
@@ -48,8 +46,7 @@ Göttingen 2016, Eisenach 2021), und Straftatenschlüssel ändern sich.
 
 ## Stand
 
-Version 0.1.0 ist seit dem 21. November 2026 auf
-[CRAN](https://CRAN.R-project.org/package=pksR). Die erste
+Das Paket ist in Entwicklung und noch nicht auf CRAN. Die erste
 Datenveröffentlichung,
 [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
 (Berichtsjahre 2003 bis 2025, Gebietsstand 2025), ist am 1. November
@@ -60,10 +57,6 @@ Datenveröffentlichung,
 
 ``` r
 
-# Veröffentlichte Version von CRAN
-install.packages("pksR")
-
-# Entwicklungsversion von GitHub
 # install.packages("remotes")
 remotes::install_github("ofurkancoban/pksR")
 ```

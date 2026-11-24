@@ -6,10 +6,13 @@ Nothing here is promised for a date; suggestions are welcome in the
 
 ## Next
 
-1.  **rOpenSci software peer review.** The first data release (`2026.1`,
-    1 November 2026) and the first CRAN release (0.1.0, 21
-    November 2026) are out; the next step is a submission to rOpenSci.
-2.  **Paper in the Journal of Open Source Software** after the review.
+1.  **First data release (`2026.1`).** The pipeline is ready; the first
+    release makes
+    [`pks_get()`](https://ofurkancoban.github.io/pksR/reference/pks_get.md)
+    usable.
+2.  **CRAN submission** after the first release, followed by rOpenSci
+    software peer review and a paper in the Journal of Open Source
+    Software.
 
 ## Data
 

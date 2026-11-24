@@ -5,11 +5,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Getting started with pksR • pksR</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
-<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="icon" sizes="any" href="../favicon.ico">
-<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -25,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">pksR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +64,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Getting started with pksR</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ofurkancoban/pksR/blob/main/vignettes/pksR.Rmd" class="external-link"><code>vignettes/pksR.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ofurkancoban/pksR/blob/v0.1.0/vignettes/pksR.Rmd" class="external-link"><code>vignettes/pksR.Rmd</code></a></small>
       <div class="d-none name"><code>pksR.Rmd</code></div>
     </div>
 
@@ -217,112 +212,99 @@ e.g. <code>"02000"</code> for Hamburg</td>
 changed districts</td>
 </tr>
 <tr class="even">
-<td><code>region_name_official</code></td>
-<td>District name of the BBSR crosswalk at the boundary year of the row;
-one name per district in a harmonized panel</td>
-</tr>
-<tr class="odd">
 <td><code>offence_key</code></td>
 <td>Offence key (Straftatenschlüssel); in harmonized data the harmonized
 key, see <code><a href="../reference/pks_offences.html">pks_offences()</a></code>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>offence_key_published</code></td>
 <td>Harmonized data only: the key as published, or
 <code>"KEY minus KEY"</code> for computed keys</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>offence_label</code></td>
 <td>German label as published</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>cases</code></td>
 <td>Recorded cases (published; <code>NA</code> in the PDF years 2003 to
 2012)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>attempts</code></td>
 <td>Attempted cases</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>hz</code></td>
 <td>Häufigkeitszahl: cases per 100,000 inhabitants</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>cleared</code></td>
 <td>Cleared cases</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>clearance_rate</code></td>
 <td>Aufklärungsquote in percent (0 where cases are 0, as in the BKA
 tables)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>suspects</code></td>
 <td>Suspects (persons; not additive over offence keys)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>
 <code>cases_derived</code>, <code>cleared_derived</code>
 </td>
 <td>PDF years only: <code>hz * population / 1e5</code>, because those
 tables print rates and population but no counts</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>population</code></td>
 <td>Published population (PDF years and 2020)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>derived_population</code></td>
 <td>
 <code>cases / hz * 1e5</code>, derived from the published rate; one
 value per district and year</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>population_corrected</code></td>
 <td>Census-corrected population of the BBSR (INKAR) at 31 December of
 the year before, the date the HZ refers to; one census base for all
 years, see <code>pks_rates(population = "corrected")</code>
 </td>
 </tr>
-<tr class="even">
-<td><code>district_type</code></td>
-<td>District type as published: <code>KfS</code> (kreisfreie Stadt),
-<code>LK</code> (Landkreis), <code>K</code> (Kreis), <code>SK</code>
-(Stadtkreis), <code>RV</code> (Regionalverband); districts changed by
-harmonization get their type in the latest table (2013 onwards)</td>
-</tr>
 <tr class="odd">
 <td>
-<code>firearm_threatened</code>, <code>firearm_fired</code>
+<code>source_format</code>, <code>source_file</code>
 </td>
-<td>Cases in which a firearm was used to threaten or was fired</td>
+<td>Format and file of the BKA source</td>
 </tr>
 <tr class="even">
+<td><code>boundary_year</code></td>
+<td>Territorial boundary (Gebietsstand) of the row</td>
+</tr>
+<tr class="odd">
+<td><code>harmonized</code></td>
 <td>
-<code>suspects_male</code>, <code>suspects_female</code>
-</td>
-<td>Suspects by sex; they add up to <code>suspects</code>
+<code>TRUE</code> if the district was changed by harmonization</td>
+</tr>
+<tr class="even">
+<td><code>weight_type</code></td>
+<td>
+<code>none</code>, <code>population</code> or <code>area</code>
 </td>
 </tr>
 <tr class="odd">
-<td><code>suspects_non_german</code></td>
-<td>Non-German suspects (Nichtdeutsche Tatverdächtige)</td>
+<td><code>estimated</code></td>
+<td>
+<code>TRUE</code> for shares of split districts and for derived
+counts (PDF years)</td>
 </tr>
 </tbody>
 </table>
-<p>The last six columns are published from 2013 onwards (NA for 2003 to
-2012) and come with data release 2026.2 and later; for older releases
-they are NA. Suspect counts are persons: for keys computed as the
-difference of two published keys they are NA. |
-<code>source_format</code>, <code>source_file</code> | Format and file
-of the BKA source | | <code>boundary_year</code> | Territorial boundary
-(Gebietsstand) of the row | | <code>harmonized</code> |
-<code>TRUE</code> if the district was changed by harmonization | |
-<code>weight_type</code> | <code>none</code>, <code>population</code> or
-<code>area</code> | | <code>estimated</code> | <code>TRUE</code> for
-shares of split districts and for derived counts (PDF years) |</p>
 <p>Counts in harmonized data are doubles: a split district passes
 fractions of its cases to its successors, and rounding them would change
 the national totals.</p>

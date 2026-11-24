@@ -116,7 +116,6 @@ download and `source_urls` the release files the data came from.
 | `year` | Reporting year |
 | `ags` | District code (Kreisschlüssel), 5 digits with leading zero, e.g. `"02000"` for Hamburg |
 | `region_name` | District name as published, or the name at the target boundary for changed districts |
-| `region_name_official` | District name of the BBSR crosswalk at the boundary year of the row; one name per district in a harmonized panel |
 | `offence_key` | Offence key (Straftatenschlüssel); in harmonized data the harmonized key, see [`pks_offences()`](https://ofurkancoban.github.io/pksR/reference/pks_offences.md) |
 | `offence_key_published` | Harmonized data only: the key as published, or `"KEY minus KEY"` for computed keys |
 | `offence_label` | German label as published |
@@ -130,20 +129,11 @@ download and `source_urls` the release files the data came from.
 | `population` | Published population (PDF years and 2020) |
 | `derived_population` | `cases / hz * 1e5`, derived from the published rate; one value per district and year |
 | `population_corrected` | Census-corrected population of the BBSR (INKAR) at 31 December of the year before, the date the HZ refers to; one census base for all years, see `pks_rates(population = "corrected")` |
-| `district_type` | District type as published: `KfS` (kreisfreie Stadt), `LK` (Landkreis), `K` (Kreis), `SK` (Stadtkreis), `RV` (Regionalverband); districts changed by harmonization get their type in the latest table (2013 onwards) |
-| `firearm_threatened`, `firearm_fired` | Cases in which a firearm was used to threaten or was fired |
-| `suspects_male`, `suspects_female` | Suspects by sex; they add up to `suspects` |
-| `suspects_non_german` | Non-German suspects (Nichtdeutsche Tatverdächtige) |
-
-The last six columns are published from 2013 onwards (NA for 2003 to
-2012) and come with data release 2026.2 and later; for older releases
-they are NA. Suspect counts are persons: for keys computed as the
-difference of two published keys they are NA. \| `source_format`,
-`source_file` \| Format and file of the BKA source \| \| `boundary_year`
-\| Territorial boundary (Gebietsstand) of the row \| \| `harmonized` \|
-`TRUE` if the district was changed by harmonization \| \| `weight_type`
-\| `none`, `population` or `area` \| \| `estimated` \| `TRUE` for shares
-of split districts and for derived counts (PDF years) \|
+| `source_format`, `source_file` | Format and file of the BKA source |
+| `boundary_year` | Territorial boundary (Gebietsstand) of the row |
+| `harmonized` | `TRUE` if the district was changed by harmonization |
+| `weight_type` | `none`, `population` or `area` |
+| `estimated` | `TRUE` for shares of split districts and for derived counts (PDF years) |
 
 Counts in harmonized data are doubles: a split district passes fractions
 of its cases to its successors, and rounding them would change the

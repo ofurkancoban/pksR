@@ -35,8 +35,8 @@ this work once, openly and reproducibly:
 
 ## Status
 
-Version 0.1.0 is on [CRAN](https://CRAN.R-project.org/package=pksR)
-since 21 November 2026. The first data release,
+The package is under development and not yet on CRAN. The first data
+release,
 [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
 (reporting years 2003 to 2025, boundary of 2025), was published on 1
 November 2026
@@ -46,10 +46,6 @@ November 2026
 
 ``` r
 
-# Release version from CRAN
-install.packages("pksR")
-
-# Development version from GitHub
 # install.packages("remotes")
 remotes::install_github("ofurkancoban/pksR")
 ```

@@ -82,12 +82,6 @@ pks_get(
 A tibble with one row per year, district (`ags`) and offence key.
 Columns are described in
 [`vignette("pksR")`](https://ofurkancoban.github.io/pksR/articles/pksR.md).
-`region_name` is the name as published; `region_name_official` is the
-name of the BBSR crosswalk at the boundary year of the row, the same for
-every year of a district in a harmonized panel. The detail columns
-`district_type`, `firearm_threatened`, `firearm_fired`, `suspects_male`,
-`suspects_female` and `suspects_non_german` come from separate release
-files (2026.2 and later; NA for older releases and for 2003 to 2012).
 Attributes: `data_version`, `retrieved_at`, `boundary_year`, `weights`
 and `source_urls`.
 
@@ -120,12 +114,7 @@ geprüft und im Cache abgelegt.
 
 Ergebnis: ein Tibble mit einer Zeile je Jahr, Kreis und
 Straftatenschlüssel und den Attributen `data_version`, `retrieved_at`,
-`boundary_year`, `weights` und `source_urls`. `region_name` ist der Name
-wie veröffentlicht, `region_name_official` der Name des
-BBSR-Umsteigeschlüssels im Gebietsstand der Zeile. Die Detailspalten
-(Kreisart, Fälle mit Schusswaffe, Tatverdächtige nach Geschlecht und
-nichtdeutsche Tatverdächtige) stammen aus eigenen Dateien der
-Veröffentlichung (ab 2026.2; sonst und für 2003 bis 2012 NA).
+`boundary_year`, `weights` und `source_urls`.
 
 ## See also
 
