@@ -38,7 +38,10 @@
 #'   harmonized key.
 #'
 #' @return A tibble with one row per year, district (`ags`) and offence key.
-#'   Columns are described in `vignette("pksR")`. Attributes:
+#'   Columns are described in `vignette("pksR")`. `region_name` is the name
+#'   as published; `region_name_official` is the name of the BBSR crosswalk
+#'   at the boundary year of the row, the same for every year of a district
+#'   in a harmonized panel. Attributes:
 #'   `data_version`, `retrieved_at`, `boundary_year`, `weights` and
 #'   `source_urls`.
 #' @section Deutsch:
@@ -63,7 +66,9 @@
 #'
 #' Ergebnis: ein Tibble mit einer Zeile je Jahr, Kreis und Straftatenschlüssel
 #' und den Attributen `data_version`, `retrieved_at`, `boundary_year`, `weights`
-#' und `source_urls`.
+#' und `source_urls`. `region_name` ist der Name wie veröffentlicht,
+#' `region_name_official` der Name des BBSR-Umsteigeschlüssels im Gebietsstand
+#' der Zeile.
 #' @family data
 #' @export
 #' @examplesIf interactive()
@@ -119,6 +124,11 @@ pks_get <- function(years = NULL,
   map <- with_aliases(read_offence_map(map_file))
   keys <- if (is.null(offence)) NULL else resolve_offences(offence, map)
 
+  # The crosswalk gives the official name of every district (and the
+  # boundaries for harmonize_to other than the latest)
+  crosswalk <- release_file(version, "boundary_map.csv", manifest, cache)
+  boundary_map <- read_boundary_map(crosswalk)
+
   if (is.null(target)) {
     files <- sprintf("pks_kreis_%d_published.csv.gz", years)
     data <- read_years(version, files, manifest, cache, canonical_spec)
@@ -133,17 +143,17 @@ pks_get <- function(years = NULL,
     } else {
       published_files <- sprintf("pks_kreis_%d_published.csv.gz", years)
       published <- read_years(version, published_files, manifest, cache, canonical_spec)
-      crosswalk <- release_file(version, "boundary_map.csv", manifest, cache)
       cli::cli_inform(tr("Harmonizing {length(years)} year{?s} to the boundary of {target} with {weights} weights."))
-      data <- harmonize_published(published, read_boundary_map(crosswalk), map, target, weights)
-      files <- c(published_files, "boundary_map.csv")
+      data <- harmonize_published(published, boundary_map, map, target, weights)
+      files <- published_files
     }
     if (!is.null(keys)) data <- data[data$offence_key %in% keys, ]
     data$offence_label <- offence_labels(data$offence_key, map, lang)
     weights_used <- weights
     notes <- manifest$notes$harmonized
   }
-  files <- c(files, "offence_map.csv")
+  data <- add_official_names(data, boundary_map)
+  files <- c(files, "boundary_map.csv", "offence_map.csv")
 
   show_notes(version, notes, manifest)
   attr(data, "data_version") <- version
@@ -169,6 +179,29 @@ resolve_target <- function(harmonize_to, manifest) {
     cli::cli_abort(tr("{.arg harmonize_to} must be a year, {.val latest} or {.code NULL}."))
   }
   as.integer(harmonize_to)
+}
+
+# Adds `region_name_official`, the BBSR name of each district at the boundary
+# year of its row, after `region_name`. `region_name` stays as published, and
+# the yearbooks of 2003 to 2012 spell some names differently from year to
+# year; the official name is the same for a district and boundary year.
+add_official_names <- function(data, boundary_map) {
+  map <- effective_boundary_map(boundary_map)
+  years <- intersect(unique(data$boundary_year), boundary_years(map))
+  official <- dplyr::bind_rows(lapply(years, function(y) {
+    n <- boundary_names(map, y)
+    tibble::tibble(ags = n$ags, boundary_year = as.integer(y), region_name_official = n$name)
+  }))
+  # A left join with unique keys keeps every row and adds none
+  out <- dplyr::left_join(data, official, by = c("ags", "boundary_year"))
+  if (nrow(out) != nrow(data)) {
+    cli::cli_abort(tr("Adding the official district names changed the number of rows."))
+  }
+  missing <- unique(out$ags[is.na(out$region_name_official)])
+  if (length(missing) > 0) {
+    cli::cli_warn(tr("No official name in the crosswalk for district{?s} {.val {missing}}."))
+  }
+  dplyr::relocate(out, "region_name_official", .after = "region_name")
 }
 
 read_years <- function(version, files, manifest, cache, spec) {

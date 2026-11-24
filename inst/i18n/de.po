@@ -90,6 +90,12 @@ msgstr "{.arg years} muss aus ganzen Zahlen bestehen, etwa {.code 2015:2025}."
 msgid "{.arg harmonize_to} must be a year, {.val latest} or {.code NULL}."
 msgstr "{.arg harmonize_to} muss ein Jahr, {.val latest} oder {.code NULL} sein."
 
+msgid "Adding the official district names changed the number of rows."
+msgstr "Das Ergänzen der amtlichen Kreisnamen hat die Zahl der Zeilen verändert."
+
+msgid "No official name in the crosswalk for district{?s} {.val {missing}}."
+msgstr "Kein amtlicher Name im Umsteigeschlüssel für Kreis{?e} {.val {missing}}."
+
 msgid "PKS data release {.val {version}}."
 msgstr "PKS-Datenveröffentlichung {.val {version}}."
 

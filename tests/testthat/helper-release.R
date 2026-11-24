@@ -54,3 +54,9 @@ local_fake_release <- function(offline = FALSE, corrupt = NULL, env = parent.fra
   }, env = env)
   log
 }
+
+# Columns returned by pks_get(): the release schema plus the official name
+with_official_name <- function(cols) {
+  at <- match("region_name", cols)
+  c(cols[seq_len(at)], "region_name_official", cols[-seq_len(at)])
+}

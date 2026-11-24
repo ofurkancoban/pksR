@@ -2,14 +2,14 @@ test_that("harmonized data come with the attributes of the request", {
   local_fake_release()
   d <- pks_get(years = 2019:2021)
   expect_s3_class(d, "tbl_df")
-  expect_identical(names(d), names(pksR:::harmonized_spec))
+  expect_identical(names(d), with_official_name(names(pksR:::harmonized_spec)))
   expect_identical(attr(d, "data_version"), "2026.1")
   expect_identical(attr(d, "boundary_year"), 2025L)
   expect_identical(attr(d, "weights"), "population")
   expect_s3_class(attr(d, "retrieved_at"), "POSIXct")
   expect_identical(attr(d, "source_urls"), paste0(
     "https://github.com/test/pksR-data/releases/download/v2026.1/",
-    c(sprintf("pks_kreis_%d_population.csv.gz", 2019:2021), "offence_map.csv")
+    c(sprintf("pks_kreis_%d_population.csv.gz", 2019:2021), "boundary_map.csv", "offence_map.csv")
   ))
   expect_true(all(d$boundary_year == 2025L))
   # Eisenach (16056) is part of the Wartburgkreis at the 2025 boundary
@@ -20,7 +20,7 @@ test_that("harmonized data come with the attributes of the request", {
 test_that("the data as published keep the published codes and keys", {
   local_fake_release()
   d <- pks_get(years = 2019, harmonize_to = NULL)
-  expect_identical(names(d), names(pksR:::canonical_spec))
+  expect_identical(names(d), with_official_name(names(pksR:::canonical_spec)))
   expect_true("16056" %in% d$ags)
   expect_true(all(d$boundary_year == 2019L))
   expect_identical(attr(d, "boundary_year"), NA_integer_)
@@ -126,4 +126,34 @@ test_that("the data notes are shown once per session and version", {
   local_fake_release()
   expect_message(pks_get(years = 2021), "clearance_rate")
   expect_no_message(pks_get(years = 2021))
+})
+
+test_that("every row gets the official name of its district and boundary year", {
+  local_fake_release()
+  h <- suppressMessages(pks_get(years = 2019:2021, offence = "total"))
+  expect_false(anyNA(h$region_name_official))
+  # One official name per district in a harmonized panel
+  per_ags <- tapply(h$region_name_official, h$ags, function(x) length(unique(x)))
+  expect_true(all(per_ags == 1))
+  # The data as published name Eisenach, which the 2025 boundary lacks
+  p <- suppressMessages(pks_get(years = 2019, offence = "total", harmonize_to = NULL))
+  expect_false(anyNA(p$region_name_official))
+  expect_match(p$region_name_official[p$ags == "16056"], "Eisenach")
+  # Harmonizing to another boundary names the districts of that boundary
+  h21 <- suppressMessages(pks_get(years = 2019, offence = "total", harmonize_to = 2021))
+  expect_false(anyNA(h21$region_name_official))
+  expect_false("16056" %in% h21$ags)
+})
+
+test_that("official names never add or drop rows", {
+  map <- tibble::tibble(
+    id = c("a", "b"), period = 2019L, from_ags = c("01001", "01002"), from_name = c("Flensburg", "Kiel"),
+    to_ags = c("01001", "01002"), to_name = c("Flensburg", "Kiel"), weight_population = 1, weight_area = 1,
+    source = "bbsr", replaces = NA_character_, status = "official", reason = NA_character_
+  )
+  d <- tibble::tibble(year = 2019L, ags = c("01001", "01002", "01003"), region_name = "x", boundary_year = 2019L)
+  expect_warning(out <- pksR:::add_official_names(d, map), "01003")
+  expect_identical(nrow(out), 3L)
+  expect_identical(names(out), c("year", "ags", "region_name", "region_name_official", "boundary_year"))
+  expect_identical(out$region_name_official, c("Flensburg", "Kiel", NA))
 })

@@ -77,6 +77,7 @@ Bei Daten aus `pks_get()` ist `data_version` die Datenversion, `retrieved_at` de
 | `year` | Berichtsjahr |
 | `ags` | Kreisschlüssel, fünfstellig mit führender Null, etwa `"02000"` für Hamburg |
 | `region_name` | Name des Kreises wie veröffentlicht, bei veränderten Kreisen der Name im Ziel-Gebietsstand |
+| `region_name_official` | Name des Kreises im BBSR-Umsteigeschlüssel zum Gebietsstand der Zeile; in einem harmonisierten Panel ein Name je Kreis |
 | `offence_key` | Straftatenschlüssel; in harmonisierten Daten der harmonisierte Schlüssel, siehe `pks_offences()` |
 | `offence_key_published` | Nur harmonisierte Daten: der veröffentlichte Schlüssel oder `"SCHLÜSSEL minus SCHLÜSSEL"` bei berechneten Schlüsseln |
 | `offence_label` | Bezeichnung in der gewählten Sprache |

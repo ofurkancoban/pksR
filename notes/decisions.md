@@ -77,3 +77,7 @@ The maintainer asked that "Deutsch" on the website switch the site to German ins
 ## 2026-11-24: After the first CRAN release
 
 pksR 0.1.0 was accepted by CRAN and published on 21 November 2026; the CRAN checks are OK on all nine flavours. The CRAN reviewer asked that, from the next update on, only package, software and API names are written in single quotes in Title and Description (https://contributor.r-project.org/cran-cookbook/description_issues.html#formatting-software-names). The quotes around 'Polizeiliche Kriminalstatistik' (the name of a statistic, not of software) were therefore removed. 'pksR-data' keeps its quotes, because it names the data pipeline, which is software. The development version is now 0.1.0.9000; the tag v0.1.0 points to the submitted commit (SHA in the former CRAN-SUBMISSION file).
+
+## 2026-11-24: Official district names in pks_get()
+
+`pks_get()` adds `region_name_official`, the BBSR name of each district at the boundary year of the row, read from `boundary_map.csv` of the data release (BUG-043 in pksR-data). The column is added by the package, not stored in the release files, because pksR 0.1.0 refuses release files with unknown columns: a new file column would break every installed 0.1.0 as soon as the release is published. The crosswalk is therefore downloaded with every request (about 760 KB, once per version thanks to the cache) and listed in `source_urls`. `pks_example()` keeps the release schema without the new column.

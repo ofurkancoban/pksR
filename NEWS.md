@@ -1,5 +1,12 @@
 # pksR (development version)
 
+* `pks_get()` returns a new column `region_name_official`: the district name
+  of the BBSR crosswalk at the boundary year of the row. `region_name` stays
+  as published, and the yearbooks of 2003 to 2012 spell some names
+  differently from year to year, so a harmonized panel now has one name per
+  district. The crosswalk (`boundary_map.csv`) is now downloaded with every
+  request and listed in `attr(, "source_urls")`.
+
 # pksR 0.1.0
 
 * First release on CRAN (21 November 2026).

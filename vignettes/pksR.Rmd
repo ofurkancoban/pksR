@@ -75,6 +75,7 @@ For data from `pks_get()`, `data_version` is the release version, `retrieved_at`
 | `year` | Reporting year |
 | `ags` | District code (Kreisschlüssel), 5 digits with leading zero, e.g. `"02000"` for Hamburg |
 | `region_name` | District name as published, or the name at the target boundary for changed districts |
+| `region_name_official` | District name of the BBSR crosswalk at the boundary year of the row; one name per district in a harmonized panel |
 | `offence_key` | Offence key (Straftatenschlüssel); in harmonized data the harmonized key, see `pks_offences()` |
 | `offence_key_published` | Harmonized data only: the key as published, or `"KEY minus KEY"` for computed keys |
 | `offence_label` | German label as published |
