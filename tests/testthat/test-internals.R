@@ -160,12 +160,13 @@ test_that("release files with other columns or types are refused", {
   readr::write_csv(data.frame(year = 2020, extra = 1), path)
   expect_error(read_release_csv(path, canonical_spec), "expected columns")
   d <- as_harmonized(data.frame(year = 2020L, ags = "01001"))
-  expect_identical(names(d), names(harmonized_spec))
+  expect_identical(names(d), names(full_spec(harmonized_spec)))
   expect_true(is.na(d$population_corrected))
-  expect_invisible(assert_schema(d, harmonized_spec, "harmonized"))
-  expect_error(assert_schema(d[, 1:3], harmonized_spec, "harmonized"), "Columns differ")
+  expect_true(is.na(d$suspects_non_german))
+  expect_invisible(assert_schema(d, full_spec(harmonized_spec), "harmonized"))
+  expect_error(assert_schema(d[, 1:3], full_spec(harmonized_spec), "harmonized"), "Columns differ")
   d$cases <- as.character(d$cases)
-  expect_error(assert_schema(d, harmonized_spec, "harmonized"), "Wrong column types")
+  expect_error(assert_schema(d, full_spec(harmonized_spec), "harmonized"), "Wrong column types")
 })
 
 test_that("helpers report lost rows and bad year ranges", {

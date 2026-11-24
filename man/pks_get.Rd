@@ -59,7 +59,10 @@ A tibble with one row per year, district (\code{ags}) and offence key.
 Columns are described in \code{vignette("pksR")}. \code{region_name} is the name
 as published; \code{region_name_official} is the name of the BBSR crosswalk
 at the boundary year of the row, the same for every year of a district
-in a harmonized panel. Attributes:
+in a harmonized panel. The detail columns \code{district_type},
+\code{firearm_threatened}, \code{firearm_fired}, \code{suspects_male}, \code{suspects_female}
+and \code{suspects_non_german} come from separate release files (2026.2 and
+later; NA for older releases and for 2003 to 2012). Attributes:
 \code{data_version}, \code{retrieved_at}, \code{boundary_year}, \code{weights} and
 \code{source_urls}.
 }
@@ -96,7 +99,9 @@ Ergebnis: ein Tibble mit einer Zeile je Jahr, Kreis und Straftatenschlüssel
 und den Attributen \code{data_version}, \code{retrieved_at}, \code{boundary_year}, \code{weights}
 und \code{source_urls}. \code{region_name} ist der Name wie veröffentlicht,
 \code{region_name_official} der Name des BBSR-Umsteigeschlüssels im Gebietsstand
-der Zeile.
+der Zeile. Die Detailspalten (Kreisart, Fälle mit Schusswaffe, Tatverdächtige
+nach Geschlecht und nichtdeutsche Tatverdächtige) stammen aus eigenen Dateien
+der Veröffentlichung (ab 2026.2; sonst und für 2003 bis 2012 NA).
 }
 
 \examples{

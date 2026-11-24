@@ -41,7 +41,10 @@
 #'   Columns are described in `vignette("pksR")`. `region_name` is the name
 #'   as published; `region_name_official` is the name of the BBSR crosswalk
 #'   at the boundary year of the row, the same for every year of a district
-#'   in a harmonized panel. Attributes:
+#'   in a harmonized panel. The detail columns `district_type`,
+#'   `firearm_threatened`, `firearm_fired`, `suspects_male`, `suspects_female`
+#'   and `suspects_non_german` come from separate release files (2026.2 and
+#'   later; NA for older releases and for 2003 to 2012). Attributes:
 #'   `data_version`, `retrieved_at`, `boundary_year`, `weights` and
 #'   `source_urls`.
 #' @section Deutsch:
@@ -68,7 +71,9 @@
 #' und den Attributen `data_version`, `retrieved_at`, `boundary_year`, `weights`
 #' und `source_urls`. `region_name` ist der Name wie veröffentlicht,
 #' `region_name_official` der Name des BBSR-Umsteigeschlüssels im Gebietsstand
-#' der Zeile.
+#' der Zeile. Die Detailspalten (Kreisart, Fälle mit Schusswaffe, Tatverdächtige
+#' nach Geschlecht und nichtdeutsche Tatverdächtige) stammen aus eigenen Dateien
+#' der Veröffentlichung (ab 2026.2; sonst und für 2003 bis 2012 NA).
 #' @family data
 #' @export
 #' @examplesIf interactive()
@@ -129,23 +134,26 @@ pks_get <- function(years = NULL,
   crosswalk <- release_file(version, "boundary_map.csv", manifest, cache)
   boundary_map <- read_boundary_map(crosswalk)
 
+  # Detail columns (suspects by sex and nationality, firearm cases, district
+  # type) come in separate files from release 2026.2 on
+  details <- has_details(manifest)
+
   if (is.null(target)) {
-    files <- sprintf("pks_kreis_%d_published.csv.gz", years)
-    data <- read_years(version, files, manifest, cache, canonical_spec)
+    files <- year_files(years, "published", details)
+    data <- read_years(version, years, "published", manifest, cache, canonical_spec, details)
     if (!is.null(keys)) data <- data[published_rows(data, keys, map), ]
     if (lang == "en") data$offence_label <- published_labels_en(data, map)
     weights_used <- NA_character_
     notes <- manifest$notes$published
   } else {
     if (identical(target, as.integer(manifest$target_boundary_year))) {
-      files <- sprintf("pks_kreis_%d_%s.csv.gz", years, weights)
-      data <- read_years(version, files, manifest, cache, harmonized_spec)
+      files <- year_files(years, weights, details)
+      data <- read_years(version, years, weights, manifest, cache, harmonized_spec, details)
     } else {
-      published_files <- sprintf("pks_kreis_%d_published.csv.gz", years)
-      published <- read_years(version, published_files, manifest, cache, canonical_spec)
+      files <- year_files(years, "published", details)
+      published <- read_years(version, years, "published", manifest, cache, canonical_spec, details)
       cli::cli_inform(tr("Harmonizing {length(years)} year{?s} to the boundary of {target} with {weights} weights."))
       data <- harmonize_published(published, boundary_map, map, target, weights)
-      files <- published_files
     }
     if (!is.null(keys)) data <- data[data$offence_key %in% keys, ]
     data$offence_label <- offence_labels(data$offence_key, map, lang)
@@ -204,10 +212,52 @@ add_official_names <- function(data, boundary_map) {
   dplyr::relocate(out, "region_name_official", .after = "region_name")
 }
 
-read_years <- function(version, files, manifest, cache, spec) {
-  paths <- vapply(files, function(f) release_file(version, f, manifest, cache), "")
-  data <- dplyr::bind_rows(lapply(paths, read_release_csv, spec = spec))
+# Release files of `years` for one variant ("published" or a weighting):
+# the main file of each year and, where the release has them, its details.
+year_files <- function(years, variant, details) {
+  main <- sprintf("pks_kreis_%d_%s.csv.gz", years, variant)
+  if (details) c(main, sprintf("pks_kreis_%d_%s_details.csv.gz", years, variant)) else main
+}
+
+has_details <- function(manifest) {
+  any(grepl("_details\\.csv\\.gz$", vapply(manifest$files, function(f) f$name, "")))
+}
+
+# The years of one variant with the detail columns joined. A release without
+# detail files (2026.1) gives the detail columns as NA, once with a message.
+read_years <- function(version, years, variant, manifest, cache, spec, details) {
+  read <- function(f, s) read_release_csv(release_file(version, f, manifest, cache), s)
+  data <- dplyr::bind_rows(lapply(sprintf("pks_kreis_%d_%s.csv.gz", years, variant), read, s = spec))
+  if (details) {
+    dspec <- details_file_spec(spec)
+    extra <- dplyr::bind_rows(lapply(sprintf("pks_kreis_%d_%s_details.csv.gz", years, variant), read, s = dspec))
+    data <- join_details(data, extra)
+  } else {
+    no_details_message(version)
+    for (col in names(detail_spec)) data[[col]] <- methods::as(rep(NA, nrow(data)), details_file_spec(spec)[[col]])
+  }
   data[order(data$year, data$offence_key, data$ags), ]
+}
+
+# Every row of the main file has exactly one detail row: the join neither
+# adds nor drops rows, and a row without details stops instead of turning NA.
+join_details <- function(data, extra) {
+  if (anyDuplicated(extra[detail_key])) {
+    cli::cli_abort(tr("The detail files have duplicate rows."))
+  }
+  out <- dplyr::left_join(data, extra, by = detail_key)
+  unmatched <- nrow(dplyr::anti_join(data[detail_key], extra[detail_key], by = detail_key))
+  if (nrow(out) != nrow(data) || unmatched > 0 || nrow(extra) != nrow(data)) {
+    cli::cli_abort(tr("The detail files do not match the data files row by row."))
+  }
+  out
+}
+
+no_details_message <- function(version) {
+  key <- paste0("details:", data_repo(), ":", version)
+  if (isTRUE(the[[key]])) return(invisible())
+  the[[key]] <- TRUE
+  cli::cli_inform(c("i" = tr("Data release {.val {version}} has no detail columns; they are NA.")))
 }
 
 # When the files were downloaded: the oldest file of the request.

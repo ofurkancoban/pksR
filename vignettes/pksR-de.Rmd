@@ -91,6 +91,12 @@ Bei Daten aus `pks_get()` ist `data_version` die Datenversion, `retrieved_at` de
 | `population` | Veröffentlichte Einwohnerzahl (PDF-Jahre und 2020) |
 | `derived_population` | `cases / hz * 1e5`, aus der veröffentlichten Quote abgeleitet; ein Wert je Kreis und Jahr |
 | `population_corrected` | Zensuskorrigierte Einwohnerzahl des BBSR (INKAR) zum 31.12. des Vorjahres, dem Stichtag der HZ; eine Zensusbasis für alle Jahre, siehe `pks_rates(population = "corrected")` |
+| `district_type` | Kreisart wie veröffentlicht: `KfS` (kreisfreie Stadt), `LK` (Landkreis), `K` (Kreis), `SK` (Stadtkreis), `RV` (Regionalverband); NA für veränderte Kreise nach der Harmonisierung |
+| `firearm_threatened`, `firearm_fired` | Fälle, in denen mit einer Schusswaffe gedroht oder geschossen wurde |
+| `suspects_male`, `suspects_female` | Tatverdächtige nach Geschlecht; sie ergeben zusammen `suspects` |
+| `suspects_non_german` | Nichtdeutsche Tatverdächtige |
+
+Die letzten sechs Spalten werden ab 2013 veröffentlicht (NA für 2003 bis 2012) und kommen mit der Datenveröffentlichung 2026.2 und späteren; bei älteren Veröffentlichungen sind sie NA. Tatverdächtige sind Personen: Für Schlüssel, die als Differenz zweier veröffentlichter Schlüssel berechnet werden, sind sie NA.
 | `source_format`, `source_file` | Format und Datei der BKA-Quelle |
 | `boundary_year` | Gebietsstand der Zeile |
 | `harmonized` | `TRUE`, wenn der Kreis durch die Harmonisierung verändert wurde |

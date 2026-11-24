@@ -81,3 +81,7 @@ pksR 0.1.0 was accepted by CRAN and published on 21 November 2026; the CRAN chec
 ## 2026-11-24: Official district names in pks_get()
 
 `pks_get()` adds `region_name_official`, the BBSR name of each district at the boundary year of the row, read from `boundary_map.csv` of the data release (BUG-043 in pksR-data). The column is added by the package, not stored in the release files, because pksR 0.1.0 refuses release files with unknown columns: a new file column would break every installed 0.1.0 as soon as the release is published. The crosswalk is therefore downloaded with every request (about 760 KB, once per version thanks to the cache) and listed in `source_urls`. `pks_example()` keeps the release schema without the new column.
+
+## 2026-11-24: Detail columns in pks_get()
+
+`pks_get()` returns six detail columns (`district_type`, `firearm_threatened`, `firearm_fired`, `suspects_male`, `suspects_female`, `suspects_non_german`). From release 2026.2 on they come in `*_details.csv.gz` files next to the per-year files (pksR-data decisions, 2026-11-24); pksR joins them on `year`, `ags`, `offence_key` and stops when the files do not match row by row. With a release without detail files the columns are NA, announced once per session, so every request returns the same columns. The package harmonization treats the detail counts like the other counts (suspect breakdowns NA for difference keys, type NA for changed districts), so `harmonize_to` other than the latest boundary gives them too.

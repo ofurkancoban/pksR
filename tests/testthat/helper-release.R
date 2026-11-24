@@ -15,7 +15,14 @@ fake_listing <- function(repo) {
        release("v2026.1", body = "Data version: 2026.1\n\nDOI: 10.5281/zenodo.1\n"), release("v2025.1"))
 }
 
-fake_body <- function(name) {
+fake_body <- function(name, without_details = FALSE) {
+  if (name == "manifest.json" && without_details) {
+    # A release as 2026.1 was published: no detail files
+    m <- jsonlite::read_json(file.path(fixture_dir(), name))
+    m$files <- Filter(function(f) !grepl("_details", f$name), m$files)
+    return(charToRaw(jsonlite::toJSON(m, auto_unbox = TRUE, null = "null", digits = NA)))
+  }
+  if (without_details && grepl("_details", name)) return(NULL)
   if (name == "boundary_map.csv") {
     return(memDecompress(readBin(file.path(fixture_dir(), "boundary_map.csv.gz"), "raw", 2e7), "gzip"))
   }
@@ -28,7 +35,7 @@ fake_body <- function(name) {
 # fresh session state for the calling test. `offline = TRUE` makes every
 # request fail as without a connection. Returns an environment whose
 # `requests` lists the URLs asked for.
-local_fake_release <- function(offline = FALSE, corrupt = NULL, env = parent.frame()) {
+local_fake_release <- function(offline = FALSE, corrupt = NULL, without_details = FALSE, env = parent.frame()) {
   repo <- "test/pksR-data"
   withr::local_options(pksR.repo = repo, .local_envir = env)
   withr::local_envvar(R_USER_CACHE_DIR = withr::local_tempdir(.local_envir = env), GITHUB_PAT = "", GITHUB_TOKEN = "", .local_envir = env)
@@ -44,7 +51,7 @@ local_fake_release <- function(offline = FALSE, corrupt = NULL, env = parent.fra
     prefix <- sprintf("https://github.com/%s/releases/download/v2026.1/", repo)
     if (startsWith(req$url, prefix)) {
       name <- substring(req$url, nchar(prefix) + 1)
-      body <- fake_body(name)
+      body <- fake_body(name, without_details)
       if (!is.null(body)) {
         if (identical(name, corrupt)) body[length(body)] <- as.raw((as.integer(body[length(body)]) + 1) %% 256)
         return(httr2::response(200, body = body))
@@ -55,7 +62,10 @@ local_fake_release <- function(offline = FALSE, corrupt = NULL, env = parent.fra
   log
 }
 
-# Columns returned by pks_get(): the release schema plus the official name
+# Columns returned by pks_get(): the release schema with the detail columns
+# plus the official name
+returned_columns <- function(spec) with_official_name(names(pksR:::full_spec(spec)))
+
 with_official_name <- function(cols) {
   at <- match("region_name", cols)
   c(cols[seq_len(at)], "region_name_official", cols[-seq_len(at)])

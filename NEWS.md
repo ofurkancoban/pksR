@@ -6,6 +6,12 @@
   differently from year to year, so a harmonized panel now has one name per
   district. The crosswalk (`boundary_map.csv`) is now downloaded with every
   request and listed in `attr(, "source_urls")`.
+* `pks_get()` returns six detail columns of the BKA tables (2013 onwards):
+  `district_type`, `firearm_threatened`, `firearm_fired`, `suspects_male`,
+  `suspects_female` and `suspects_non_german`. They are read from separate
+  `*_details.csv.gz` files of data release 2026.2 and later, so older pksR
+  versions keep working with new releases; with older releases the columns
+  are NA. Detail counts are harmonized like the other counts.
 
 # pksR 0.1.0
 

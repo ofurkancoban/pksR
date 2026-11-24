@@ -154,6 +154,7 @@ harmonize_space <- function(data, map, target, weights = c("population", "area")
     cli::cli_abort(tr("Data to harmonize must have one boundary year."))
   }
   cw <- compose_crosswalk(map, from_year, target, weights)
+  data <- with_detail_columns(data)
 
   unmatched <- setdiff(unique(data$ags), cw$from_ags)
   if (length(unmatched) > 0) {
@@ -186,6 +187,7 @@ harmonize_space <- function(data, map, target, weights = c("population", "area")
     dplyr::group_by(joined, .data$offence_key, ags = .data$to_ags),
     dplyr::across(dplyr::all_of(harmonized_counts), ~ sum_weighted(.x, .data$weight)),
     published_name = if (dplyr::n() == 1) .data$region_name[1] else NA_character_,
+    published_type = if (dplyr::n() == 1) .data$district_type[1] else NA_character_,
     offence_label = .data$offence_label[1],
     hz_published = if (dplyr::n() == 1) .data$hz[1] else NA_real_,
     clearance_rate_published = if (dplyr::n() == 1) .data$clearance_rate[1] else NA_real_,
@@ -204,6 +206,8 @@ harmonize_space <- function(data, map, target, weights = c("population", "area")
   out$clearance_rate <- ifelse(out$identity, out$clearance_rate_published, cleared / cases * 100)
   out$clearance_rate[!is.na(cases) & cases == 0] <- 0
   out$region_name <- ifelse(out$identity, out$published_name, out$name)
+  # The BKA type of a changed district is not known for its earlier years
+  out$district_type <- ifelse(out$identity, out$published_type, NA_character_)
 
   out$year <- unique(data$year)
   out$source_format <- unique(data$source_format)
@@ -213,12 +217,14 @@ harmonize_space <- function(data, map, target, weights = c("population", "area")
   out$weight_type <- ifelse(out$identity, "none", weights)
   out$estimated <- out$split | out$source_estimated
   out$offence_key_published <- out$offence_key
-  out <- as_harmonized(out[intersect(names(harmonized_spec), names(out))])
+  out <- as_harmonized(out[intersect(names(full_spec(harmonized_spec)), names(out))])
   out[order(out$offence_key, out$ags), ]
 }
 
 # National totals per offence key and population must not change.
 check_conservation <- function(before, after, tolerance = 1e-9) {
+  before <- with_detail_columns(before)
+  after <- with_detail_columns(after)
   totals <- function(d) {
     sums <- dplyr::summarise(
       dplyr::group_by(d, .data$offence_key),
@@ -304,7 +310,7 @@ harmonize_offences <- function(data, map) {
   out$offence_key <- direct$offence_key_harmonized[match(out$offence_key, direct$plus_key)]
   derived <- lapply(which(!is.na(spec$minus_key)), function(i) difference_rows(data, spec[i, ], map))
   out <- as_harmonized(dplyr::bind_rows(out, derived))
-  assert_schema(out, harmonized_spec, "harmonized")
+  assert_schema(out, full_spec(harmonized_spec), "harmonized")
   out[order(out$offence_key, out$ags), ]
 }
 
@@ -318,10 +324,10 @@ difference_rows <- function(data, spec_row, map) {
     cli::cli_abort(tr("{spec_row$year}: key {spec_row$minus_key} is missing for some districts."))
   }
   out <- plus
-  for (col in setdiff(harmonized_counts, "suspects")) {
+  for (col in setdiff(harmonized_counts, person_counts)) {
     out[[col]] <- plus[[col]] - minus[[col]]
   }
-  out$suspects <- NA_real_
+  out[person_counts] <- NA_real_
   cases <- dplyr::coalesce(out$cases, out$cases_derived)
   cleared <- dplyr::coalesce(out$cleared, out$cleared_derived)
   out$hz <- cases / dplyr::coalesce(out$population, out$derived_population) * 1e5
@@ -349,7 +355,7 @@ harmonize_published <- function(published, boundary_map, offence_map, target, we
       "i" = tr("Request years up to {target}, or a later {.arg harmonize_to}.")
     ))
   }
-  years <- split(published, published$year)
+  years <- split(with_detail_columns(published), published$year)
   out <- lapply(years, function(d) {
     spatial <- harmonize_space(d, map, target, weights)
     check_conservation(d, spatial)

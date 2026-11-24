@@ -29,8 +29,25 @@ canonical_spec <- c(
 
 count_columns <- c("cases", "attempts", "cleared", "suspects")
 
+# Detail columns of the spreadsheet years (2013 onward), in separate files
+# *_details.csv.gz from release 2026.2 on; NA in the PDF years. They are
+# kept out of the main files because pksR 0.1.0 refuses unknown columns.
+detail_spec <- c(
+  district_type = "character",
+  firearm_threatened = "integer",
+  firearm_fired = "integer",
+  suspects_male = "integer",
+  suspects_female = "integer",
+  suspects_non_german = "integer"
+)
+detail_key <- c("year", "ags", "offence_key")
+detail_counts <- setdiff(names(detail_spec), "district_type")
+
+# Suspects are persons and cannot be subtracted between offence keys.
+person_counts <- c("suspects", "suspects_male", "suspects_female", "suspects_non_german")
+
 # Everything that is moved with crosswalk weights during harmonization.
-harmonized_counts <- c(count_columns, "cases_derived", "cleared_derived")
+harmonized_counts <- c(count_columns, "cases_derived", "cleared_derived", detail_counts)
 
 # Harmonized panel: offence_key is the harmonized key and the published key
 # moves to offence_key_published. Counts are double, because splitting a
@@ -41,6 +58,28 @@ harmonized_spec <- local({
   at <- match("offence_key", names(spec))
   c(spec[seq_len(at)], offence_key_published = "character", spec[-seq_len(at)])
 })
+
+# Columns of a detail file: the row key and the detail columns, with counts
+# as double in the harmonized files (weights give fractions).
+details_file_spec <- function(spec) {
+  d <- detail_spec
+  if (identical(spec[["cases"]], "double")) d[detail_counts] <- "double"
+  c(spec[detail_key], d)
+}
+
+# Columns returned by pks_get(): the release schema plus the detail columns.
+full_spec <- function(spec) c(spec, details_file_spec(spec)[names(detail_spec)])
+
+# Detail columns as typed NA where data lack them (an older release, or data
+# built outside pks_get()), so harmonization always finds them.
+with_detail_columns <- function(data) {
+  types <- details_file_spec(c(year = "integer", ags = "character", offence_key = "character",
+                               cases = if (is.double(data$cases)) "double" else "integer"))
+  for (col in setdiff(names(detail_spec), names(data))) {
+    data[[col]] <- methods::as(rep(NA, nrow(data)), types[[col]])
+  }
+  data
+}
 
 readr_types <- function(spec) {
   codes <- c(integer = "i", double = "d", character = "c", logical = "l")
@@ -77,11 +116,12 @@ assert_schema <- function(data, spec, what) {
 }
 
 as_harmonized <- function(data) {
-  for (col in setdiff(names(harmonized_spec), names(data))) {
-    data[[col]] <- methods::as(rep(NA, nrow(data)), harmonized_spec[[col]])
+  spec <- full_spec(harmonized_spec)
+  for (col in setdiff(names(spec), names(data))) {
+    data[[col]] <- methods::as(rep(NA, nrow(data)), spec[[col]])
   }
-  for (col in names(harmonized_spec)) {
-    data[[col]] <- methods::as(data[[col]], harmonized_spec[[col]])
+  for (col in names(spec)) {
+    data[[col]] <- methods::as(data[[col]], spec[[col]])
   }
-  tibble::as_tibble(data[names(harmonized_spec)])
+  tibble::as_tibble(data[names(spec)])
 }

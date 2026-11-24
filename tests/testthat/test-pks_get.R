@@ -2,14 +2,15 @@ test_that("harmonized data come with the attributes of the request", {
   local_fake_release()
   d <- pks_get(years = 2019:2021)
   expect_s3_class(d, "tbl_df")
-  expect_identical(names(d), with_official_name(names(pksR:::harmonized_spec)))
+  expect_identical(names(d), returned_columns(pksR:::harmonized_spec))
   expect_identical(attr(d, "data_version"), "2026.1")
   expect_identical(attr(d, "boundary_year"), 2025L)
   expect_identical(attr(d, "weights"), "population")
   expect_s3_class(attr(d, "retrieved_at"), "POSIXct")
   expect_identical(attr(d, "source_urls"), paste0(
     "https://github.com/test/pksR-data/releases/download/v2026.1/",
-    c(sprintf("pks_kreis_%d_population.csv.gz", 2019:2021), "boundary_map.csv", "offence_map.csv")
+    c(sprintf("pks_kreis_%d_population.csv.gz", 2019:2021), sprintf("pks_kreis_%d_population_details.csv.gz", 2019:2021),
+      "boundary_map.csv", "offence_map.csv")
   ))
   expect_true(all(d$boundary_year == 2025L))
   # Eisenach (16056) is part of the Wartburgkreis at the 2025 boundary
@@ -20,7 +21,7 @@ test_that("harmonized data come with the attributes of the request", {
 test_that("the data as published keep the published codes and keys", {
   local_fake_release()
   d <- pks_get(years = 2019, harmonize_to = NULL)
-  expect_identical(names(d), with_official_name(names(pksR:::canonical_spec)))
+  expect_identical(names(d), returned_columns(pksR:::canonical_spec))
   expect_true("16056" %in% d$ags)
   expect_true(all(d$boundary_year == 2019L))
   expect_identical(attr(d, "boundary_year"), NA_integer_)
@@ -114,7 +115,7 @@ test_that("a download with the wrong checksum is refused and not cached", {
 test_that("a damaged cached file is downloaded again", {
   log <- local_fake_release()
   pks_get(years = 2021)
-  path <- list.files(Sys.getenv("R_USER_CACHE_DIR"), "pks_kreis_2021_population", recursive = TRUE, full.names = TRUE)
+  path <- list.files(Sys.getenv("R_USER_CACHE_DIR"), "pks_kreis_2021_population\\.csv\\.gz$", recursive = TRUE, full.names = TRUE)
   writeLines("damaged", path)
   n <- length(log$requests)
   d <- pks_get(years = 2021)
@@ -156,4 +157,41 @@ test_that("official names never add or drop rows", {
   expect_identical(nrow(out), 3L)
   expect_identical(names(out), c("year", "ags", "region_name", "region_name_official", "boundary_year"))
   expect_identical(out$region_name_official, c("Flensburg", "Kiel", NA))
+})
+
+test_that("detail columns are joined from the detail files", {
+  local_fake_release()
+  p <- suppressMessages(pks_get(years = 2019:2021, harmonize_to = NULL))
+  expect_false(anyNA(p[c("district_type", "suspects_male", "suspects_female", "suspects_non_german", "firearm_threatened", "firearm_fired")]))
+  expect_identical(p$suspects_male + p$suspects_female, p$suspects)
+  expect_true(all(p$suspects_non_german <= p$suspects))
+  expect_true(all(p$district_type %in% c("KfS", "K", "LK", "SK", "RV")))
+  expect_true(any(grepl("_published_details.csv.gz$", attr(p, "source_urls"))))
+  # Harmonized as released and by the package: the breakdown still adds up
+  h <- suppressMessages(pks_get(years = 2019:2021))
+  expect_equal(h$suspects_male + h$suspects_female, h$suspects)
+  h21 <- suppressMessages(pks_get(years = 2019:2020, harmonize_to = 2021))
+  expect_equal(h21$suspects_male + h21$suspects_female, h21$suspects)
+  # The merged Wartburgkreis has no published type for 2019 and 2020
+  expect_true(all(is.na(h21$district_type[h21$ags == "16063"])))
+  expect_false(anyNA(h21$district_type[h21$ags == "01001"]))
+  # Detail counts are conserved like cases
+  key <- p$year %in% 2019:2020 & p$offence_key == "------"
+  expect_equal(sum(h21$suspects_non_german[h21$offence_key == "------"]), sum(p$suspects_non_german[key]))
+})
+
+test_that("a release without detail files gives NA detail columns", {
+  local_fake_release(without_details = TRUE)
+  expect_message(d <- pks_get(years = 2019), "no detail columns")
+  expect_identical(names(d), returned_columns(pksR:::harmonized_spec))
+  expect_true(all(is.na(d[c("district_type", "suspects_male", "suspects_non_german")])))
+  expect_type(d$suspects_male, "double")
+  expect_false(any(grepl("_details", attr(d, "source_urls"))))
+})
+
+test_that("detail files that do not match the data stop the request", {
+  data <- tibble::tibble(year = 2019L, ags = c("01001", "01002"), offence_key = "------", cases = 1:2)
+  extra <- tibble::tibble(year = 2019L, ags = "01001", offence_key = "------", suspects_male = 1L)
+  expect_error(pksR:::join_details(data, extra), "row by row")
+  expect_error(pksR:::join_details(data, rbind(extra, extra)), "duplicate")
 })

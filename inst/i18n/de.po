@@ -96,6 +96,15 @@ msgstr "Das Ergänzen der amtlichen Kreisnamen hat die Zahl der Zeilen veränder
 msgid "No official name in the crosswalk for district{?s} {.val {missing}}."
 msgstr "Kein amtlicher Name im Umsteigeschlüssel für Kreis{?e} {.val {missing}}."
 
+msgid "The detail files have duplicate rows."
+msgstr "Die Detaildateien enthalten doppelte Zeilen."
+
+msgid "The detail files do not match the data files row by row."
+msgstr "Die Detaildateien passen nicht Zeile für Zeile zu den Datendateien."
+
+msgid "Data release {.val {version}} has no detail columns; they are NA."
+msgstr "Die Datenveröffentlichung {.val {version}} hat keine Detailspalten; sie sind NA."
+
 msgid "PKS data release {.val {version}}."
 msgstr "PKS-Datenveröffentlichung {.val {version}}."
 
