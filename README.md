@@ -3,6 +3,7 @@
 **English** | [Deutsch](https://github.com/ofurkancoban/pksR/blob/main/README.de.md)
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/pksR)](https://CRAN.R-project.org/package=pksR)
 [![R-CMD-check](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -26,11 +27,15 @@ The BKA publishes the district tables once a year: as PDF yearbooks up to 2012 a
 
 ## Status
 
-The package is under development and not yet on CRAN. The first data release, [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1) (reporting years 2003 to 2025, boundary of 2025), was published on 1 November 2026 ([doi:10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429)).
+Version 0.1.0 is on [CRAN](https://CRAN.R-project.org/package=pksR) since 21 November 2026. The first data release, [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1) (reporting years 2003 to 2025, boundary of 2025), was published on 1 November 2026 ([doi:10.5281/zenodo.23858429](https://doi.org/10.5281/zenodo.23858429)).
 
 ## Installation
 
 ```r
+# Release version from CRAN
+install.packages("pksR")
+
+# Development version from GitHub
 # install.packages("remotes")
 remotes::install_github("ofurkancoban/pksR")
 ```

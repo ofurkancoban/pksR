@@ -4,8 +4,8 @@ Planned work for pksR and the pksR-data pipeline, roughly in order. Nothing here
 
 ## Next
 
-1. **First data release (`2026.1`).** The pipeline is ready; the first release makes `pks_get()` usable.
-2. **CRAN submission** after the first release, followed by rOpenSci software peer review and a paper in the Journal of Open Source Software.
+1. **rOpenSci software peer review.** The first data release (`2026.1`, 1 November 2026) and the first CRAN release (0.1.0, 21 November 2026) are out; the next step is a submission to rOpenSci.
+2. **Paper in the Journal of Open Source Software** after the review.
 
 ## Data
 
