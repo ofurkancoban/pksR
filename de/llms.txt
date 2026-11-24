@@ -37,7 +37,8 @@ Göttingen 2016, Eisenach 2021), und Straftatenschlüssel ändern sich.
 
 ## Stand
 
-Das Paket ist in Entwicklung und noch nicht auf CRAN. Die erste
+Version 0.1.0 ist seit dem 21. November 2026 auf
+[CRAN](https://CRAN.R-project.org/package=pksR). Die erste
 Datenveröffentlichung,
 [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
 (Berichtsjahre 2003 bis 2025, Gebietsstand 2025), ist am 1. November
@@ -48,6 +49,10 @@ Datenveröffentlichung,
 
 ``` r
 
+# Veröffentlichte Version von CRAN
+install.packages("pksR")
+
+# Entwicklungsversion von GitHub
 # install.packages("remotes")
 remotes::install_github("ofurkancoban/pksR")
 ```

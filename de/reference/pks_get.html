@@ -15,7 +15,7 @@ checksums of the release manifest."><meta property="og:image" content="https://o
 
     <a class="navbar-brand me-2" href="../index.html">pksR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,7 +133,13 @@ harmonized key.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A tibble with one row per year, district (<code>ags</code>) and offence key.
-Columns are described in <code><a href="../articles/pksR.html">vignette("pksR")</a></code>. Attributes:
+Columns are described in <code><a href="../articles/pksR.html">vignette("pksR")</a></code>. <code>region_name</code> is the name
+as published; <code>region_name_official</code> is the name of the BBSR crosswalk
+at the boundary year of the row, the same for every year of a district
+in a harmonized panel. The detail columns <code>district_type</code>,
+<code>firearm_threatened</code>, <code>firearm_fired</code>, <code>suspects_male</code>, <code>suspects_female</code>
+and <code>suspects_non_german</code> come from separate release files (2026.2 and
+later; NA for older releases and for 2003 to 2012). Attributes:
 <code>data_version</code>, <code>retrieved_at</code>, <code>boundary_year</code>, <code>weights</code> and
 <code>source_urls</code>.</p>
     </div>
@@ -159,7 +165,11 @@ Vorrang. Übersicht: <code><a href="pks_offences.html">pks_offences()</a></code>
 Voreinstellung <code>options(pksR.lang)</code>, sonst die Sprache der R-Sitzung.</p></li>
 </ul><p>Ergebnis: ein Tibble mit einer Zeile je Jahr, Kreis und Straftatenschlüssel
 und den Attributen <code>data_version</code>, <code>retrieved_at</code>, <code>boundary_year</code>, <code>weights</code>
-und <code>source_urls</code>.</p>
+und <code>source_urls</code>. <code>region_name</code> ist der Name wie veröffentlicht,
+<code>region_name_official</code> der Name des BBSR-Umsteigeschlüssels im Gebietsstand
+der Zeile. Die Detailspalten (Kreisart, Fälle mit Schusswaffe, Tatverdächtige
+nach Geschlecht und nichtdeutsche Tatverdächtige) stammen aus eigenen Dateien
+der Veröffentlichung (ab 2026.2; sonst und für 2003 bis 2012 NA).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
