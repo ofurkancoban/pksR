@@ -1,4 +1,8 @@
+# pksR (development version)
+
 # pksR 0.1.0
+
+* First release on CRAN (21 November 2026).
 
 * First version: `pks_get()`, `pks_manifest()`, `pks_versions()`,
   `pks_cache_info()`, `pks_cache_clear()`, `pks_rates()`, `pks_offences()`,

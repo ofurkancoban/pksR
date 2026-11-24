@@ -1,6 +1,6 @@
 Package: pksR
 Title: District-Level German Police Crime Statistics
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:
     person("Ömer Furkan", "Çoban", , "oemer.furkan.coban@uni-oldenburg.de", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0005-3623-7178"))
