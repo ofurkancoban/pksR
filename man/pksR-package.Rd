@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Access to the district (Kreis) tables of the German Police Crime Statistics ('Polizeiliche Kriminalstatistik', PKS) published by the Bundeskriminalamt, from 2003 onwards. Data come from versioned, validated releases of the 'pksR-data' pipeline, either as published or harmonized to a common territorial boundary and offence classification. Downloads are cached and checked against SHA-256 checksums; rates can be recomputed after harmonization, panels validated, and data releases cited.
+Access to the district (Kreis) tables of the German Police Crime Statistics (Polizeiliche Kriminalstatistik, PKS) published by the Bundeskriminalamt, from 2003 onwards. Data come from versioned, validated releases of the 'pksR-data' pipeline, either as published or harmonized to a common territorial boundary and offence classification. Downloads are cached and checked against SHA-256 checksums; rates can be recomputed after harmonization, panels validated, and data releases cited.
 }
 \section{Language}{
 
