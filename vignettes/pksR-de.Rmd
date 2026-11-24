@@ -91,7 +91,7 @@ Bei Daten aus `pks_get()` ist `data_version` die Datenversion, `retrieved_at` de
 | `population` | Veröffentlichte Einwohnerzahl (PDF-Jahre und 2020) |
 | `derived_population` | `cases / hz * 1e5`, aus der veröffentlichten Quote abgeleitet; ein Wert je Kreis und Jahr |
 | `population_corrected` | Zensuskorrigierte Einwohnerzahl des BBSR (INKAR) zum 31.12. des Vorjahres, dem Stichtag der HZ; eine Zensusbasis für alle Jahre, siehe `pks_rates(population = "corrected")` |
-| `district_type` | Kreisart wie veröffentlicht: `KfS` (kreisfreie Stadt), `LK` (Landkreis), `K` (Kreis), `SK` (Stadtkreis), `RV` (Regionalverband); NA für veränderte Kreise nach der Harmonisierung |
+| `district_type` | Kreisart wie veröffentlicht: `KfS` (kreisfreie Stadt), `LK` (Landkreis), `K` (Kreis), `SK` (Stadtkreis), `RV` (Regionalverband); durch die Harmonisierung veränderte Kreise erhalten ihre Kreisart in der neuesten Tabelle (ab 2013) |
 | `firearm_threatened`, `firearm_fired` | Fälle, in denen mit einer Schusswaffe gedroht oder geschossen wurde |
 | `suspects_male`, `suspects_female` | Tatverdächtige nach Geschlecht; sie ergeben zusammen `suspects` |
 | `suspects_non_german` | Nichtdeutsche Tatverdächtige |

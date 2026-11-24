@@ -89,7 +89,7 @@ For data from `pks_get()`, `data_version` is the release version, `retrieved_at`
 | `population` | Published population (PDF years and 2020) |
 | `derived_population` | `cases / hz * 1e5`, derived from the published rate; one value per district and year |
 | `population_corrected` | Census-corrected population of the BBSR (INKAR) at 31 December of the year before, the date the HZ refers to; one census base for all years, see `pks_rates(population = "corrected")` |
-| `district_type` | District type as published: `KfS` (kreisfreie Stadt), `LK` (Landkreis), `K` (Kreis), `SK` (Stadtkreis), `RV` (Regionalverband); NA for changed districts after harmonization |
+| `district_type` | District type as published: `KfS` (kreisfreie Stadt), `LK` (Landkreis), `K` (Kreis), `SK` (Stadtkreis), `RV` (Regionalverband); districts changed by harmonization get their type in the latest table (2013 onwards) |
 | `firearm_threatened`, `firearm_fired` | Cases in which a firearm was used to threaten or was fired |
 | `suspects_male`, `suspects_female` | Suspects by sex; they add up to `suspects` |
 | `suspects_non_german` | Non-German suspects (Nichtdeutsche Tatverdächtige) |

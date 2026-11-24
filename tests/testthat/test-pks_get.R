@@ -69,7 +69,8 @@ test_that("harmonizing to the release boundary on the client gives the released 
   # Only districts whose sources are all in the fixture are comparable
   keep <- c("01001", "02000", "11000", "16063")
   key <- function(x) as.data.frame(x[x$ags %in% keep, ][order(x$year[x$ags %in% keep], x$offence_key[x$ags %in% keep], x$ags[x$ags %in% keep]), ])
-  common <- c("year", "ags", "offence_key", "cases", "attempts", "cleared", "hz", "clearance_rate", "boundary_year", "harmonized")
+  common <- c("year", "ags", "offence_key", "cases", "attempts", "cleared", "hz", "clearance_rate", "boundary_year", "harmonized",
+              "firearm_threatened", "firearm_fired", "suspects_male", "suspects_female", "suspects_non_german")
   expect_equal(key(client)[common], key(released)[common], tolerance = 1e-10, ignore_attr = TRUE)
 })
 
@@ -172,9 +173,12 @@ test_that("detail columns are joined from the detail files", {
   expect_equal(h$suspects_male + h$suspects_female, h$suspects)
   h21 <- suppressMessages(pks_get(years = 2019:2020, harmonize_to = 2021))
   expect_equal(h21$suspects_male + h21$suspects_female, h21$suspects)
-  # The merged Wartburgkreis has no published type for 2019 and 2020
-  expect_true(all(is.na(h21$district_type[h21$ags == "16063"])))
-  expect_false(anyNA(h21$district_type[h21$ags == "01001"]))
+  # The merged Wartburgkreis gets its type in the latest table (2021 in the
+  # fixture release), as in the panel of the pipeline
+  latest <- unique(p$district_type[p$year == 2021 & p$ags == "16063"])
+  expect_true(all(h21$district_type[h21$ags == "16063"] == latest))
+  expect_identical(unique(h$district_type[h$ags == "16063"]), latest)
+  expect_false(anyNA(h21$district_type))
   # Detail counts are conserved like cases
   key <- p$year %in% 2019:2020 & p$offence_key == "------"
   expect_equal(sum(h21$suspects_non_german[h21$offence_key == "------"]), sum(p$suspects_non_german[key]))

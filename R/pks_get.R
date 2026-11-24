@@ -152,8 +152,16 @@ pks_get <- function(years = NULL,
     } else {
       files <- year_files(years, "published", details)
       published <- read_years(version, years, "published", manifest, cache, canonical_spec, details)
+      # Changed districts get their type in the latest table of the release
+      types <- NULL
+      if (details) {
+        latest_file <- sprintf("pks_kreis_%d_published_details.csv.gz", as.integer(manifest$years[[2]]))
+        latest <- read_release_csv(release_file(version, latest_file, manifest, cache), details_file_spec(canonical_spec))
+        types <- unique(latest[!is.na(latest$district_type), c("ags", "district_type")])
+        files <- union(files, latest_file)
+      }
       cli::cli_inform(tr("Harmonizing {length(years)} year{?s} to the boundary of {target} with {weights} weights."))
-      data <- harmonize_published(published, boundary_map, map, target, weights)
+      data <- harmonize_published(published, boundary_map, map, target, weights, types)
     }
     if (!is.null(keys)) data <- data[data$offence_key %in% keys, ]
     data$offence_label <- offence_labels(data$offence_key, map, lang)
