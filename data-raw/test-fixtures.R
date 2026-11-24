@@ -5,7 +5,7 @@
 #
 # Contents: years 2019 to 2021 for five districts (all offence keys, so the
 # offence map applies), as published and harmonized with both weightings,
-# plus the full crosswalk and offence map. Eisenach (16056) merged into the
+# each with its detail file, plus the full crosswalk and offence map. Eisenach (16056) merged into the
 # Wartburgkreis (16063) on 1 July 2021, so harmonization is exercised.
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) != 1) stop("Usage: Rscript data-raw/test-fixtures.R <path to pksR-data>")
@@ -22,8 +22,10 @@ subset_csv <- function(name) {
   readr::write_csv(x, file.path(out, name), na = "")
 }
 for (y in years) {
-  subset_csv(sprintf("pks_kreis_%d_published.csv.gz", y))
-  for (w in c("population", "area")) subset_csv(sprintf("pks_kreis_%d_%s.csv.gz", y, w))
+  for (v in c("published", "population", "area")) {
+    subset_csv(sprintf("pks_kreis_%d_%s.csv.gz", y, v))
+    subset_csv(sprintf("pks_kreis_%d_%s_details.csv.gz", y, v))
+  }
 }
 file.copy(file.path(rel, "offence_map.csv"), out)
 # Stored compressed, served uncompressed by the mock (helper-release.R)

@@ -23,8 +23,14 @@
   "files": [
     {
       "name": "offence_map.csv",
-      "sha256": "74e76e44f864115a18cbea4c3de0f7daffc6602122eea20dd8f4605f3687aedf",
-      "bytes": 11660,
+      "sha256": "7e57b1851aaa3f14ebcdc870237b741c917aa3827ae7b51e1b7e63ba86801da0",
+      "bytes": 11735,
+      "rows": null
+    },
+    {
+      "name": "pks_kreis_2019_area_details.csv.gz",
+      "sha256": "beda92038db321e43fb418fb61ea59dc8ee37a5ec9f6bde21790ef5b01c36f83",
+      "bytes": 2456,
       "rows": null
     },
     {
@@ -34,9 +40,21 @@
       "rows": null
     },
     {
+      "name": "pks_kreis_2019_population_details.csv.gz",
+      "sha256": "0a35bb010c6b996de021b2a7b4eedc38fe718636daf53e7463c9c57e4574bd3b",
+      "bytes": 2446,
+      "rows": null
+    },
+    {
       "name": "pks_kreis_2019_population.csv.gz",
       "sha256": "dcdddfcc862606ebec90565b320a81cda20401bea62b9e46f18c8ca3a5820285",
       "bytes": 7476,
+      "rows": null
+    },
+    {
+      "name": "pks_kreis_2019_published_details.csv.gz",
+      "sha256": "e46bc8f5b1a89a0d36a22929383ef9fdd19ad6f920873d42d922073cd19f28eb",
+      "bytes": 2036,
       "rows": null
     },
     {
@@ -46,9 +64,21 @@
       "rows": null
     },
     {
+      "name": "pks_kreis_2020_area_details.csv.gz",
+      "sha256": "97a502e03c9470539f51386b887223e6e3511937f4bb35c28a93062e48665917",
+      "bytes": 2441,
+      "rows": null
+    },
+    {
       "name": "pks_kreis_2020_area.csv.gz",
       "sha256": "5dd6ce35bcf45428ba1bd1fecd4b7672b471e3ac5f2d2618319353802d094a70",
       "bytes": 7488,
+      "rows": null
+    },
+    {
+      "name": "pks_kreis_2020_population_details.csv.gz",
+      "sha256": "bf286d2aeac3f5614ca3dee3dd4c278df73eeb4324841d5cc5ab72fd793ccaf8",
+      "bytes": 2438,
       "rows": null
     },
     {
@@ -58,9 +88,21 @@
       "rows": null
     },
     {
+      "name": "pks_kreis_2020_published_details.csv.gz",
+      "sha256": "c4d1b696cb2e25b5b031e00a789820289749979d981df1a6ba428781dff99be8",
+      "bytes": 2012,
+      "rows": null
+    },
+    {
       "name": "pks_kreis_2020_published.csv.gz",
       "sha256": "fb0e466ddb15f20fa87beb1fe32060fed14feee48c4365f8c56e9196670c9b3f",
       "bytes": 7184,
+      "rows": null
+    },
+    {
+      "name": "pks_kreis_2021_area_details.csv.gz",
+      "sha256": "128e57df5d88b5c57ee1023412011753a02407bcf8597d0313d301f69893609b",
+      "bytes": 2324,
       "rows": null
     },
     {
@@ -70,9 +112,21 @@
       "rows": null
     },
     {
+      "name": "pks_kreis_2021_population_details.csv.gz",
+      "sha256": "0b4b9822d2c790f011088c6f6aa642abba2d98af659f6b5751bf61eb4a1fe569",
+      "bytes": 2321,
+      "rows": null
+    },
+    {
       "name": "pks_kreis_2021_population.csv.gz",
       "sha256": "ac528642533d7e9b37e8b7d29c3a9ae5c190fd94ac34cc5fc42eb76bc9e5baed",
       "bytes": 7295,
+      "rows": null
+    },
+    {
+      "name": "pks_kreis_2021_published_details.csv.gz",
+      "sha256": "ec19ae2ae9c417968e71aeaae6fea03bdfcf8a73e3ddebcefa6c127d2b108f4c",
+      "bytes": 1941,
       "rows": null
     },
     {
@@ -83,8 +137,8 @@
     },
     {
       "name": "boundary_map.csv",
-      "sha256": "69a4adc4a88d1d9f9b2db9e5276179240b59ae56d53780fe539c41b48ca4590a",
-      "bytes": 774366,
+      "sha256": "838645032bf178000a9cf4d0674f0e64676edbef4161e85227a003ac0bc4231f",
+      "bytes": 774576,
       "rows": null
     }
   ]
