@@ -3,11 +3,20 @@
 [English](README.md) | **Deutsch**
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/pksR)](https://CRAN.R-project.org/package=pksR)
 [![R-CMD-check](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN checks](https://badges.cranchecks.info/summary/pksR.svg)](https://cranchecks.info/package/pksR)
 [![test-coverage](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Minimum R Version](https://img.shields.io/badge/R-%3E%3D%204.1.0-blue.svg)](https://www.r-project.org/)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Weekly Downloads](https://cranlogs.r-pkg.org/badges/last-week/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Daily Downloads](https://cranlogs.r-pkg.org/badges/last-day/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/pksR)](https://CRAN.R-project.org/package=pksR)
+[![GitHub issues](https://img.shields.io/github/issues/ofurkancoban/pksR)](https://github.com/ofurkancoban/pksR/issues)
+[![Repo Size](https://img.shields.io/github/repo-size/ofurkancoban/pksR)](https://github.com/ofurkancoban/pksR)
 [![DOI (data releases)](https://zenodo.org/badge/DOI/10.5281/zenodo.23858428.svg)](https://doi.org/10.5281/zenodo.23858428)
 <!-- badges: end -->
 
@@ -108,7 +117,7 @@ Einige häufige Kurznamen:
 - **Straftaten:** die 46 Straftatenschlüssel der Kreistabellen. Die Tabellen enthalten eine Auswahl von Schlüsseln, die sich über die Zeit ändert: 6 Schlüssel umfassen alle Jahre 2003 bis 2025, 37 Schlüssel die Jahre 2014 bis 2025.
 - **Größen:** Fälle, Versuche, Häufigkeitszahl (HZ, Fälle je 100.000 Einwohner), aufgeklärte Fälle, Aufklärungsquote und Tatverdächtige.
 
-Alle Spalten beschreibt `vignette("pksR-de")`.
+Alle Spalten beschreibt `vignette("pksR-de")`; die Detailspalten (Kreisart, Fälle mit Schusswaffe, Tatverdächtige nach Geschlecht und Staatsangehörigkeit) und typische Auswertungen `vignette("variables-de")`.
 
 ## Was zu beachten ist
 
@@ -130,6 +139,7 @@ Die [Website des Pakets](https://ofurkancoban.github.io/pksR/) enthält die Refe
 | Erste Schritte | [pksR-de](https://ofurkancoban.github.io/pksR/articles/pksR-de.html) | [pksR](https://ofurkancoban.github.io/pksR/articles/pksR.html) |
 | Harmonisierung: Methoden, Annahmen und Sensitivität | [harmonization-de](https://ofurkancoban.github.io/pksR/articles/harmonization-de.html) | [harmonization](https://ofurkancoban.github.io/pksR/articles/harmonization.html) |
 | Herkunft und Prüfung der Daten | [provenance-de](https://ofurkancoban.github.io/pksR/articles/provenance-de.html) | [provenance](https://ofurkancoban.github.io/pksR/articles/provenance.html) |
+| Detailspalten und Anwendungsfälle | [variables-de](https://ofurkancoban.github.io/pksR/articles/variables-de.html) | [variables](https://ofurkancoban.github.io/pksR/articles/variables.html) |
 
 ## Datenveröffentlichungen und Cache
 

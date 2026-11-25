@@ -3,11 +3,20 @@
 **English** | [Deutsch](https://github.com/ofurkancoban/pksR/blob/main/README.de.md)
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/pksR)](https://CRAN.R-project.org/package=pksR)
 [![R-CMD-check](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN checks](https://badges.cranchecks.info/summary/pksR.svg)](https://cranchecks.info/package/pksR)
 [![test-coverage](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Minimum R Version](https://img.shields.io/badge/R-%3E%3D%204.1.0-blue.svg)](https://www.r-project.org/)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Weekly Downloads](https://cranlogs.r-pkg.org/badges/last-week/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Daily Downloads](https://cranlogs.r-pkg.org/badges/last-day/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/pksR)](https://CRAN.R-project.org/package=pksR)
+[![GitHub issues](https://img.shields.io/github/issues/ofurkancoban/pksR)](https://github.com/ofurkancoban/pksR/issues)
+[![Repo Size](https://img.shields.io/github/repo-size/ofurkancoban/pksR)](https://github.com/ofurkancoban/pksR)
 [![DOI (data releases)](https://zenodo.org/badge/DOI/10.5281/zenodo.23858428.svg)](https://doi.org/10.5281/zenodo.23858428)
 <!-- badges: end -->
 
@@ -107,7 +116,7 @@ Some common short names:
 - **Offences:** the 46 offence keys of the district tables. The tables contain a selection of keys that changes over time: 6 keys cover all years 2003 to 2025, 37 keys cover 2014 to 2025.
 - **Measures:** cases, attempts, frequency rate (HZ, cases per 100,000 inhabitants), cleared cases, clearance rate and suspects.
 
-All columns are described in `vignette("pksR")`.
+All columns are described in `vignette("pksR")`; the detail columns (district type, firearm cases, suspects by sex and nationality) and typical analyses in `vignette("variables")`.
 
 ## Things to keep in mind
 
@@ -129,6 +138,7 @@ The [package website](https://ofurkancoban.github.io/pksR/) has the reference an
 | Getting started | [pksR](https://ofurkancoban.github.io/pksR/articles/pksR.html) | [pksR-de](https://ofurkancoban.github.io/pksR/articles/pksR-de.html) |
 | Harmonization: methods, assumptions and sensitivity | [harmonization](https://ofurkancoban.github.io/pksR/articles/harmonization.html) | [harmonization-de](https://ofurkancoban.github.io/pksR/articles/harmonization-de.html) |
 | Data provenance and validation | [provenance](https://ofurkancoban.github.io/pksR/articles/provenance.html) | [provenance-de](https://ofurkancoban.github.io/pksR/articles/provenance-de.html) |
+| Detail columns and use cases | [variables](https://ofurkancoban.github.io/pksR/articles/variables.html) | [variables-de](https://ofurkancoban.github.io/pksR/articles/variables-de.html) |
 
 ## Data releases and cache
 
