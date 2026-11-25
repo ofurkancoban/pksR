@@ -1,6 +1,8 @@
 test_that("the example panel has the harmonized schema", {
   d <- pks_example()
-  expect_identical(names(d), names(pksR:::harmonized_spec))
+  expect_identical(names(d), returned_columns(pksR:::harmonized_spec))
+  # The example carries the detail columns and the official names
+  expect_false(anyNA(d[c("region_name_official", "district_type", "suspects_non_german")]))
   expect_equal(nrow(d), 70)
   expect_identical(attr(d, "data_version"), "example")
 })

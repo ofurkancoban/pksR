@@ -70,6 +70,14 @@ details_file_spec <- function(spec) {
 # Columns returned by pks_get(): the release schema plus the detail columns.
 full_spec <- function(spec) c(spec, details_file_spec(spec)[names(detail_spec)])
 
+# All columns of pks_get() in their order: the official name after the
+# published name, the detail columns at the end.
+returned_spec <- function(spec) {
+  full <- full_spec(spec)
+  at <- match("region_name", names(full))
+  c(full[seq_len(at)], region_name_official = "character", full[-seq_len(at)])
+}
+
 # Detail columns as typed NA where data lack them (an older release, or data
 # built outside pks_get()), so harmonization always finds them.
 with_detail_columns <- function(data) {

@@ -3,7 +3,7 @@
 #' A subset of the harmonized panel of pksR-data that ships with the package, for
 #' examples, tests and vignettes without internet access: five districts,
 #' two offence keys and the years 2019 to 2025, harmonized to the 2025
-#' boundary with population weights, built from pksR-data commit 9b6985d
+#' boundary with population weights, built from pksR-data commit bb69d65
 #' (`data-raw/example.R`), not from a data release, so `data_version` is
 #' `"example"`. Source: PKS Bundeskriminalamt,
 #' Datenlizenz Deutschland, Namensnennung, Version 2.0; changed (harmonized)
@@ -23,7 +23,7 @@
 #' pks_example()
 pks_example <- function() {
   path <- system.file("extdata", "pks_example.csv", package = "pksR")
-  d <- read_release_csv(path, harmonized_spec)
+  d <- read_release_csv(path, returned_spec(harmonized_spec))
   attr(d, "data_version") <- example_info$data_version
   attr(d, "retrieved_at") <- as.POSIXct(example_info$retrieved_at, tz = "UTC")
   attr(d, "boundary_year") <- example_info$boundary_year
@@ -32,5 +32,5 @@ pks_example <- function() {
   d
 }
 
-# Built from pksR-data commit 9b6985d on 2026-10-29 (data-raw/example.R)
-example_info <- list(data_version = "example", retrieved_at = "2026-10-29 00:00:00", boundary_year = 2025L)
+# Built from pksR-data commit bb69d65 on 2026-11-25 (data-raw/example.R)
+example_info <- list(data_version = "example", retrieved_at = "2026-11-25 00:00:00", boundary_year = 2025L)
