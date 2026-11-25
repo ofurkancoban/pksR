@@ -8,6 +8,8 @@
   sensitivity](https://ofurkancoban.github.io/pksR/articles/harmonization.md):
 - [Data provenance and
   validation](https://ofurkancoban.github.io/pksR/articles/provenance.md):
+- [Detail columns and use
+  cases](https://ofurkancoban.github.io/pksR/articles/variables.md):
 
 ### Deutsch
 
@@ -17,3 +19,5 @@
   Sensitivität](https://ofurkancoban.github.io/pksR/articles/harmonization-de.md):
 - [Herkunft und Prüfung der
   Daten](https://ofurkancoban.github.io/pksR/articles/provenance-de.md):
+- [Detailspalten und
+  Anwendungsfälle](https://ofurkancoban.github.io/pksR/articles/variables-de.md):

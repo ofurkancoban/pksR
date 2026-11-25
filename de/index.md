@@ -37,7 +37,8 @@ Göttingen 2016, Eisenach 2021), und Straftatenschlüssel ändern sich.
 
 ## Stand
 
-Das Paket ist in Entwicklung und noch nicht auf CRAN. Die erste
+Version 0.1.0 ist seit dem 21. November 2026 auf
+[CRAN](https://CRAN.R-project.org/package=pksR). Die erste
 Datenveröffentlichung,
 [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
 (Berichtsjahre 2003 bis 2025, Gebietsstand 2025), ist am 1. November
@@ -48,6 +49,10 @@ Datenveröffentlichung,
 
 ``` r
 
+# Veröffentlichte Version von CRAN
+install.packages("pksR")
+
+# Entwicklungsversion von GitHub
 # install.packages("remotes")
 remotes::install_github("ofurkancoban/pksR")
 ```
@@ -135,7 +140,10 @@ Einige häufige Kurznamen:
   Einwohner), aufgeklärte Fälle, Aufklärungsquote und Tatverdächtige.
 
 Alle Spalten beschreibt
-[`vignette("pksR-de")`](https://ofurkancoban.github.io/pksR/de/articles/pksR-de.md).
+[`vignette("pksR-de")`](https://ofurkancoban.github.io/pksR/de/articles/pksR-de.md);
+die Detailspalten (Kreisart, Fälle mit Schusswaffe, Tatverdächtige nach
+Geschlecht und Staatsangehörigkeit) und typische Auswertungen
+[`vignette("variables-de")`](https://ofurkancoban.github.io/pksR/de/articles/variables-de.md).
 
 ## Was zu beachten ist
 
@@ -177,6 +185,7 @@ die Referenz und drei Artikel, jeweils auf Deutsch und Englisch:
 | Erste Schritte | [pksR-de](https://ofurkancoban.github.io/pksR/articles/pksR-de.html) | [pksR](https://ofurkancoban.github.io/pksR/articles/pksR.html) |
 | Harmonisierung: Methoden, Annahmen und Sensitivität | [harmonization-de](https://ofurkancoban.github.io/pksR/articles/harmonization-de.html) | [harmonization](https://ofurkancoban.github.io/pksR/articles/harmonization.html) |
 | Herkunft und Prüfung der Daten | [provenance-de](https://ofurkancoban.github.io/pksR/articles/provenance-de.html) | [provenance](https://ofurkancoban.github.io/pksR/articles/provenance.html) |
+| Detailspalten und Anwendungsfälle | [variables-de](https://ofurkancoban.github.io/pksR/articles/variables-de.html) | [variables](https://ofurkancoban.github.io/pksR/articles/variables.html) |
 
 ## Datenveröffentlichungen und Cache
 

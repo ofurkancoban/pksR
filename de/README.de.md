@@ -4,11 +4,31 @@
 **Deutsch**
 
 [![R-CMD-check](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN
+checks](https://badges.cranchecks.info/summary/pksR.svg)](https://cranchecks.info/package/pksR)
 [![test-coverage](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ofurkancoban/pksR/actions/workflows/test-coverage.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status:
 Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Minimum R
+Version](https://img.shields.io/badge/R-%3E%3D%204.1.0-blue.svg)](https://www.r-project.org/)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Weekly
+Downloads](https://cranlogs.r-pkg.org/badges/last-week/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Daily
+Downloads](https://cranlogs.r-pkg.org/badges/last-day/pksR)](https://CRAN.R-project.org/package=pksR)
+[![CRAN Total
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/pksR)](https://CRAN.R-project.org/package=pksR)
+[![GitHub
+issues](https://img.shields.io/github/issues/ofurkancoban/pksR)](https://github.com/ofurkancoban/pksR/issues)
+[![Repo
+Size](https://img.shields.io/github/repo-size/ofurkancoban/pksR)](https://github.com/ofurkancoban/pksR)
 [![DOI (data
 releases)](https://zenodo.org/badge/DOI/10.5281/zenodo.23858428.svg)](https://doi.org/10.5281/zenodo.23858428)
 
@@ -47,7 +67,8 @@ Göttingen 2016, Eisenach 2021), und Straftatenschlüssel ändern sich.
 
 ## Stand
 
-Das Paket ist in Entwicklung und noch nicht auf CRAN. Die erste
+Version 0.1.0 ist seit dem 21. November 2026 auf
+[CRAN](https://CRAN.R-project.org/package=pksR). Die erste
 Datenveröffentlichung,
 [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
 (Berichtsjahre 2003 bis 2025, Gebietsstand 2025), ist am 1. November
@@ -58,6 +79,10 @@ Datenveröffentlichung,
 
 ``` r
 
+# Veröffentlichte Version von CRAN
+install.packages("pksR")
+
+# Entwicklungsversion von GitHub
 # install.packages("remotes")
 remotes::install_github("ofurkancoban/pksR")
 ```
@@ -145,7 +170,10 @@ Einige häufige Kurznamen:
   Einwohner), aufgeklärte Fälle, Aufklärungsquote und Tatverdächtige.
 
 Alle Spalten beschreibt
-[`vignette("pksR-de")`](https://ofurkancoban.github.io/pksR/de/articles/pksR-de.md).
+[`vignette("pksR-de")`](https://ofurkancoban.github.io/pksR/de/articles/pksR-de.md);
+die Detailspalten (Kreisart, Fälle mit Schusswaffe, Tatverdächtige nach
+Geschlecht und Staatsangehörigkeit) und typische Auswertungen
+[`vignette("variables-de")`](https://ofurkancoban.github.io/pksR/de/articles/variables-de.md).
 
 ## Was zu beachten ist
 
@@ -187,6 +215,7 @@ die Referenz und drei Artikel, jeweils auf Deutsch und Englisch:
 | Erste Schritte | [pksR-de](https://ofurkancoban.github.io/pksR/articles/pksR-de.html) | [pksR](https://ofurkancoban.github.io/pksR/articles/pksR.html) |
 | Harmonisierung: Methoden, Annahmen und Sensitivität | [harmonization-de](https://ofurkancoban.github.io/pksR/articles/harmonization-de.html) | [harmonization](https://ofurkancoban.github.io/pksR/articles/harmonization.html) |
 | Herkunft und Prüfung der Daten | [provenance-de](https://ofurkancoban.github.io/pksR/articles/provenance-de.html) | [provenance](https://ofurkancoban.github.io/pksR/articles/provenance.html) |
+| Detailspalten und Anwendungsfälle | [variables-de](https://ofurkancoban.github.io/pksR/articles/variables-de.html) | [variables](https://ofurkancoban.github.io/pksR/articles/variables.html) |
 
 ## Datenveröffentlichungen und Cache
 

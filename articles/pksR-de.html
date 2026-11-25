@@ -5,6 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Erste Schritte mit pksR • pksR</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -20,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">pksR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +41,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/harmonization.html">Harmonization: methods, assumptions and sensitivity</a></li>
     <li><a class="dropdown-item" href="../articles/provenance.html">Data provenance and validation</a></li>
+    <li><a class="dropdown-item" href="../articles/variables.html">Detail columns and use cases</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">More articles...</a></li>
   </ul>
@@ -63,7 +69,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Erste Schritte mit pksR</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ofurkancoban/pksR/blob/v0.1.0/vignettes/pksR-de.Rmd" class="external-link"><code>vignettes/pksR-de.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ofurkancoban/pksR/blob/main/vignettes/pksR-de.Rmd" class="external-link"><code>vignettes/pksR-de.Rmd</code></a></small>
       <div class="d-none name"><code>pksR-de.Rmd</code></div>
     </div>
 
@@ -218,47 +224,52 @@ die Daten stammen.</p>
 Name im Ziel-Gebietsstand</td>
 </tr>
 <tr class="even">
+<td><code>region_name_official</code></td>
+<td>Name des Kreises im BBSR-Umsteigeschlüssel zum Gebietsstand der
+Zeile; in einem harmonisierten Panel ein Name je Kreis</td>
+</tr>
+<tr class="odd">
 <td><code>offence_key</code></td>
 <td>Straftatenschlüssel; in harmonisierten Daten der harmonisierte
 Schlüssel, siehe <code><a href="../reference/pks_offences.html">pks_offences()</a></code>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>offence_key_published</code></td>
 <td>Nur harmonisierte Daten: der veröffentlichte Schlüssel oder
 <code>"SCHLÜSSEL minus SCHLÜSSEL"</code> bei berechneten Schlüsseln</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>offence_label</code></td>
 <td>Bezeichnung in der gewählten Sprache</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>cases</code></td>
 <td>Erfasste Fälle (veröffentlicht; <code>NA</code> in den PDF-Jahren
 2003 bis 2012)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>attempts</code></td>
 <td>Versuche</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>hz</code></td>
 <td>Häufigkeitszahl: Fälle je 100.000 Einwohner</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>cleared</code></td>
 <td>Aufgeklärte Fälle</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>clearance_rate</code></td>
 <td>Aufklärungsquote in Prozent (0, wo die Fallzahl 0 ist, wie in den
 BKA-Tabellen)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>suspects</code></td>
 <td>Tatverdächtige (Personen; über Schlüssel nicht addierbar)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>
 <code>cases_derived</code>, <code>cleared_derived</code>
 </td>
@@ -266,54 +277,64 @@ BKA-Tabellen)</td>
 Tabellen Quoten und Einwohnerzahlen, aber keine Fallzahlen
 enthalten</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>population</code></td>
 <td>Veröffentlichte Einwohnerzahl (PDF-Jahre und 2020)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>derived_population</code></td>
 <td>
 <code>cases / hz * 1e5</code>, aus der veröffentlichten Quote
 abgeleitet; ein Wert je Kreis und Jahr</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>population_corrected</code></td>
 <td>Zensuskorrigierte Einwohnerzahl des BBSR (INKAR) zum 31.12. des
 Vorjahres, dem Stichtag der HZ; eine Zensusbasis für alle Jahre, siehe
 <code>pks_rates(population = "corrected")</code>
 </td>
 </tr>
-<tr class="odd">
-<td>
-<code>source_format</code>, <code>source_file</code>
-</td>
-<td>Format und Datei der BKA-Quelle</td>
-</tr>
 <tr class="even">
-<td><code>boundary_year</code></td>
-<td>Gebietsstand der Zeile</td>
+<td><code>district_type</code></td>
+<td>Kreisart wie veröffentlicht: <code>KfS</code> (kreisfreie Stadt),
+<code>LK</code> (Landkreis), <code>K</code> (Kreis), <code>SK</code>
+(Stadtkreis), <code>RV</code> (Regionalverband); durch die
+Harmonisierung veränderte Kreise erhalten ihre Kreisart in der neuesten
+Tabelle (ab 2013)</td>
 </tr>
 <tr class="odd">
-<td><code>harmonized</code></td>
 <td>
-<code>TRUE</code>, wenn der Kreis durch die Harmonisierung verändert
+<code>firearm_threatened</code>, <code>firearm_fired</code>
+</td>
+<td>Fälle, in denen mit einer Schusswaffe gedroht oder geschossen
 wurde</td>
 </tr>
 <tr class="even">
-<td><code>weight_type</code></td>
 <td>
-<code>none</code>, <code>population</code> oder
-<code>area</code>
+<code>suspects_male</code>, <code>suspects_female</code>
+</td>
+<td>Tatverdächtige nach Geschlecht; sie ergeben zusammen
+<code>suspects</code>
 </td>
 </tr>
 <tr class="odd">
-<td><code>estimated</code></td>
-<td>
-<code>TRUE</code> für Anteile geteilter Kreise und für abgeleitete
-Fallzahlen (PDF-Jahre)</td>
+<td><code>suspects_non_german</code></td>
+<td>Nichtdeutsche Tatverdächtige</td>
 </tr>
 </tbody>
 </table>
+<p>Die letzten sechs Spalten werden ab 2013 veröffentlicht (NA für 2003
+bis 2012) und kommen mit der Datenveröffentlichung 2026.2 und späteren;
+bei älteren Veröffentlichungen sind sie NA. Tatverdächtige sind
+Personen: Für Schlüssel, die als Differenz zweier veröffentlichter
+Schlüssel berechnet werden, sind sie NA. | <code>source_format</code>,
+<code>source_file</code> | Format und Datei der BKA-Quelle | |
+<code>boundary_year</code> | Gebietsstand der Zeile | |
+<code>harmonized</code> | <code>TRUE</code>, wenn der Kreis durch die
+Harmonisierung verändert wurde | | <code>weight_type</code> |
+<code>none</code>, <code>population</code> oder <code>area</code> | |
+<code>estimated</code> | <code>TRUE</code> für Anteile geteilter Kreise
+und für abgeleitete Fallzahlen (PDF-Jahre) |</p>
 <p>Fallzahlen in harmonisierten Daten sind Dezimalzahlen: Ein geteilter
 Kreis gibt Bruchteile seiner Fälle an seine Nachfolger ab, und Runden
 würde die Bundessummen verändern.</p>

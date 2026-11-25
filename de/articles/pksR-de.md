@@ -121,6 +121,7 @@ die Daten stammen.
 | `year` | Berichtsjahr |
 | `ags` | Kreisschlüssel, fünfstellig mit führender Null, etwa `"02000"` für Hamburg |
 | `region_name` | Name des Kreises wie veröffentlicht, bei veränderten Kreisen der Name im Ziel-Gebietsstand |
+| `region_name_official` | Name des Kreises im BBSR-Umsteigeschlüssel zum Gebietsstand der Zeile; in einem harmonisierten Panel ein Name je Kreis |
 | `offence_key` | Straftatenschlüssel; in harmonisierten Daten der harmonisierte Schlüssel, siehe [`pks_offences()`](https://ofurkancoban.github.io/pksR/de/reference/pks_offences.md) |
 | `offence_key_published` | Nur harmonisierte Daten: der veröffentlichte Schlüssel oder `"SCHLÜSSEL minus SCHLÜSSEL"` bei berechneten Schlüsseln |
 | `offence_label` | Bezeichnung in der gewählten Sprache |
@@ -134,11 +135,21 @@ die Daten stammen.
 | `population` | Veröffentlichte Einwohnerzahl (PDF-Jahre und 2020) |
 | `derived_population` | `cases / hz * 1e5`, aus der veröffentlichten Quote abgeleitet; ein Wert je Kreis und Jahr |
 | `population_corrected` | Zensuskorrigierte Einwohnerzahl des BBSR (INKAR) zum 31.12. des Vorjahres, dem Stichtag der HZ; eine Zensusbasis für alle Jahre, siehe `pks_rates(population = "corrected")` |
-| `source_format`, `source_file` | Format und Datei der BKA-Quelle |
-| `boundary_year` | Gebietsstand der Zeile |
-| `harmonized` | `TRUE`, wenn der Kreis durch die Harmonisierung verändert wurde |
-| `weight_type` | `none`, `population` oder `area` |
-| `estimated` | `TRUE` für Anteile geteilter Kreise und für abgeleitete Fallzahlen (PDF-Jahre) |
+| `district_type` | Kreisart wie veröffentlicht: `KfS` (kreisfreie Stadt), `LK` (Landkreis), `K` (Kreis), `SK` (Stadtkreis), `RV` (Regionalverband); durch die Harmonisierung veränderte Kreise erhalten ihre Kreisart in der neuesten Tabelle (ab 2013) |
+| `firearm_threatened`, `firearm_fired` | Fälle, in denen mit einer Schusswaffe gedroht oder geschossen wurde |
+| `suspects_male`, `suspects_female` | Tatverdächtige nach Geschlecht; sie ergeben zusammen `suspects` |
+| `suspects_non_german` | Nichtdeutsche Tatverdächtige |
+
+Die letzten sechs Spalten werden ab 2013 veröffentlicht (NA für 2003 bis
+2012) und kommen mit der Datenveröffentlichung 2026.2 und späteren; bei
+älteren Veröffentlichungen sind sie NA. Tatverdächtige sind Personen:
+Für Schlüssel, die als Differenz zweier veröffentlichter Schlüssel
+berechnet werden, sind sie NA. \| `source_format`, `source_file` \|
+Format und Datei der BKA-Quelle \| \| `boundary_year` \| Gebietsstand
+der Zeile \| \| `harmonized` \| `TRUE`, wenn der Kreis durch die
+Harmonisierung verändert wurde \| \| `weight_type` \| `none`,
+`population` oder `area` \| \| `estimated` \| `TRUE` für Anteile
+geteilter Kreise und für abgeleitete Fallzahlen (PDF-Jahre) \|
 
 Fallzahlen in harmonisierten Daten sind Dezimalzahlen: Ein geteilter
 Kreis gibt Bruchteile seiner Fälle an seine Nachfolger ab, und Runden

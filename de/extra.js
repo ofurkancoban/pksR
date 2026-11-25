@@ -3,7 +3,7 @@
 // other language. Each article has a German twin named <name>-de.
 document.addEventListener("DOMContentLoaded", function () {
   var site = "https://ofurkancoban.github.io/pksR/";
-  var articles = ["pksR", "harmonization", "provenance"];
+  var articles = ["pksR", "harmonization", "provenance", "variables"];
   var here = window.location.href.split("#")[0].split("?")[0];
   if (here.indexOf(site) !== 0) return;
   var path = here.slice(site.length);

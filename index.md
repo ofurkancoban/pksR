@@ -35,8 +35,8 @@ this work once, openly and reproducibly:
 
 ## Status
 
-The package is under development and not yet on CRAN. The first data
-release,
+Version 0.1.0 is on [CRAN](https://CRAN.R-project.org/package=pksR)
+since 21 November 2026. The first data release,
 [`v2026.1`](https://github.com/ofurkancoban/pksR-data/releases/tag/v2026.1)
 (reporting years 2003 to 2025, boundary of 2025), was published on 1
 November 2026
@@ -46,6 +46,10 @@ November 2026
 
 ``` r
 
+# Release version from CRAN
+install.packages("pksR")
+
+# Development version from GitHub
 # install.packages("remotes")
 remotes::install_github("ofurkancoban/pksR")
 ```
@@ -129,7 +133,10 @@ Some common short names:
   inhabitants), cleared cases, clearance rate and suspects.
 
 All columns are described in
-[`vignette("pksR")`](https://ofurkancoban.github.io/pksR/articles/pksR.md).
+[`vignette("pksR")`](https://ofurkancoban.github.io/pksR/articles/pksR.md);
+the detail columns (district type, firearm cases, suspects by sex and
+nationality) and typical analyses in
+[`vignette("variables")`](https://ofurkancoban.github.io/pksR/articles/variables.md).
 
 ## Things to keep in mind
 
@@ -168,6 +175,7 @@ reference and three articles, each in English and German:
 | Getting started | [pksR](https://ofurkancoban.github.io/pksR/articles/pksR.html) | [pksR-de](https://ofurkancoban.github.io/pksR/articles/pksR-de.html) |
 | Harmonization: methods, assumptions and sensitivity | [harmonization](https://ofurkancoban.github.io/pksR/articles/harmonization.html) | [harmonization-de](https://ofurkancoban.github.io/pksR/articles/harmonization-de.html) |
 | Data provenance and validation | [provenance](https://ofurkancoban.github.io/pksR/articles/provenance.html) | [provenance-de](https://ofurkancoban.github.io/pksR/articles/provenance-de.html) |
+| Detail columns and use cases | [variables](https://ofurkancoban.github.io/pksR/articles/variables.html) | [variables-de](https://ofurkancoban.github.io/pksR/articles/variables-de.html) |
 
 ## Data releases and cache
 

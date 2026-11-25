@@ -8,7 +8,9 @@ articles:
   pksR: pksR.html
   provenance-de: provenance-de.html
   provenance: provenance.html
-last_built: 2026-11-24T14:48Z
+  variables-de: variables-de.html
+  variables: variables.html
+last_built: 2026-11-25T15:12Z
 urls:
   reference: https://ofurkancoban.github.io/pksR/reference
   article: https://ofurkancoban.github.io/pksR/articles
