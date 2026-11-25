@@ -54,8 +54,10 @@ articles:
       - pksR-de
       - harmonization-de
       - provenance-de
+      - variables-de
   - title: English
     contents:
       - pksR
       - harmonization
       - provenance
+      - variables

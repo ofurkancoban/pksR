@@ -12,6 +12,10 @@
   `*_details.csv.gz` files of data release 2026.2 and later, so older pksR
   versions keep working with new releases; with older releases the columns
   are NA. Detail counts are harmonized like the other counts.
+* New vignette `vignette("variables")` (German: `vignette("variables-de")`)
+  on the detail columns, the rules for using them and typical analyses.
+* `pks_example()` has the format of `pks_get()`, with the detail columns and
+  `region_name_official`.
 
 # pksR 0.1.0
 
